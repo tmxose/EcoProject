@@ -38,7 +38,7 @@
 			</div>
 			<div id="head_image">(이미지, 생략 가능)</div>
 		</div>
-        
+         
 		<div id="main">
 			<div id="main_use"><a href="#">사용량</a></div>
 			<div id="main_charge"><a href="#">요금</a></div>
