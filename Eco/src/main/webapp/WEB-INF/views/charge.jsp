@@ -5,24 +5,60 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+	<style>
+		*{margin: 0; padding: 0;}
+		#wrap{width: 90%; margin : 0 auto}
+
+		#head{width: 100%;}
+		#head_icon{height: 50px; margin: 10px}
+		#head_user{float: right; margin-top: 20px;}
+		#head_image{clear: both; height: 250px;}
+
+		#main{width: 100%;}
+		#main_charge{display: inline-block; width: 200px; height: 40px; border: 1px solid black; text-align: center; line-height: 40px; position: relative; top:1px; left: -6px; border-top-left-radius: 15px; border-top-right-radius: 15px;}
+		#main_use{display: inline-block; width: 180px; height: 35px; border: 1px solid black; position: relative; top:4px; text-align: center; line-height: 35px; border-top-left-radius: 15px; border-top-right-radius: 15px;}
+		#main_info{border: 1px solid black; border-radius: 7px; border-top-left-radius: 0;}
+		#main .title{clear:both; display: inline-block; margin: 20px; font-size: 20px; font-weight: bold;}
+		#main table{width: 80%; margin: 0 auto;}
+		#main table, th, td{border: 1px dotted black; border-collapse: collapse;}
+
+		#main form{width: 90%; margin: 0 auto;}
+		#main select{width: 100px; height: 25px;}
+		#main input{width: 50px; text-align: center;}
+		#main_data{margin: 20px auto; width: 90%; height: 200px; border: 1px dotted black;}
+	</style>
 </head>
 <body>
 	<div id="wrap">
-		<div>
-			<img src="" id="logo_icon">
-			<span>(사용자)님, 환영합니다.</span>
-			<a href="#">로그아웃</a>
-			<div>(이미지, 생략 가능)</div>
+		<div id="head">
+			<img src="#" id="head_icon">
+			<div id="head_user">
+				<span>(사용자)님, 환영합니다.</span>
+				<a href="#">로그아웃</a>
+			</div>
+			<div id="head_image">(이미지, 생략 가능)</div>
 		</div>
-		<div>
-			<div>사용량</div>
-			<div>요금</div>
-			<div>
-				<span>이번 달 나의 에너지 사용 요금</span>
-				<div>
-					(요금)
-				</div>
-				<span>과거 사용 이력</span>
+        
+		<div id="main">
+			<div id="main_use"><a href="#">사용량</a></div>
+			<div id="main_charge"><a href="#">요금</a></div>
+			<div id="main_info">
+				<span class="title">이번 달 나의 에너지 사용 요금</span><br>
+				<table>
+					<colgroup>
+						<col width="50%">
+						<col width="50%">
+					</colgroup>
+					<tr>
+						<th>도시가스</th>
+						<th>전기</th>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td>내용</td>
+					</tr>
+				</table>
+				<span class="title">과거 요금 이력</span>
 				<form>
 					<span>기간 : </span>
 					<select>
@@ -31,9 +67,9 @@
 						<option>지난 6개월</option>
 						<option>지난 12개월</option>
 					</select>
-					<input type="submit" value="조회하기">
+					<input type="submit" value="조회">
 				</form>
-				<div>
+				<div id="main_data">
 					(과거 사용 이력)
 				</div>
 			</div>
