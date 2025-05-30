@@ -5,7 +5,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.eco.mapper.UsageMapper">
 	<!-- 이번 달 나의 사용량 가져오기 -->
 	<select id="usageSelect" resultType="com.eco.domain.UsageVO">
-		SELECT * FROM t_usage WHERE usage_cd=#{usage_cd}
+		select * FROM t_usage us
+		JOIN t_user u ON u.user_cd = us.user_cd
+		WHERE user_id = #{user_id}
+		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
+		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE())
+	</select>
+	<!-- 가스 상세 내역 -->
+	<select id="getUserGasUsageDetail" resultType="com.eco.domain.UserTypeChargeDTO">
+		<![CDATA[
+		SELECT u.user_cd AS userCD, u.user_nm AS userNM, g.type AS usageType, g.charge AS unitCharge, gas_usage, gas_time 
+		FROM t_user u
+		JOIN t_usage us ON u.user_cd = us.user_cd
+		JOIN t_gas g ON us.gas_cd = g.gas_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
+		]]>
+	</select>
+	<!-- 전기 상세 내역 -->
+	<select id="getUserElecUsageDetail" resultType="com.eco.domain.UserTypeChargeDTO">
+      <![CDATA[
+		SELECT u.user_cd AS userCD, u.user_nm AS userNM, e.type AS usageType, e.charge AS unitCharge, elec_usage, elec_time 
+		FROM t_user u
+		JOIN t_usage us ON u.user_cd = us.user_cd
+		JOIN t_elec e ON us.elec_cd = e.elec_cd
+		WHERE u.use_yn = 'Y'AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
+		]]>
 	</select>
 	<!-- INSERT -->
 	<!-- UPDATE -->

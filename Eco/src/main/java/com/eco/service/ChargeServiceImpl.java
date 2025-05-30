@@ -1,5 +1,7 @@
 package com.eco.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.eco.domain.UsageVO;
@@ -19,9 +21,26 @@ public class ChargeServiceImpl implements ChargeService{
 		return mapper.chargeSelect(usage_Cd);
 	}
 
+	//이번 달 가스 요금
 	@Override
 	public UserTypeChargeDTO getGasCharge(String userId) {
 		return mapper.getUserGasChargeSummary(userId);
+	}
+	// 이번 달 전기 요금
+	@Override
+	public UserTypeChargeDTO getElecCharge(String userId) {
+		return mapper.getUserElecChargeSummary(userId);
+	}
+	
+	// 가스 요금 상세 내역
+	@Override
+	public List<UserTypeChargeDTO> gasChargeDetail(String userId) {
+		return mapper.getUserGasChargeDetail(userId);
+	}
+	// 전기 요금 상세 내역
+	@Override
+	public List<UserTypeChargeDTO> elecChargeDetail(String userId) {
+		return mapper.getUserElecChargeDetail(userId);
 	}
 
 }
