@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/common.css?after">
 	<style>
 		*{margin: 0; padding: 0;}
 		#wrap{width: 90%; margin : 0 auto}

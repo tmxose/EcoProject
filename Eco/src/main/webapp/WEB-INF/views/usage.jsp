@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/common.css?after">
 	<style>
 		*{margin: 0; padding: 0;}
 		#wrap{width: 90%; margin : 0 auto}
@@ -54,8 +56,8 @@
 						<th>전기</th>
 					</tr>
 					<tr>
-						<td>내용</td>
-						<td>내용</td>
+						<td>${ usage.gas_usage }</td>
+						<td>${ usage.elec_usage }</td>
 					</tr>
 				</table>
 				<span class="title">과거 에너지 사용 이력</span>
