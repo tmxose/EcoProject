@@ -21,4 +21,15 @@ public class UserServiceImpl implements UserService{
 		mapper.userInsert(user);
 	}
 
+	@Override
+	public UserVO login(UserVO user) {
+		// TODO Auto-generated method stub
+		
+		return mapper.getUserSelect(user);
+	}
+	
+	// 로그인 함수를 만들어요
+	
+	// mapper 함수를 사용해요
+	
 }
