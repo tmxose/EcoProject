@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +73,48 @@
 					<input type="submit" value="조회">
 				</form>
 				<div id="main_data">
-					(과거 사용 이력)
+					<table>
+						<caption>가스 사용 상세 내역</caption>
+						<tr>
+							<th>userCD</th>
+							<th>사용자명</th>
+							<th>타입</th>
+							<th>표준원가</th>
+							<th>사용량</th>
+							<th>날짜</th>
+						</tr>
+						<c:forEach var="item" items="${gasUse}">
+				            <tr>
+				                <td>${item.userCd}</td>
+				                <td>${item.userNm}</td>
+				                <td>${item.usageType}</td>
+				                <td>${item.unitCharge}</td>
+				                <td>${item.gas_usage}</td>
+				                <td>${item.gas_time}</td>
+				            </tr>
+				        </c:forEach>
+					</table>
+					<table>
+						<caption>전기 사용 상세 내역</caption>
+						<tr>
+							<th>userCD</th>
+							<th>사용자명</th>
+							<th>타입</th>
+							<th>표준원가</th>
+							<th>사용량</th>
+							<th>날짜</th>
+						</tr>
+						<c:forEach var="item" items="${elecUse}">
+				            <tr>
+				                <td>${item.userCd}</td>
+				                <td>${item.userNm}</td>
+				                <td>${item.usageType}</td>
+				                <td>${item.unitCharge}</td>
+				                <td>${item.elec_usage}</td>
+				                <td>${item.elec_time}</td>
+				            </tr>
+				        </c:forEach>
+					</table>
 				</div>
 			</div>
 		</div>

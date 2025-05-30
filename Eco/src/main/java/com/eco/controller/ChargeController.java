@@ -1,10 +1,11 @@
 package com.eco.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.eco.domain.UsageVO;
 import com.eco.domain.UserTypeChargeDTO;
 import com.eco.service.ChargeService;
 
@@ -22,28 +23,17 @@ public class ChargeController {
 	@GetMapping("/charge")
 	public void chargePage(Model model) {
 		log.info("요금 조회 화면 이동");
-		//UserTypeChargeDTO gasChargeDTO = service.getGasCharge("abcd");
-//		//사용량
-//	    float gas_usage = gasChargeDTO.getGas_usage();
-//	    float elec_usage = gasChargeDTO.getElec_usage();
-//	    //표준요금
-//	    
-//	    //사용량 * 표준요금
-//	    float gas_charge = gas_usage * 표준요금;
-//	    float elec_charge = elec_usage * 표준요금;
-	    
-//	    model.addAttribute("usage", gasChargeDTO);
-//	    model.addAttribute("gasCharge", gas_charge);
-//	    model.addAttribute("elecCharge", elec_charge);
+		model.addAttribute("gasCharge", service.getGasCharge("abcd"));
+		model.addAttribute("elecCharge", service.getElecCharge("abcd"));
 		
-//		log.info("userCd " +gasChargeDTO.getUserCd());
-//		log.info("userNm " +gasChargeDTO.getUserNm());
-//		log.info("energyType " +gasChargeDTO.getEnergyType());
-//		log.info("usageType " +gasChargeDTO.getUsageType());
-//		log.info("usageAmount " +gasChargeDTO.getUsageAmount());
-//		log.info("unitCharge " +gasChargeDTO.getUnitCharge());
-//		log.info("totalCharge " +gasChargeDTO.getTotalCharge());
+		//가스 상세 내용
+		List<UserTypeChargeDTO> gasUse = service.gasChargeDetail("abcd");
+		model.addAttribute("gasUse", gasUse);
+		//전기 상세 내용
+		List<UserTypeChargeDTO> elecUse = service.elecChargeDetail("abcd");
+		model.addAttribute("elecUse", elecUse);
 	}
+	
 	@GetMapping("/chargeSelect")
 	public void chargeSelect(Model model) {
 		//log.info("요금 조회 화면 이동");
