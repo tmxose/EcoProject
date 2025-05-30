@@ -40,8 +40,8 @@
 		</div>
         
 		<div id="main">
-			<div id="main_use"><a href="#">사용량</a></div>
-			<div id="main_charge"><a href="#">요금</a></div>
+			<div id="main_use"><a href="/usage">사용량</a></div>
+			<div id="main_charge"><a href="/charge">요금</a></div>
 			<div id="main_info">
 				<span class="title">이번 달 나의 에너지 사용 현황</span><br>
 				<table>
