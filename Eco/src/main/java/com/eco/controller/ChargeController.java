@@ -22,7 +22,7 @@ public class ChargeController {
 	// 이번 달 나의 요금 가져오기
 	@GetMapping("/charge")
 	public void chargePage(Model model) {
-		log.info("��� ��ȸ ȭ�� �̵�");
+		log.info("이번 달 나의 요금 가져오기");
 		model.addAttribute("gasCharge", service.getGasCharge("abcd"));
 		model.addAttribute("elecCharge", service.getElecCharge("abcd"));
 		

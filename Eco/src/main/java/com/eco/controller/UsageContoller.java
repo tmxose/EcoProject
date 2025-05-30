@@ -22,7 +22,7 @@ public class UsageContoller {
 	// 이번 달 나의 사용량 가져오기
 	@GetMapping("/usage")
 	public void usageSelect(Model model) {
-		log.info("��뷮 ��ȸ ȭ�� �̵�");
+		log.info("이번 달 나의 사용량 가져오기");
 		model.addAttribute("usage", service.usageRead("abcd"));
 		
 		//가스 상세 내역

@@ -9,8 +9,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_user u ON u.user_cd = us.user_cd
 		WHERE user_id = #{user_id}
 		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
-		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE())
+		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE()) LIMIT 1
 	</select>
+	<!-- 이번 달 나의 전쳉 사용량 가져오기 -->
+	<select id="usageSelect" resultType="com.eco.domain.UsageVO">
+		select * FROM t_usage us
+		JOIN t_user u ON u.user_cd = us.user_cd
+		WHERE user_id = #{user_id}
+		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
+		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE()) LIMIT 1
+	</select>
+	
 	<!-- 가스 상세 내역 -->
 	<select id="getUserGasUsageDetail" resultType="com.eco.domain.UserTypeChargeDTO">
 		<![CDATA[
