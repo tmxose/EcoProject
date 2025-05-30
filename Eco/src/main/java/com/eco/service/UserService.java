@@ -1,5 +1,7 @@
 package com.eco.service;
 
-public interface UserService {
+import com.eco.domain.UserVO;
 
+public interface UserService {
+	public void signup(UserVO user);
 }
