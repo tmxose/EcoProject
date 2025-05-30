@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 	<style>
 		*{margin: 0; padding: 0;}
@@ -33,44 +33,44 @@
 		<div id="head">
 			<img src="#" id="head_icon">
 			<div id="head_user">
-				<span>(»ç¿ëÀÚ)´Ô, È¯¿µÇÕ´Ï´Ù.</span>
-				<a href="#">·Î±×¾Æ¿ô</a>
+				<span>(ì‚¬ìš©ìž)ë‹˜, í™˜ì˜í•©ë‹ˆë‹¤.</span>
+				<a href="#">ë¡œê·¸ì•„ì›ƒ</a>
 			</div>
-			<div id="head_image">(ÀÌ¹ÌÁö, »ý·« °¡´É)</div>
+			<div id="head_image">(ì´ë¯¸ì§€, ìƒëžµ ê°€ëŠ¥)</div>
 		</div>
          
 		<div id="main">
-			<div id="main_use"><a href="#">»ç¿ë·®</a></div>
-			<div id="main_charge"><a href="#">¿ä±Ý</a></div>
+			<div id="main_use"><a href="#">ì‚¬ìš©ëŸ‰</a></div>
+			<div id="main_charge"><a href="#">ìš”ê¸ˆ</a></div>
 			<div id="main_info">
-				<span class="title">ÀÌ¹ø ´Þ ³ªÀÇ ¿¡³ÊÁö »ç¿ë ¿ä±Ý</span><br>
+				<span class="title">ì´ë²ˆ ë‹¬ ë‚˜ì˜ ì—ë„ˆì§€ ì‚¬ìš© ìš”ê¸ˆ</span><br>
 				<table>
 					<colgroup>
 						<col width="50%">
 						<col width="50%">
 					</colgroup>
 					<tr>
-						<th>µµ½Ã°¡½º</th>
-						<th>Àü±â</th>
+						<th>ë„ì‹œê°€ìŠ¤</th>
+						<th>ì „ê¸°</th>
 					</tr>
 					<tr>
-						<td>³»¿ë</td>
-						<td>³»¿ë</td>
+						<td>ë‚´ìš©</td>
+						<td>ë‚´ìš©</td>
 					</tr>
 				</table>
-				<span class="title">°ú°Å ¿ä±Ý ÀÌ·Â</span>
+				<span class="title">ê³¼ê±° ìš”ê¸ˆ ì´ë ¥</span>
 				<form>
-					<span>±â°£ : </span>
+					<span>ê¸°ê°„ : </span>
 					<select>
-						<option>Áö³­ 1°³¿ù</option>
-						<option>Áö³­ 3°³¿ù</option>
-						<option>Áö³­ 6°³¿ù</option>
-						<option>Áö³­ 12°³¿ù</option>
+						<option>ì§€ë‚œ 1ê°œì›”</option>
+						<option>ì§€ë‚œ 3ê°œì›”</option>
+						<option>ì§€ë‚œ 6ê°œì›”</option>
+						<option>ì§€ë‚œ 12ê°œì›”</option>
 					</select>
-					<input type="submit" value="Á¶È¸">
+					<input type="submit" value="ì¡°íšŒ">
 				</form>
 				<div id="main_data">
-					(°ú°Å »ç¿ë ÀÌ·Â)
+					(ê³¼ê±° ì‚¬ìš© ì´ë ¥)
 				</div>
 			</div>
 		</div>
