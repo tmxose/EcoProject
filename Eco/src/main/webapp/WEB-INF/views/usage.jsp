@@ -19,7 +19,7 @@
 
 		#main{width: 100%;}
 		#main_use{display: inline-block; width: 200px; height: 40px; border: 1px solid black; text-align: center; line-height: 40px; position: relative; top:1px; border-top-left-radius: 15px; border-top-right-radius: 15px;}
-		#main_charge{display: inline-block; width: 180px; height: 35px; border: 1px solid black; position: relative; top:4px; left: -6px; text-align: center; line-height: 35px; border-top-left-radius: 15px; border-top-right-radius: 15px;}
+		#main_charge{display: inline-block; width: 180px; height: 30px; border: 1px solid black; position: relative; top:6px; left: -6px; text-align: center; line-height: 30px; border-top-left-radius: 15px; border-top-right-radius: 15px;}
 		#main_info{border: 1px solid black; border-radius: 7px; border-top-left-radius: 0;}
 		#main .title{clear:both; display: inline-block; margin: 20px; font-size: 20px; font-weight: bold;}
 		#main table{width: 80%; margin: 0 auto;}
@@ -37,7 +37,7 @@
 <body>
 	<div id="wrap">
 		<div id="head">
-			<img src="/resources/img/icon.png" id="head_icon">
+			<a href="#"><img src="/resources/img/icon.png" id="head_icon"></a>
 			<div id="head_user">
 				<span>(사용자)님, 환영합니다.</span>
 				<a href="#">로그아웃</a>
