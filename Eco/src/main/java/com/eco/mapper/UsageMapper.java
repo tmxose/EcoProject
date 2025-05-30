@@ -6,12 +6,12 @@ import com.eco.domain.UsageVO;
 import com.eco.domain.UserTypeChargeDTO;
 
 public interface UsageMapper {
-	// ÀÌ¹ø ´Ş ³ªÀÇ »ç¿ë·® select
+	// ì´ë²ˆ ë‹¬ ë‚˜ì˜ ì‚¬ìš©ëŸ‰ ê°€ì ¸ì˜¤ê¸°
 	public UsageVO usageSelect(String userId);
 	
-	// °¡½º »ç¿ë »ó¼¼ ³»¿ª
+	// ê°€ìŠ¤ ìƒì„¸ ë‚´ì—­
 	public List<UserTypeChargeDTO> getUserGasUsageDetail(String userId);
-	// Àü±â »ó¼¼ ³»¿ª
+	// ì „ê¸° ìƒì„¸ ë‚´ì—­
 	public List<UserTypeChargeDTO> getUserElecUsageDetail(String userId);
 
 }

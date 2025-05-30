@@ -6,11 +6,11 @@ import com.eco.domain.UsageVO;
 import com.eco.domain.UserTypeChargeDTO;
 
 public interface UsageService {
-	// ÀÌ¹ø ´Ş ³ªÀÇ »ç¿ë·® select
+	// ì´ë²ˆ ë‹¬ ë‚˜ì˜ ì‚¬ìš©ëŸ‰ ê°€ì ¸ì˜¤ê¸°
 	public UsageVO usageRead(String userId);
 	
-	// °¡½º »ç¿ë »ó¼¼ ³»¿ª
+	// ê°€ìŠ¤ ìƒì„¸ ë‚´ì—­
 	public List<UserTypeChargeDTO> gasUsageDetail(String userId);
-	// Àü±â »ç¿ë »ó¼¼ ³»¿ª
+	// ì „ê¸° ìƒì„¸ ë‚´ì—­
 	public List<UserTypeChargeDTO> elecUsageDetail(String userId);
 }

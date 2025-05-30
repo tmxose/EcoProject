@@ -19,16 +19,16 @@ public class UsageContoller {
 	
 	private UsageService service;
 	
-	// ÀÌ¹ø ´Ş ³ªÀÇ »ç¿ë·® select
+	// ì´ë²ˆ ë‹¬ ë‚˜ì˜ ì‚¬ìš©ëŸ‰ ê°€ì ¸ì˜¤ê¸°
 	@GetMapping("/usage")
 	public void usageSelect(Model model) {
-		log.info("»ç¿ë·® Á¶È¸ È­¸é ÀÌµ¿");
+		log.info("ï¿½ï¿½ë·® ï¿½ï¿½È¸ È­ï¿½ï¿½ ï¿½Ìµï¿½");
 		model.addAttribute("usage", service.usageRead("abcd"));
 		
-		//°¡½º »ó¼¼ ³»¿ë
+		//ê°€ìŠ¤ ìƒì„¸ ë‚´ì—­
 		List<UserTypeChargeDTO> gasUse = service.gasUsageDetail("abcd");
 		model.addAttribute("gasUse", gasUse);
-		//Àü±â »ó¼¼ ³»¿ë
+		//ì „ê¸° ìƒì„¸ ë‚´ì—­
 		List<UserTypeChargeDTO> elecUse = service.elecUsageDetail("abcd");
 		model.addAttribute("elecUse", elecUse);
 	}

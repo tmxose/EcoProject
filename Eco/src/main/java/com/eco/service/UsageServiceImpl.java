@@ -15,18 +15,18 @@ import lombok.AllArgsConstructor;
 public class UsageServiceImpl implements UsageService{
 	private UsageMapper mapper;
 
-	// ÀÌ¹ø ´Ş ³ªÀÇ »ç¿ë·® select
+	// ì´ë²ˆ ë‹¬ ë‚˜ì˜ ì‚¬ìš©ëŸ‰ ê°€ì ¸ì˜¤ê¸°
 	@Override
 	public UsageVO usageRead(String userId) {
 		return mapper.usageSelect(userId);
 	}
 	
-	// °¡½º »ç¿ë »ó¼¼ ³»¿ª
+	// ê°€ìŠ¤ ìƒì„¸ ë‚´ì—­
 	@Override
 	public List<UserTypeChargeDTO> gasUsageDetail(String userId) {
 		return mapper.getUserGasUsageDetail(userId);
 	}
-	// Àü±â »ç¿ë »ó¼¼ ³»¿ª
+	// ì „ê¸° ìƒì„¸ ë‚´ì—­
 	@Override
 	public List<UserTypeChargeDTO> elecUsageDetail(String userId) {
 		return mapper.getUserElecUsageDetail(userId);

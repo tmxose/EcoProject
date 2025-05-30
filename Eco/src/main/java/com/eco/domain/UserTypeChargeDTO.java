@@ -9,13 +9,13 @@ public class UserTypeChargeDTO {
     private int userCd;
     private String userNm;
 
-    private String energyType; // "Àü±â" or "°¡½º"
-    private String usageType;  // "ÁÖÅÃ¿ë", "»ê¾÷¿ë"
+    private String energyType; // "ì „ê¸°" or "ê°€ìŠ¤"
+    private String usageType;  // "ì£¼íƒìš©", "ì‚°ì—…ìš©"
     private float usageAmount;
     private int unitCharge;
     private float totalCharge;
     
-    //°¡½º, Àü±â »ó¼¼ ³»¿ª Ç¥½Ã ¿ëµµ
+    //ìƒì„¸ ë°ì´í„° ê°€ì ¸ì˜¤ê¸° ìœ„í•œ ë³€ìˆ˜
     private float gas_usage;
     private Date gas_time;
     private float elec_usage;

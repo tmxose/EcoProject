@@ -15,29 +15,29 @@ import lombok.AllArgsConstructor;
 public class ChargeServiceImpl implements ChargeService{
 	private ChargeMapper mapper;
 
-	// ÀÌ¹ø ´Ş ³ªÀÇ ¿ä±İ select
+	// ì´ë²ˆ ë‹¬ ë‚˜ì˜ ìš”ê¸ˆ ê°€ì ¸ì˜¤ê¸°
 	@Override
 	public UsageVO chargeRead(int usage_Cd) {
 		return mapper.chargeSelect(usage_Cd);
 	}
 
-	//ÀÌ¹ø ´Ş °¡½º ¿ä±İ
+	// ì´ë²ˆ ë‹¬ ê°€ìŠ¤ìš”ê¸ˆ
 	@Override
 	public UserTypeChargeDTO getGasCharge(String userId) {
 		return mapper.getUserGasChargeSummary(userId);
 	}
-	// ÀÌ¹ø ´Ş Àü±â ¿ä±İ
+	// ì´ë²ˆ ë‹¬ ì „ê¸°ìš”ê¸ˆ
 	@Override
 	public UserTypeChargeDTO getElecCharge(String userId) {
 		return mapper.getUserElecChargeSummary(userId);
 	}
 	
-	// °¡½º ¿ä±İ »ó¼¼ ³»¿ª
+	// ê°€ìŠ¤ ìƒì„¸ ë‚´ì—­
 	@Override
 	public List<UserTypeChargeDTO> gasChargeDetail(String userId) {
 		return mapper.getUserGasChargeDetail(userId);
 	}
-	// Àü±â ¿ä±İ »ó¼¼ ³»¿ª
+	// ì „ê¸° ìƒì„¸ ë‚´ì—­
 	@Override
 	public List<UserTypeChargeDTO> elecChargeDetail(String userId) {
 		return mapper.getUserElecChargeDetail(userId);

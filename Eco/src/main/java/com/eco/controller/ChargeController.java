@@ -19,33 +19,33 @@ public class ChargeController {
 	
 	private ChargeService service;
 	
-	// ÀÌ¹ø ´Ş ³ªÀÇ ¿ä±İ select
+	// ì´ë²ˆ ë‹¬ ë‚˜ì˜ ìš”ê¸ˆ ê°€ì ¸ì˜¤ê¸°
 	@GetMapping("/charge")
 	public void chargePage(Model model) {
-		log.info("¿ä±İ Á¶È¸ È­¸é ÀÌµ¿");
+		log.info("ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ È­ï¿½ï¿½ ï¿½Ìµï¿½");
 		model.addAttribute("gasCharge", service.getGasCharge("abcd"));
 		model.addAttribute("elecCharge", service.getElecCharge("abcd"));
 		
-		//°¡½º »ó¼¼ ³»¿ë
+		//ê°€ìŠ¤ ìƒì„¸ ë‚´ì—­
 		List<UserTypeChargeDTO> gasUse = service.gasChargeDetail("abcd");
 		model.addAttribute("gasUse", gasUse);
-		//Àü±â »ó¼¼ ³»¿ë
+		//ì „ê¸° ìƒì„¸ ë‚´ì—­
 		List<UserTypeChargeDTO> elecUse = service.elecChargeDetail("abcd");
 		model.addAttribute("elecUse", elecUse);
 	}
 	
 	@GetMapping("/chargeSelect")
 	public void chargeSelect(Model model) {
-		//log.info("¿ä±İ Á¶È¸ È­¸é ÀÌµ¿");
+		//log.info("ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ È­ï¿½ï¿½ ï¿½Ìµï¿½");
 		UserTypeChargeDTO gasChargeDTO = service.getGasCharge("abcd");
-//		//»ç¿ë·®
+//		//ï¿½ï¿½ë·®
 //	    float gas_usage = gasChargeDTO.getGas_usage();
 //	    float elec_usage = gasChargeDTO.getElec_usage();
-//	    //Ç¥ÁØ¿ä±İ
+//	    //Ç¥ï¿½Ø¿ï¿½ï¿½
 //	    
-//	    //»ç¿ë·® * Ç¥ÁØ¿ä±İ
-//	    float gas_charge = gas_usage * Ç¥ÁØ¿ä±İ;
-//	    float elec_charge = elec_usage * Ç¥ÁØ¿ä±İ;
+//	    //ï¿½ï¿½ë·® * Ç¥ï¿½Ø¿ï¿½ï¿½
+//	    float gas_charge = gas_usage * Ç¥ï¿½Ø¿ï¿½ï¿½;
+//	    float elec_charge = elec_usage * Ç¥ï¿½Ø¿ï¿½ï¿½;
 	    
 //	    model.addAttribute("usage", gasChargeDTO);
 //	    model.addAttribute("gasCharge", gas_charge);

@@ -6,17 +6,17 @@ import com.eco.domain.UsageVO;
 import com.eco.domain.UserTypeChargeDTO;
 
 public interface ChargeMapper {
-	// ÀÌ¹ø ´Ş ³ªÀÇ ¿ä±İ select
+	// ì´ë²ˆ ë‹¬ ë‚˜ì˜ ìš”ê¸ˆ ê°€ì ¸ì˜¤ê¸°
 	public UsageVO chargeSelect(int usage_cd);
 	
-	// ÀÌ¹ø ´Ş °¡½º ¿ä±İ
+	// ì´ë²ˆ ë‹¬ ê°€ìŠ¤ìš”ê¸ˆ
 	public UserTypeChargeDTO getUserGasChargeSummary(String userId);
-	// ÀÌ¹ø ´Ş Àü±â ¿ä±İ
+	// ì´ë²ˆ ë‹¬ ì „ê¸°ìš”ê¸ˆ
 	public UserTypeChargeDTO getUserElecChargeSummary(String userId);
 	
-	// °¡½º ¿ä±İ »ó¼¼ ³»¿ª
+	// ê°€ìŠ¤ ìƒì„¸ ë‚´ì—­
 	public List<UserTypeChargeDTO> getUserGasChargeDetail(String userId);
-	// Àü±â ¿ä±İ »ó¼¼ ³»¿ª
+	// ì „ê¸° ìƒì„¸ ë‚´ì—­
 	public List<UserTypeChargeDTO> getUserElecChargeDetail(String userId);
 
 }
