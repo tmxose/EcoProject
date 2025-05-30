@@ -14,7 +14,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class UsageContoller {
 	
-	UsageService service;
+	private UsageService service;
 	
 	// 이번 달 나의 사용량 select
 	@GetMapping("/usage")
