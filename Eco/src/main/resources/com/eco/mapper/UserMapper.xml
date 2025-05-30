@@ -5,6 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.eco.mapper.UserMapper">
 	<!-- SELECT -->
 	<!-- INSERT -->
+	<insert id="userInsert">
+		<![CDATA[
+		INSERT INTO t_user(user_id, user_pw, user_nm) VALUES(#{user_id}, #{user_pw}, #{user_nm})
+		]]>
+	</insert>
+	
 	<!-- UPDATE -->
 	<!-- DELETE -->
 </mapper>
