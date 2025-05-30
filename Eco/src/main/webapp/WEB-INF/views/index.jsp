@@ -1,24 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>메인페이지</title>
-<link rel="stylesheet" type="text/css"
-	href="/resources/css/common.css?after">
+<link rel="stylesheet" type="text/css" href="/resources/css/common.css?after">
 </head>
 <body>
 	<div class="container">
 		<div class="inner-container">
-			<button onclick="location.href='/login'">로그인</button>
-			<button onclick="location.href='/signup'">회원가입</button>
-			<button onclick="location.href='/usage'">내 사용량 조회</button>
+			<c:if test="${not empty sessionScope.loginUser}">
+				<p>환영합니다, ${loginUser.user_nm} 님!</p>
+				<button onclick="location.href='/logout'">로그아웃</button>
+			</c:if>
+			
+			<c:if test="${empty sessionScope.loginUser}">
+				<button onclick="location.href='/login'">로그인</button>
+				<button onclick="location.href='/signup'">회원가입</button>
+			</c:if>
+
+			<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
+			<button onclick="goToMyUsagePage()">내 사용량 조회</button>
 		</div>
+		
 		<div class="inner-container">
 			<h2>지역별 평균 사용량</h2>
 			<p>지역별 평균 사용량 내용</p>
 		</div>
 	</div>
+
+	<script>
+		function goToMyUsagePage() {
+			const isLoggedIn = '${not empty sessionScope.loginUser}' === 'true';
+			if (isLoggedIn) {
+				location.href = '/usage'; // 실제 내 정보 보기 페이지로 변경
+			} else {
+				alert('로그인이 필요합니다.');
+				location.href = '/login';
+			}
+		}
+	</script>
 </body>
 </html>

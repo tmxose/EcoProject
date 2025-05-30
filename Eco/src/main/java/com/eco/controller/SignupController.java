@@ -29,6 +29,6 @@ public class SignupController {
 	public String signupPost(UserVO user) {
 		log.info("signup Post");
 		service.signup(user);
-		return "home";
+		return "login";
 	}
 }
