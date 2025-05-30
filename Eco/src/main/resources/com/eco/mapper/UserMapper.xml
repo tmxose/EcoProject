@@ -4,6 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eco.mapper.UserMapper">
 	<!-- SELECT -->
+	<select id="getUserSelect" resultType="com.eco.domain.UserVO">
+		<![CDATA[
+		SELECT * FROM t_user
+		WHERE user_id = #{user_id} and user_pw = #{user_pw};
+		]]>
+	</select>
+	
 	<!-- INSERT -->
 	<insert id="userInsert">
 		<![CDATA[

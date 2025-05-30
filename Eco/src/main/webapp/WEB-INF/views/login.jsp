@@ -22,51 +22,54 @@ html, body {
 }
 
 #table {
+	text-align: center;
 	width: 400px;
-	height: 500px;
+	height: 400px;
+	width: 400px;
 }
+
+
 
 td button {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	margin-left: 23%;
 }
 
-td input {
-	margin-left: 23%;
-}
 </style>
 </head>
 <body>
 	<div class="container">
-		<table id="table" border="1px solid black" style="margin: 0 auto">
-			<tr>
-				<td>ID/PW</td>
-			</tr>
+		<form action="login" method="post">
 
-			<!-- <table border="1" style="width: 100%; margin-top: 5px;"> -->
-			<tr>
-				<td colspan="2"><input type="text" value="ID"></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="text" value=""></td>
 
-			</tr>
-			<!-- 					</table> -->
-			<tr>
-				<td><in>로그인</button></td>
-			</tr>
-			<tr>
-				<td><button>회원가입</button></td>
-			</tr>
-			<tr>
-				<td colspan="2"><button>SNS 로그인</button></td>
-			</tr>
-			<tr>
-				<td colspan="2"><button>SNS 회원가입</button></td>
-			</tr>
-		</table>
+			<table id="table" border="1px solid black" style="margin: 0 auto">
+				<tr>
+					<td>ID/PW</td>
+				</tr>
+
+				<!-- <table border="1" style="width: 100%; margin-top: 5px;"> -->
+				<tr>
+					<td class="td1">ID<input type="text" name="user_id"></td>
+				</tr>
+				<tr>
+					<td class="td2">PassWord<input type="password" name="user_pw"></td>
+
+				</tr>
+				<!-- 					</table> -->
+				<tr>
+					<td style="text-align: center; margin: 5%"><input type="submit" value="로그인"></input><input
+						type="submit" value="회원가입"></input></td>
+				</tr>
+
+				<tr>
+					<td colspan="2"><button>SNS 로그인</button></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button>SNS 회원가입</button></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 </body>
 </html>
