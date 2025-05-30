@@ -16,8 +16,10 @@
 <p>여기에 써주세요</p>
 <p>박정현</p>
 <p>이동건</p>
-<a href="/login"> 로그인 화면으로 이동</a>
-<a href="/signup"> 회원가입 화면으로 이동</a>
+<a href="/login"> 로그인 화면으로 이동</a><br>
+<a href="/signup"> 회원가입 화면으로 이동</a><br>
+<a href="/index"> 메인화면2으로 이동</a><br>
+
 
 
 </body>
