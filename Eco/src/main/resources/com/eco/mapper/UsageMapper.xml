@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eco.mapper.UsageMapper">
+	<!-- 이번 달 나의 사용량 가져오기 -->
+	<select id="usageSelect" resultType="com.eco.domain.UsageVO">
+		SELECT * FROM t_usage WHERE usage_cd=#{usage_cd}
+	</select>
+	<!-- INSERT -->
+	<!-- UPDATE -->
+	<!-- DELETE -->
+</mapper>
