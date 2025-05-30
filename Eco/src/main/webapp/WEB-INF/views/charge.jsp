@@ -56,8 +56,8 @@
 						<th>전기</th>
 					</tr>
 					<tr>
-						<td>내용</td>
-						<td>내용</td>
+						<td>${ gasCharge }</td>
+						<td>${ elecCharge }</td>
 					</tr>
 				</table>
 				<span class="title">과거 요금 이력</span>
@@ -74,6 +74,7 @@
 				<div id="main_data">
 					(과거 사용 이력)
 				</div>
+				<!-- <button onclick="location.href='/chargeSelect'">ddd</button> -->
 			</div>
 		</div>
 	</div>
