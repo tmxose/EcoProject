@@ -28,14 +28,11 @@ html, body {
 	width: 400px;
 }
 
-
-
 td button {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
 }
-
 </style>
 </head>
 <body>
@@ -58,15 +55,18 @@ td button {
 				</tr>
 				<!-- 					</table> -->
 				<tr>
-					<td style="text-align: center; margin: 5%"><input type="submit" value="로그인"></input><input
-						type="submit" value="회원가입"></input></td>
+					<td style="text-align: center; margin: 5%"><input
+						type="submit" value="로그인"></input><input type="submit"
+						value="회원가입"></input></td>
 				</tr>
 
 				<tr>
-					<td colspan="2"><button>SNS 로그인</button></td>
+					<td colspan="2"><a href="/login/googleLogin"><img
+							src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
+							alt="Google 로그인"></a></td>
 				</tr>
 				<tr>
-					<td colspan="2"><button>SNS 회원가입</button></td>
+					<td colspan="2"><a href="/login/googleLogin"> Google 계정으로 로그인</a></td>
 				</tr>
 			</table>
 		</form>
