@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,98 +31,97 @@ import lombok.extern.log4j.Log4j;
 public class LoginController {
 
 	private UserService service;
-    // Google OAuth2 Á¤º¸
-    private final String CLIENT_ID = "851862848030-5533gqa556ubk6f09hqicorf10jnvsk3.apps.googleusercontent.com";
-    private final String CLIENT_SECRET = "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";
-    private final String REDIRECT_URI = "http://localhost:8080/login/oauth2callback";
+	// Google OAuth2 ï¿½ï¿½ï¿½ï¿½
+	@Value("${google.client.id}")
+	private final String CLIENT_ID;
+	@Value("${google.client.secret}")
+	private final String CLIENT_SECRET;
+	@Value("${google.redirect.uri}")
+	private final String REDIRECT_URI;
 
-    @GetMapping("")
+	@GetMapping("")
 	public void loginPage() {
 		log.info("login form");
 	}
 
-    @PostMapping("") 
+	@PostMapping("")
 	public void loginPost(UserVO user) {
-		log.info("loginPost ÁøÀÔ");
+		log.info("loginPost ï¿½ï¿½ï¿½ï¿½");
 		log.info("user_id: " + user.getUser_id());
 		log.info("user_pw: " + user.getUser_pw());
 
-		// ¼­ºñ½º¿¡ ÇÔ¼ö¸¦ È£Ãâ°ª ¸¸µé±â
+		// ï¿½ï¿½ï¿½ñ½º¿ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ È£ï¿½â°ª ï¿½ï¿½ï¿½ï¿½ï¿½
 		UserVO loginUser = service.login(user);
 		/*
-		 * if(loginUser != null) { log.info("·Î±×ÀÎ ¼º°ø: "+loginUser.getUser_nm();) return
-		 * "re }
+		 * if(loginUser != null) { log.info("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: "+loginUser.getUser_nm();)
+		 * return "re }
 		 */
 	}
-	
-	
-	 // 1. ±¸±Û ·Î±×ÀÎ URL·Î ¸®µð·º¼Ç
-    @GetMapping("/googleLogin") 
-    public void googleLogin(HttpServletResponse response) throws IOException {
-        String oauthUrl = "https://accounts.google.com/o/oauth2/v2/auth"
-                + "?scope=email%20profile"
-                + "&access_type=offline"
-                + "&include_granted_scopes=true"
-                + "&response_type=code"
-                + "&client_id=" + CLIENT_ID
-                + "&redirect_uri=" + REDIRECT_URI;
-        response.sendRedirect(oauthUrl);
-    }
 
-    // 2. ÄÝ¹é Ã³¸®
-    @GetMapping("/oauth2callback")
-    public String oauth2Callback(@RequestParam("code") String code, HttpSession session) throws IOException {
-        // 2-1. code ·Î access_token ¿äÃ»
-        String tokenUrl = "https://oauth2.googleapis.com/token";
-        URL url = new URL(tokenUrl);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setDoOutput(true);
-        
-        String data = "code=" + code
-                + "&client_id=" + CLIENT_ID
-                + "&client_secret=" + CLIENT_SECRET
-                + "&redirect_uri=" + REDIRECT_URI
-                + "&grant_type=authorization_code";
+	// 1. ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ URLï¿½ï¿½ ï¿½ï¿½ï¿½ð·º¼ï¿½
+	@GetMapping("/googleLogin")
+	public void googleLogin(HttpServletResponse response) throws IOException {
+		String oauthUrl = "https://accounts.google.com/o/oauth2/v2/auth" + "?scope=email%20profile"
+				+ "&access_type=offline" + "&include_granted_scopes=true" + "&response_type=code" + "&client_id="
+				+ CLIENT_ID + "&redirect_uri=" + REDIRECT_URI;
+		response.sendRedirect(oauthUrl);
+	}
 
-        OutputStream os = conn.getOutputStream();
-        os.write(data.getBytes());
-        os.flush();
-        os.close();
+	// 2. ï¿½Ý¹ï¿½ Ã³ï¿½ï¿½
+	@GetMapping("/oauth2callback")
+	public String oauth2Callback(@RequestParam("code") String code, HttpSession session) throws IOException {
+		// 2-1. code ï¿½ï¿½ access_token ï¿½ï¿½Ã»
+		String tokenUrl = "https://oauth2.googleapis.com/token";
+		URL url = new URL(tokenUrl);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("POST");
+		conn.setDoOutput(true);
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        StringBuilder sb = new StringBuilder(); String line;
-        while ((line = br.readLine()) != null) sb.append(line);
-        br.close();
+		String data = "code=" + code + "&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&redirect_uri="
+				+ REDIRECT_URI + "&grant_type=authorization_code";
 
-        JSONObject json = new JSONObject(sb.toString());
-        String accessToken = json.getString("access_token");
+		OutputStream os = conn.getOutputStream();
+		os.write(data.getBytes());
+		os.flush();
+		os.close();
 
-        // 2-2. access_token À¸·Î À¯Àú Á¤º¸ ¿äÃ»
-        URL userInfoUrl = new URL("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + accessToken);
-        HttpURLConnection userConn = (HttpURLConnection) userInfoUrl.openConnection();
-        BufferedReader userReader = new BufferedReader(new InputStreamReader(userConn.getInputStream()));
-        StringBuilder userSb = new StringBuilder(); String userLine;
-        while ((userLine = userReader.readLine()) != null) userSb.append(userLine);
-        userReader.close();
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		StringBuilder sb = new StringBuilder();
+		String line;
+		while ((line = br.readLine()) != null)
+			sb.append(line);
+		br.close();
 
-        JSONObject userInfo = new JSONObject(userSb.toString());
-        String email = userInfo.getString("email");
-        String name = userInfo.getString("name");
+		JSONObject json = new JSONObject(sb.toString());
+		String accessToken = json.getString("access_token");
 
-        // 2-3. DB Á¶È¸ ÈÄ °¡ÀÔ Ã³¸®
-        UserVO user = service.findByUserId(email);
-        if (user == null) {
-            user = new UserVO();
-            user.setUser_id(email);
-            user.setUser_pw(""); // ºñ¹ø ¾øÀÌ ¼Ò¼È ·Î±×ÀÎ
-            user.setUser_nm(name);
-            user.setUse_yn('Y');
-            service.signup(user);
-        }
+		// 2-2. access_token ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
+		URL userInfoUrl = new URL("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + accessToken);
+		HttpURLConnection userConn = (HttpURLConnection) userInfoUrl.openConnection();
+		BufferedReader userReader = new BufferedReader(new InputStreamReader(userConn.getInputStream()));
+		StringBuilder userSb = new StringBuilder();
+		String userLine;
+		while ((userLine = userReader.readLine()) != null)
+			userSb.append(userLine);
+		userReader.close();
 
-        // 2-4. ¼¼¼Ç ÀúÀå
-        session.setAttribute("loginUser", user);
-        return "redirect: /index";  // ·Î±×ÀÎ ÈÄ ÀÌµ¿ÇÒ ÆäÀÌÁö
-    }
+		JSONObject userInfo = new JSONObject(userSb.toString());
+		String email = userInfo.getString("email");
+		String name = userInfo.getString("name");
+
+		// 2-3. DB ï¿½ï¿½È¸ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+		UserVO user = service.findByUserId(email);
+		if (user == null) {
+			user = new UserVO();
+			user.setUser_id(email);
+			user.setUser_pw(""); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¼ï¿½ ï¿½Î±ï¿½ï¿½ï¿½
+			user.setUser_nm(name);
+			user.setUse_yn('Y');
+			service.signup(user);
+		}
+
+		// 2-4. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		session.setAttribute("loginUser", user);
+		return "redirect: /index"; // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	}
 }
