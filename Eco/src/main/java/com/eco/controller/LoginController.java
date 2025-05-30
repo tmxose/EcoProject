@@ -29,6 +29,9 @@ public class LoginController {
 
 		//서비스에 함수를 호출값 만들기
 		UserVO loginUser = service.login(user);
-		
+		/*
+		 * if(loginUser != null) { log.info("로그인 성공: "+loginUser.getUser_nm();) return
+		 * "re }
+		 */
 	}
 }
