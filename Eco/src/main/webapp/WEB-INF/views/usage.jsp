@@ -28,13 +28,16 @@
 		#main form{width: 90%; margin: 0 auto;}
 		#main select{width: 100px; height: 25px;}
 		#main input{width: 50px; text-align: center;}
-		#main_data{margin: 20px auto; width: 90%; height: 200px; border: 1px dotted black;}
+		
+		#main_data{margin: 20px auto; width: 90%; border: 1px dotted black;}
+		#main_data table{margin : 25px auto}
+		#main_data table caption{margin-bottom : 10px}
 	</style>
 </head>
 <body>
 	<div id="wrap">
 		<div id="head">
-			<img src="#" id="head_icon">
+			<img src="/resources/img/icon.png" id="head_icon">
 			<div id="head_user">
 				<span>(사용자)님, 환영합니다.</span>
 				<a href="#">로그아웃</a>
