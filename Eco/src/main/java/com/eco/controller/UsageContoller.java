@@ -2,6 +2,8 @@ package com.eco.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +23,20 @@ public class UsageContoller {
 	
 	// 이번 달 나의 사용량 가져오기
 	@GetMapping("/usage")
-	public void usageSelect(Model model) {
+	public String usageSelect(Model model, HttpSession session) {
 		log.info("이번 달 나의 사용량 가져오기");
-		model.addAttribute("usage", service.usageRead("abcd"));
+		// session의 유저 아이디 가져오기
+		String userId = (String)session.getAttribute("userID");
+		
+		model.addAttribute("usage", service.usageRead(userId));
 		
 		//가스 상세 내역
-		List<UserTypeChargeDTO> gasUse = service.gasUsageDetail("abcd");
+		List<UserTypeChargeDTO> gasUse = service.gasUsageDetail(userId);
 		model.addAttribute("gasUse", gasUse);
 		//전기 상세 내역
-		List<UserTypeChargeDTO> elecUse = service.elecUsageDetail("abcd");
+		List<UserTypeChargeDTO> elecUse = service.elecUsageDetail(userId);
 		model.addAttribute("elecUse", elecUse);
+		
+		return "usage";
 	}
 }
