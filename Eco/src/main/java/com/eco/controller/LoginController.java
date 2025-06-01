@@ -32,13 +32,19 @@ public class LoginController {
 
 	private UserService service;
 	// Google OAuth2 ����
-	@Value("${google.client.id}")
-	private final String CLIENT_ID;
-	@Value("${google.client.secret}")
-	private final String CLIENT_SECRET;
-	@Value("${google.redirect.uri}")
-	private final String REDIRECT_URI;
+	private final String CLIENT_ID = "851862848030-5533gqa556ubk6f09hqicorf10jnvsk3.apps.googleusercontent.com";
+	private final String CLIENT_SECRET = "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";
+	private final String REDIRECT_URI = "http://localhost:8080/login/oauth2callback";
 
+	//	@Value("${google.client.id}")
+//	private String CLIENT_ID;
+//	@Value("${google.client.secret}")
+//	private String CLIENT_SECRET;
+//	@Value("${google.redirect.uri}")
+//	private String REDIRECT_URI;
+
+	
+	
 	@GetMapping("")
 	public void loginPage() {
 		log.info("login form");
