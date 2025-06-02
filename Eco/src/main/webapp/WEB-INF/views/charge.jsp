@@ -34,6 +34,24 @@
 		#main_data table{margin : 25px auto}
 		#main_data table caption{margin-bottom : 10px}		
 	</style>
+	<script>
+		function validateDates(form) {
+			let startDay = document.getElementById("startDate").value;
+			let endDay = document.getElementById("endDate").value;
+			if(!startDay){
+				alert("시작일을 지정하여 주세요")
+				return false;
+			}
+			if(!endDay){
+				alert("종료일을 지정하여 주세요")
+				return false;
+			}
+			if(startDay && endDay && startDay > endDay) {
+				alert("시작일은 종료일보다 빠른 날짜여야 합니다.");
+				return false;
+			}
+		}
+	</script>
 </head>
 <body>
 	<div id="wrap">
@@ -84,9 +102,10 @@
 					</tr>
 				</table>
 				<span class="title">과거 요금 이력</span>
-				<form method="get" action="/charge/period">
+				<form method="get" action="/charge/period" onsubmit="return validateDates(this)">
 					<span>기간 : </span>
-					<input type="date" name="startDate"> ~ <input type="date" name="endDate">
+					<input type="date" name="startDate" id="startDate" value="${startDate}" pattern="yyyy-MM-dd">
+					 ~ <input type="date" name="endDate" id="endDate" value="${endDate}" pattern="yyyy-MM-dd">
 					<input type="submit" value="조회">
 				</form>
 				<div id="main_data">
