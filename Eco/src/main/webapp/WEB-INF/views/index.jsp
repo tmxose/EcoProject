@@ -10,12 +10,12 @@
 <body>
 	<div class="container">
 		<div class="inner-container">
-			<c:if test="${not empty sessionScope.loginUser}">
-				<p>환영합니다, ${loginUser.user_nm} 님!</p>
+			<c:if test="${not empty sessionScope.currentUserInfo}">
+				<p>환영합니다, ${currentUserInfo.user_nm} 님!</p>
 				<button onclick="location.href='/logout'">로그아웃</button>
 			</c:if>
 			
-			<c:if test="${empty sessionScope.loginUser}">
+			<c:if test="${empty sessionScope.currentUserInfo}">
 				<button onclick="location.href='/login'">로그인</button>
 				<button onclick="location.href='/signup'">회원가입</button>
 			</c:if>
@@ -32,7 +32,7 @@
 
 	<script>
 		function goToMyUsagePage() {
-			const isLoggedIn = '${not empty sessionScope.loginUser}' === 'true';
+			const isLoggedIn = '${not empty sessionScope.currentUserInfo}' === 'true';
 			if (isLoggedIn) {
 				location.href = '/usage'; // 실제 내 정보 보기 페이지로 변경
 			} else {
