@@ -73,7 +73,7 @@ public class LoginController {
 	public void googleLogin(HttpServletResponse response) throws IOException {
 		String oauthUrl = "https://accounts.google.com/o/oauth2/v2/auth" + "?scope=email%20profile"
 				+ "&access_type=offline" + "&include_granted_scopes=true" + "&response_type=code" + "&client_id="
-				+ CLIENT_ID + "&redirect_uri=" + REDIRECT_URI;
+				+ CLIENT_ID + "&redirect_uri=" + REDIRECT_URI + "&prompt=select_account";
 		response.sendRedirect(oauthUrl);
 	}
 
@@ -150,7 +150,7 @@ public class LoginController {
         String naverAuthUrl = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
                 + "&client_id=" + NAVER_CLIENT_ID
                 + "&redirect_uri=" + redirectURI
-                + "&state=" + state;
+                + "&state=" + state + "&prompt=login";
 
         response.sendRedirect(naverAuthUrl);
     }

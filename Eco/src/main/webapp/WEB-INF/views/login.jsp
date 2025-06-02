@@ -49,7 +49,7 @@ table {
 				<tr>
 					<td colspan="2">
 						<a href="/login/googleLogin">
-							<img class="login-button" src="../../resources/img/google_login.png"
+							<img class="login-button" src="../../resources/img/google_siginin.png"
 							alt="Google 로그인">
 						</a>
 					</td>
