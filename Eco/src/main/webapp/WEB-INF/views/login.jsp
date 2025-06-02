@@ -48,10 +48,21 @@ table {
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><a href="/login/googleLogin"><img
-							src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
-							alt="Google 로그인"></a></td>
+					<td colspan="2">
+						<a href="/login/googleLogin">
+							<img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
+							alt="Google 로그인">
+						</a>
+					</td>
 				</tr>
+					<tr>
+					<td colspan="2">
+						<a href="/login/naverLogin">
+  							<img src="https://static.nid.naver.com/oauth/big_g_in.PNG" alt="네이버 로그인">
+						</a>
+					</td>
+				</tr>
+				
 			</table>
 		</form>
 	</div>
