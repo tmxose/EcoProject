@@ -83,10 +83,10 @@ public class ChargeController {
 		model.addAttribute("elecCharge", elecCharge);
 		// 이번 달 사용량이 0일 때 처리
 		if(gasCharge == null) {
-			model.addAttribute("gasUsageMsg", "이번 달 가스 사용량이 없습니다.");
+			model.addAttribute("gasChargeMsg", "이번 달 가스 사용량이 없습니다.");
 		}
 		if(elecCharge == null) {
-			model.addAttribute("elecUsageMsg", "이번 달 전기 사용량이 없습니다.");
+			model.addAttribute("elecChargeMsg", "이번 달 전기 사용량이 없습니다.");
 		}
 		
 		log.info("지정 기간 나의 사용량 가져오기");
@@ -104,7 +104,7 @@ public class ChargeController {
 			model.addAttribute("elecUsageDetailMsg", "해당 기간 전기 사용량이 없습니다.");
 		}
 		
-		return "usage";
+		return "charge";
 	}
 	
 }

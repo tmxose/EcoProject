@@ -104,6 +104,9 @@ public class UsageContoller {
 			model.addAttribute("elecUsageDetailMsg", "해당 기간 전기 사용량이 없습니다.");
 		}
 		
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		
 		return "usage";
 	}
 	
