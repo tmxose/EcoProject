@@ -73,7 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 지역별 가장 최근 달의 에너지 사용량 합계 -->
-	<select id="getUsageAverage" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getUsageAmount" resultType="com.eco.domain.UserTypeChargeDTO">
 	 	<![CDATA[
 		select u.user_local, round(sum(us.gas_usage)) AS gasUsageAmount, round(sum(us.elec_usage)) AS elecUsageAmount
 		FROM t_user u
