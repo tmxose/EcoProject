@@ -51,7 +51,7 @@ public class LoginController {
 	@PostMapping("")
 	public String loginPost(UserVO user, HttpSession session) {
 		UserVO rtnUser = service.login(user);
-		if (rtnUser == null) {
+		if (rtnUser != null) {
 			// 로그인 처리
 			session.setAttribute("currentUserInfo", rtnUser);
 			log.info(rtnUser.getUser_nm());
