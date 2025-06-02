@@ -21,10 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_elec e ON us.gas_cd = e.elec_cd
 		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id =#{user_id})
         AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE())
+		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
 		GROUP BY u.user_cd;
 	</select>
 	
-	<!-- 가스 상세 내역 -->
+	<!-- 당월 가스 상세 내역 -->
 	<select id="getGasUsageDetail" resultType="com.eco.domain.UserTypeChargeDTO">
 		<![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, g.type AS usageType, g.charge AS unitCharge, gas_usage, gas_time 
@@ -34,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
 		]]>
 	</select>
-	<!-- 전기 상세 내역 -->
+	<!-- 당월 전기 상세 내역 -->
 	<select id="getElecUsageDetail" resultType="com.eco.domain.UserTypeChargeDTO">
       <![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, e.type AS usageType, e.charge AS unitCharge, elec_usage, elec_time 
@@ -42,6 +43,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_usage us ON u.user_cd = us.user_cd
 		JOIN t_elec e ON us.elec_cd = e.elec_cd
 		WHERE u.use_yn = 'Y'AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
+		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE())
+		]]>
+	</select>
+	
+	<!-- 지정한 기간의 가스 상세 내역 -->
+	<select id="getGasUsagePeriod" resultType="com.eco.domain.UserTypeChargeDTO">
+		<![CDATA[
+		SELECT u.user_cd AS userCD, u.user_nm AS userNM, g.type AS usageType, g.charge AS unitCharge, gas_usage, gas_time 
+		FROM t_user u
+		JOIN t_usage us ON u.user_cd = us.user_cd
+		JOIN t_gas g ON us.gas_cd = g.gas_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
+		AND us.gas_time BETWEEN #{start_date} and #{end_date}
+		]]>
+	</select>
+	<!-- 지정한 기간의 전기 상세 내역 -->
+	<select id="getElecUsagePeriod" resultType="com.eco.domain.UserTypeChargeDTO">
+      <![CDATA[
+		SELECT u.user_cd AS userCD, u.user_nm AS userNM, e.type AS usageType, e.charge AS unitCharge, elec_usage, elec_time 
+		FROM t_user u
+		JOIN t_usage us ON u.user_cd = us.user_cd
+		JOIN t_elec e ON us.elec_cd = e.elec_cd
+		WHERE u.use_yn = 'Y'AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
+		AND us.elec_time BETWEEN #{start_date} and #{end_date}
 		]]>
 	</select>
 	<!-- INSERT -->
