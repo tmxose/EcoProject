@@ -52,7 +52,7 @@ public class LoginController {
 
 	@GetMapping("")
 	public void loginPage() {
-		log.info("login form");
+		log.info("login Page");
 	}
 
 	@PostMapping("")
@@ -61,7 +61,7 @@ public class LoginController {
 		if (rtnUser != null) {
 			// 로그인 처리
 			session.setAttribute("currentUserInfo", rtnUser);
-			log.info(rtnUser.getUser_nm());
+			log.info("web login");
 			return "redirect: /usage";
 		} else {
 			// 재로그인 처리
@@ -130,10 +130,12 @@ public class LoginController {
 			user.setUser_nm(name);
 			user.setUse_yn('Y');
 			service.signup(user);
+			log.info("Google Signup");
 		}
 
 		// 2-4. 로그인 처리
 		session.setAttribute("currentUserInfo", user);
+		log.info("Google Login");
 		return "redirect: /"; // 로그인 후 이동할 페이지 설정
 	}
 	// # 구글 로그인 End --------------------------------------------------------
@@ -159,13 +161,7 @@ public class LoginController {
                                 @RequestParam("state") String state,
                                 HttpSession session) throws IOException {
         // 1. access_token 요청 URL 생성
-		/*
-		 * String tokenUrl =
-		 * "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code" +
-		 * "&client_id=" + NAVER_CLIENT_ID + "&client_secret=" + NAVER_CLIENT_SECRET +
-		 * "&code=" + code + "&state=" + state;
-		 */
-    	String tokenUrl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
+		String tokenUrl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
     	        + "&client_id=" + NAVER_CLIENT_ID
     	        + "&client_secret=" + NAVER_CLIENT_SECRET
     	        + "&code=" + code
@@ -216,11 +212,12 @@ public class LoginController {
             user.setUser_nm(name);
             user.setUse_yn('Y');
             service.signup(user);
+            log.info("Naver Signup");
         }
 
         // 4. 세션에 로그인 정보 저장
         session.setAttribute("currentUserInfo", user);
-
+        log.info("Naver Login");
         return "redirect:/"; // 로그인 후 이동할 페이지
     }
 	// # Naver Login End ---------------------------------------------------
