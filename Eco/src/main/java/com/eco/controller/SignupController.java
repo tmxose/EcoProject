@@ -28,6 +28,7 @@ public class SignupController {
 	@PostMapping("/signup")
 	public String signupPost(UserVO user) {
 		log.info("signup Post");
+		user.setUser_type("B");
 		service.signup(user);
 		return "login";
 	}
