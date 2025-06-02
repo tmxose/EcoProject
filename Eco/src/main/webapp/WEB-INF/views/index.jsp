@@ -72,12 +72,12 @@
 	            labels: localList,
 	            datasets: [
 	                {
-	                    label: 'Gas Usage',
+	                    label: '도시가스',
 	                    data: gasUsageList,
 	                    backgroundColor: 'rgba(255, 99, 132, 0.5)'
 	                },
 	                {
-	                    label: 'Electric Usage',
+	                    label: '전기',
 	                    data: elecUsageList,
 	                    backgroundColor: 'rgba(54, 162, 235, 0.5)'
 	                }
