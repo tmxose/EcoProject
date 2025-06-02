@@ -5,6 +5,28 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
+<script>
+    function validateForm() {
+        const userId = document.querySelector('input[name="user_id"]').value;
+        const userPw = document.querySelector('input[name="user_pw"]').value;
+        const userNm = document.querySelector('input[name="user_nm"]').value;
+
+        if (userId === "" || userId === null) {
+            alert("아이디를 입력해주세요.");
+            return false; // Prevent form submission
+        }
+        if (userPw === "" || userPw === null) {
+            alert("비밀번호를 입력해주세요.");
+            return false;
+        }
+        if (userNm === "" || userNm === null) {
+            alert("이름을 입력해주세요.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
 </head>
 <body>
 	<h2>회원가입 페이지 입니다.</h2>
