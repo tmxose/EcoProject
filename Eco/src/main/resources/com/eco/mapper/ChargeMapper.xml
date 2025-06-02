@@ -3,12 +3,8 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eco.mapper.ChargeMapper">
-	<!-- 이번 달 나의 요금 가져오기? -->
-	<select id="chargeSelect" resultType="com.eco.domain.UsageVO">
-		SELECT * FROM t_usage WHERE user_id = #{user_id}
-	</select>
 	<!-- 이번 달 가스요금 -->
-	<select id="getUserGasChargeSummary" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getGasCharge" resultType="com.eco.domain.UserTypeChargeDTO">
 		<![CDATA[
 		SELECT u.user_cd AS userCd, u.user_nm AS userNm, '가스' AS energyType, g.type AS usageType,
 		SUM(us.gas_usage) AS usageAmount, g.charge AS unitCharge, SUM(us.gas_usage * g.charge) AS totalCharge
@@ -22,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	<!-- 이번 달 전기요금 -->
-	<select id="getUserElecChargeSummary" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getElecCharge" resultType="com.eco.domain.UserTypeChargeDTO">
       <![CDATA[
 		SELECT u.user_cd AS userCd, u.user_nm AS userNm, '전기' AS energyType, e.type AS usageType,
 		SUM(us.elec_usage) AS usageAmount, e.charge AS unitCharge, SUM(us.elec_usage * e.charge) AS totalCharge
@@ -36,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	<!-- 가스 상세 내역 -->
-	<select id="getUserGasChargeDetail" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getGasChargeDetail" resultType="com.eco.domain.UserTypeChargeDTO">
 		<![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, g.type AS usageType, g.charge AS unitCharge, gas_usage, gas_time 
 		FROM t_user u
@@ -46,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	<!-- 전기 상세 내역 -->
-	<select id="getUserElecChargeDetail" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getElecChargeDetail" resultType="com.eco.domain.UserTypeChargeDTO">
       <![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, e.type AS usageType, e.charge AS unitCharge, elec_usage, elec_time 
 		FROM t_user u
