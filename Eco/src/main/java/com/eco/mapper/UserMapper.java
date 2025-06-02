@@ -1,5 +1,7 @@
 package com.eco.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.eco.domain.UserVO;
 
 public interface UserMapper {
@@ -8,5 +10,5 @@ public interface UserMapper {
 	public int getUserCount(UserVO user);
 	
 	// 가입자 정보
-	public UserVO findByUserId(String user_id);  // 아이디로 사용자 조회
+	public UserVO findByUserId(@Param("user_id") String user_id, @Param("user_type") String user_type);  // 아이디로 사용자 조회
 }

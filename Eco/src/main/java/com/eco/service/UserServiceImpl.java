@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
 	// �Ҽ� �α��� �Լ�
 	@Override
-	public UserVO findByUserId(String user_id) {
-		return mapper.findByUserId(user_id);
+	public UserVO findByUserId(String user_id, String user_type) {
+		return mapper.findByUserId(user_id, user_type);
 	}
 }

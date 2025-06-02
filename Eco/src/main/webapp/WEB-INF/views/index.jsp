@@ -12,7 +12,7 @@
 		<div class="inner-container">
 			<c:if test="${not empty sessionScope.currentUserInfo}">
 				<p>환영합니다, ${currentUserInfo.user_nm} 님!</p>
-				<button onclick="location.href='/logout'">로그아웃</button>
+				<button onclick="location.href='/login/logout'">로그아웃</button>
 			</c:if>
 			
 			<c:if test="${empty sessionScope.currentUserInfo}">

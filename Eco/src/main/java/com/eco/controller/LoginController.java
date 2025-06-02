@@ -13,13 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 
 import com.eco.domain.UserVO;
 import com.eco.service.UserService;
@@ -120,15 +118,17 @@ public class LoginController {
 		JSONObject userInfo = new JSONObject(userSb.toString());
 		String email = userInfo.getString("email");
 		String name = userInfo.getString("name");
-
+		String type = "G";
+		
 		// 2-3. DB 조회 후 사용자 등록 또는 수정
-		UserVO user = service.findByUserId(email);
+		UserVO user = service.findByUserId(email, type);
 		if (user == null) {
 			user = new UserVO();
 			user.setUser_id(email);
 			user.setUser_pw(""); // 마이 페이지 가입자 로그인
 			user.setUser_nm(name);
 			user.setUse_yn('Y');
+			user.setUser_type("G");
 			service.signup(user);
 			log.info("Google Signup");
 		}
@@ -202,15 +202,16 @@ public class LoginController {
 
         String email = responseJson.getString("email");
         String name = responseJson.getString("name");
-
+        String type = "N";
         // 3. DB 사용자 조회 및 등록 또는 수정
-        UserVO user = service.findByUserId(email);
+        UserVO user = service.findByUserId(email, type);
         if (user == null) {
             user = new UserVO();
             user.setUser_id(email);
             user.setUser_pw("");  // 소셜로그인 비밀번호는 빈 문자열로 처리
             user.setUser_nm(name);
             user.setUse_yn('Y');
+            user.setUser_type("N");
             service.signup(user);
             log.info("Naver Signup");
         }
@@ -222,4 +223,10 @@ public class LoginController {
     }
 	// # Naver Login End ---------------------------------------------------
 
+    // 로그아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // 세션 무효화
+        return "redirect:/";  // 홈이나 로그인 페이지로 이동
+    }
 }

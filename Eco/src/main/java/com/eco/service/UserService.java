@@ -9,7 +9,7 @@ public interface UserService {
 	public UserVO login(UserVO user);
 	
 	// �Ҽ� �α��� 
-	public UserVO findByUserId(String user_id);
+	public UserVO findByUserId(String user_id, String user_type);
 	 
 }
 	
