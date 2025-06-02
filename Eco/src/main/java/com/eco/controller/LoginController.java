@@ -31,7 +31,7 @@ import lombok.extern.log4j.Log4j;
 public class LoginController {
 
 	private UserService service;
-	// Google OAuth2 ����
+	// Google OAuth2 Info
 	private final String CLIENT_ID = "851862848030-5533gqa556ubk6f09hqicorf10jnvsk3.apps.googleusercontent.com";
 	private final String CLIENT_SECRET = "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";
 	private final String REDIRECT_URI = "http://localhost:8080/login/oauth2callback";
@@ -74,7 +74,7 @@ public class LoginController {
 	// 2. 예외 처리
 	@GetMapping("/oauth2callback")
 	public String oauth2Callback(@RequestParam("code") String code, HttpSession session) throws IOException {
-		// 2-1. code �� access_token ��û
+		// 2-1. code 로 access_token 발급
 		String tokenUrl = "https://oauth2.googleapis.com/token";
 		URL url = new URL(tokenUrl);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -99,7 +99,7 @@ public class LoginController {
 		JSONObject json = new JSONObject(sb.toString());
 		String accessToken = json.getString("access_token");
 
-		// 2-2. access_token ���� ���� ���� ��û
+		// 2-2. access_token 으로 사용자 정보 조회
 		URL userInfoUrl = new URL("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + accessToken);
 		HttpURLConnection userConn = (HttpURLConnection) userInfoUrl.openConnection();
 		BufferedReader userReader = new BufferedReader(new InputStreamReader(userConn.getInputStream()));
@@ -113,7 +113,7 @@ public class LoginController {
 		String email = userInfo.getString("email");
 		String name = userInfo.getString("name");
 
-		// 2-3. DB ��ȸ �� ���� ó��
+		// 2-3. DB 조회 후 사용자 등록 또는 수정
 		UserVO user = service.findByUserId(email);
 		if (user == null) {
 			user = new UserVO();
@@ -124,8 +124,8 @@ public class LoginController {
 			service.signup(user);
 		}
 
-		// 2-4. ���� ����
+		// 2-4. 로그인 처리
 		session.setAttribute("currentUserInfo", user);
-		return "redirect: /"; // �α��� �� �̵��� ������
+		return "redirect: /"; // 로그인 후 이동할 페이지 설정
 	}
 }
