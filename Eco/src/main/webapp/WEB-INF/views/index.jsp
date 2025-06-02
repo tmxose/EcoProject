@@ -19,7 +19,7 @@
 				<button onclick="location.href='/login'">로그인</button>
 				<button onclick="location.href='/signup'">회원가입</button>
 				<a href="/login/googleLogin">
-					<img class="login-button" src="../../resources/img/google_login.png"
+					<img class="login-button" src="../../resources/img/google_signin.png"
 					alt="Google 로그인">
 				</a>
 				<a href="/login/naverLogin">
