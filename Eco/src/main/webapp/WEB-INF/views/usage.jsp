@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,7 +84,7 @@
 					</tr>
 				</table>
 				<span class="title">과거 에너지 사용 이력</span>
-				<form>
+				<form method="get" action="/usage/period">
 					<span>기간 : </span>
 					<input type="date" name="startDate"> ~ <input type="date" name="endDate">
 					<input type="submit" value="조회">
@@ -99,16 +100,25 @@
 							<th>사용량</th>
 							<th>날짜</th>
 						</tr>
-						<c:forEach var="item" items="${gasUse}">
-				            <tr>
-				                <td>${item.userCd}</td>
-				                <td>${item.userNm}</td>
-				                <td>${item.usageType}</td>
-				                <td>${item.unitCharge}</td>
-				                <td>${item.gas_usage}</td>
-				                <td>${item.gas_time}</td>
-				            </tr>
-				        </c:forEach>
+						<c:choose>
+							<c:when test="${not empty gasUse}">
+								<c:forEach var="item" items="${gasUse}">
+						            <tr>
+						                <td>${item.userCd}</td>
+						                <td>${item.userNm}</td>
+						                <td>${item.usageType}</td>
+						                <td>${item.unitCharge}</td>
+						                <td>${item.gas_usage}</td>
+						                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${ item.gas_time }"/></td>
+						            </tr>
+						        </c:forEach>
+						    </c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan="6">${ gasUsageDetailMsg }</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
 					</table>
 					<table>
 						<caption>전기 사용 상세 내역</caption>
@@ -120,16 +130,25 @@
 							<th>사용량</th>
 							<th>날짜</th>
 						</tr>
-						<c:forEach var="item" items="${elecUse}">
-				            <tr>
-				                <td>${item.userCd}</td>
-				                <td>${item.userNm}</td>
-				                <td>${item.usageType}</td>
-				                <td>${item.unitCharge}</td>
-				                <td>${item.elec_usage}</td>
-				                <td>${item.elec_time}</td>
-				            </tr>
-				        </c:forEach>
+						<c:choose>
+							<c:when test="${not empty elecUse}">
+								<c:forEach var="item" items="${elecUse}">
+						            <tr>
+						                <td>${item.userCd}</td>
+						                <td>${item.userNm}</td>
+						                <td>${item.usageType}</td>
+						                <td>${item.unitCharge}</td>
+						                <td>${item.elec_usage}</td>
+						                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${ item.elec_time }"/></td>
+						            </tr>
+						        </c:forEach>
+						    </c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan="6">${ elecUsageDetailMsg }</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
 					</table>
 				</div>
 			</div>
