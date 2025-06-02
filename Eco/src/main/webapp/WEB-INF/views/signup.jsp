@@ -30,7 +30,7 @@
 </head>
 <body>
 	<h2>회원가입 페이지 입니다.</h2>
-	<form action="signup" method="post">
+	<form action="signup" method="post" onsubmit="return validateForm()">
 		<p>user_id</p>
 		<input type="text" name="user_id">
 		<p>user_pw</p>
