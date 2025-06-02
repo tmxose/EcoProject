@@ -26,15 +26,16 @@ public class UsageContoller {
 	public String usageSelect(Model model, HttpSession session) {
 		log.info("이번 달 나의 사용량 가져오기");
 		// session의 유저 아이디 가져오기
-		String userId = (String)session.getAttribute("userID");
-		
-		model.addAttribute("usage", service.usageRead(userId));
+		String userId = (String)session.getAttribute("currentUserID");
+		// 이번 달 에너지 사용량 합계
+		model.addAttribute("usage", service.readGasusage("abcd"));
+		model.addAttribute("usage", service.readElecusage("abcd"));
 		
 		//가스 상세 내역
-		List<UserTypeChargeDTO> gasUse = service.gasUsageDetail(userId);
+		List<UserTypeChargeDTO> gasUse = service.gasUsageDetail("abcd");
 		model.addAttribute("gasUse", gasUse);
 		//전기 상세 내역
-		List<UserTypeChargeDTO> elecUse = service.elecUsageDetail(userId);
+		List<UserTypeChargeDTO> elecUse = service.elecUsageDetail("abcd");
 		model.addAttribute("elecUse", elecUse);
 		
 		return "usage";

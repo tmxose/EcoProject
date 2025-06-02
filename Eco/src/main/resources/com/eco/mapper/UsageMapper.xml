@@ -2,26 +2,30 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eco.mapper.UsageMapper">
-	<!-- 이번 달 나의 사용량 가져오기 -->
-	<select id="usageSelect" resultType="com.eco.domain.UsageVO">
-		select * FROM t_usage us
+<mapper namespace="com.eco.mapper.UsageMapper">	
+	<!-- 이번 달 가스 사용량 합 -->
+	<select id="getGasUsage" resultType="com.eco.domain.UserTypeChargeDTO">
+		SELECT u.user_id, SUM(us.gas_usage) AS gasUsageAmount
+		FROM t_usage us
 		JOIN t_user u ON u.user_cd = us.user_cd
-		WHERE user_id = #{user_id}
-		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
-		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE()) LIMIT 1
+		JOIN t_gas g ON us.gas_cd = g.gas_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id =#{user_id})
+        AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
+		GROUP BY u.user_cd;
 	</select>
-	<!-- 이번 달 나의 전쳉 사용량 가져오기 -->
-	<select id="usageSelect" resultType="com.eco.domain.UsageVO">
-		select * FROM t_usage us
+	<!-- 이번 달 전기 사용량 합 -->
+	<select id="getElecUsage" resultType="com.eco.domain.UserTypeChargeDTO">
+		SELECT u.user_id, SUM(us.elec_usage) AS elecUsageAmount
+		FROM t_usage us
 		JOIN t_user u ON u.user_cd = us.user_cd
-		WHERE user_id = #{user_id}
-		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
-		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE()) LIMIT 1
+		JOIN t_elec e ON us.gas_cd = e.elec_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id =#{user_id})
+        AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE())
+		GROUP BY u.user_cd;
 	</select>
 	
 	<!-- 가스 상세 내역 -->
-	<select id="getUserGasUsageDetail" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getGasUsageDetail" resultType="com.eco.domain.UserTypeChargeDTO">
 		<![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, g.type AS usageType, g.charge AS unitCharge, gas_usage, gas_time 
 		FROM t_user u
@@ -31,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	<!-- 전기 상세 내역 -->
-	<select id="getUserElecUsageDetail" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getElecUsageDetail" resultType="com.eco.domain.UserTypeChargeDTO">
       <![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, e.type AS usageType, e.charge AS unitCharge, elec_usage, elec_time 
 		FROM t_user u
