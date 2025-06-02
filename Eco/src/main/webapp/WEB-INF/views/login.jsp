@@ -50,7 +50,7 @@ table {
 				<tr>
 					<td colspan="2">
 						<a href="/login/googleLogin">
-							<img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
+							<img class="login-button" src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
 							alt="Google 로그인">
 						</a>
 					</td>
@@ -58,7 +58,7 @@ table {
 					<tr>
 					<td colspan="2">
 						<a href="/login/naverLogin">
-  							<img src="../../resources/img/btnG_완성형.png" alt="네이버 로그인">
+  							<img class="login-button" src="../../resources/img/btnG_완성형.png" alt="네이버 로그인">
 						</a>
 					</td>
 				</tr>
