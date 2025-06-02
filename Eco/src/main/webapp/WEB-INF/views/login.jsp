@@ -16,16 +16,13 @@ html, body {
 	justify-content: center;
 	align-items: center;
 }
-
-.container {
-	
-}
-
-#table {
+table {
 	text-align: center;
 	width: 400px;
 	height: 400px;
 	width: 400px;
+	border: 1px solid black;
+	margin: 0 auto;
 }
 
 td button {
@@ -38,14 +35,10 @@ td button {
 <body>
 	<div class="container">
 		<form action="login" method="post">
-
-
-			<table id="table" border="1px solid black" style="margin: 0 auto">
+			<table>
 				<tr>
 					<td>ID/PW</td>
 				</tr>
-
-				<!-- <table border="1" style="width: 100%; margin-top: 5px;"> -->
 				<tr>
 					<td class="td1">ID<input type="text" name="user_id"></td>
 				</tr>
@@ -53,7 +46,6 @@ td button {
 					<td class="td2">PassWord<input type="password" name="user_pw"></td>
 
 				</tr>
-				<!-- 					</table> -->
 				<tr>
 					<td style="text-align: center; margin: 5%"><input
 						type="submit" value="로그인"></input><input type="submit"

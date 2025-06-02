@@ -36,35 +36,35 @@ public class LoginController {
 	private final String CLIENT_SECRET = "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";
 	private final String REDIRECT_URI = "http://localhost:8080/login/oauth2callback";
 
-	//	@Value("${google.client.id}")
+	// @Value("${google.client.id}")
 //	private String CLIENT_ID;
 //	@Value("${google.client.secret}")
 //	private String CLIENT_SECRET;
 //	@Value("${google.redirect.uri}")
 //	private String REDIRECT_URI;
 
-	
-	
 	@GetMapping("")
 	public void loginPage() {
 		log.info("login form");
 	}
 
 	@PostMapping("")
-	public void loginPost(UserVO user) {
-		log.info("loginPost ����");
+	public String loginPost(UserVO user, HttpSession session) {
+		log.info("loginPost -------------");
 		log.info("user_id: " + user.getUser_id());
 		log.info("user_pw: " + user.getUser_pw());
-
-		// ���񽺿� �Լ��� ȣ�Ⱚ �����
-		UserVO loginUser = service.login(user);
-		/*
-		 * if(loginUser != null) { log.info("�α��� ����: "+loginUser.getUser_nm();)
-		 * return "re }
-		 */
+		boolean result = service.login(user);
+		if (result == true) {
+			// 로그인 처리
+			session.setAttribute("currentUserInfo", user);
+			return "redirect: /usage";
+		} else {
+			// 재로그인 처리
+			return "index";
+		}
 	}
 
-	// 1. ���� �α��� URL�� ���𷺼�
+	// 1. 사용자 로그인 URL을 반환
 	@GetMapping("/googleLogin")
 	public void googleLogin(HttpServletResponse response) throws IOException {
 		String oauthUrl = "https://accounts.google.com/o/oauth2/v2/auth" + "?scope=email%20profile"
@@ -73,7 +73,7 @@ public class LoginController {
 		response.sendRedirect(oauthUrl);
 	}
 
-	// 2. �ݹ� ó��
+	// 2. 예외 처리
 	@GetMapping("/oauth2callback")
 	public String oauth2Callback(@RequestParam("code") String code, HttpSession session) throws IOException {
 		// 2-1. code �� access_token ��û
@@ -120,7 +120,7 @@ public class LoginController {
 		if (user == null) {
 			user = new UserVO();
 			user.setUser_id(email);
-			user.setUser_pw(""); // ��� ���� �Ҽ� �α���
+			user.setUser_pw(""); // 마이 페이지 가입자 로그인
 			user.setUser_nm(name);
 			user.setUse_yn('Y');
 			service.signup(user);
