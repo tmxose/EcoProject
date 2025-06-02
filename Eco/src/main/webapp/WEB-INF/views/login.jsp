@@ -25,11 +25,6 @@ table {
 	margin: 0 auto;
 }
 
-td button {
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-}
 </style>
 </head>
 <body>
@@ -47,9 +42,10 @@ td button {
 
 				</tr>
 				<tr>
-					<td style="text-align: center; margin: 5%"><input
-						type="submit" value="로그인"></input><input type="submit"
-						value="회원가입"></input></td>
+					<td style="text-align: center; margin: 5%">
+						<input type="submit" value="로그인"></input>
+						<input type="button" onclick="location.href='/signup'" value="회원가입"></input>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2"><a href="/login/googleLogin"><img
