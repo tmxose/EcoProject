@@ -38,9 +38,9 @@ public class IndexController {
 			String user_local = amountDTO.getUser_local();
 			int gasUsageAmount = (int) amountDTO.getGasUsageAmount();
 			int elecUsageAmount = (int) amountDTO.getElecUsageAmount();
-			log.info(user_local);
-			log.info(gasUsageAmount);
-			log.info(elecUsageAmount);
+//			log.info(user_local);
+//			log.info(gasUsageAmount);
+//			log.info(elecUsageAmount);
 			
 			object.addProperty("user_local", user_local);
 			object.addProperty("gasUsageAmount", gasUsageAmount);
