@@ -37,7 +37,8 @@
 			<p>지역별 평균 사용량 내용</p>
 		</div>
 	</div>
-
+	<canvas id="usgaeChart" width="600" height="400"></canvas>
+	
 	<script>
 		function goToMyUsagePage() {
 			const isLoggedIn = '${not empty sessionScope.currentUserInfo}' === 'true';
@@ -48,6 +49,36 @@
 				location.href = '/login';
 			}
 		}
+		
+		fetch('/chart/data')
+		    .then(response => response.json())
+		    .then(data => {
+		        const labels = data.map(item => item.label);
+		        const values = data.map(item => item.value);
+		
+		        const ctx = document.getElementById('myChart').getContext('2d');
+		        const myChart = new Chart(ctx, {
+		            type: 'bar', // bar, line, pie 등 가능
+		            data: {
+		                labels: labels,
+		                datasets: [{
+		                    label: '값',
+		                    data: values,
+		                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+		                    borderColor: 'rgba(54, 162, 235, 1)',
+		                    borderWidth: 1
+		                }]
+		            },
+		            options: {
+		                responsive: true,
+		                scales: {
+		                    y: {
+		                        beginAtZero: true
+		                    }
+		                }
+		            }
+		        });
+		    });
 	</script>
 </body>
 </html>
