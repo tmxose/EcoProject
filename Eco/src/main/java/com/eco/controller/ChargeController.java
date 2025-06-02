@@ -33,6 +33,7 @@ public class ChargeController {
 		log.info("이번 달 나의 요금 가져오기");
 		// session의 유저 정보 가져오기
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
+		model.addAttribute("userId", user.getUser_id());
 		model.addAttribute("userName", user.getUser_nm());
 		// 이번 달 에너지 사용 요금 합계
 		UserTypeChargeDTO gasCharge = service.readGasCharge(user.getUser_id());
@@ -74,6 +75,7 @@ public class ChargeController {
 		// session의 유저 정보 가져오기
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
 		String userID = user.getUser_id();
+		model.addAttribute("userId", user.getUser_id());
 		model.addAttribute("userName", user.getUser_nm());
 		
 		// 이번 달 에너지 사용량 합계
