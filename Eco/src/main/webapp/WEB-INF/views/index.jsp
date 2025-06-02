@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/common.css?after">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -50,35 +51,46 @@
 			}
 		}
 		
-		fetch('/chart/data')
-		    .then(response => response.json())
-		    .then(data => {
-		        const labels = data.map(item => item.label);
-		        const values = data.map(item => item.value);
 		
-		        const ctx = document.getElementById('myChart').getContext('2d');
-		        const myChart = new Chart(ctx, {
-		            type: 'bar', // bar, line, pie 등 가능
-		            data: {
-		                labels: labels,
-		                datasets: [{
-		                    label: '값',
-		                    data: values,
-		                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-		                    borderColor: 'rgba(54, 162, 235, 1)',
-		                    borderWidth: 1
-		                }]
-		            },
-		            options: {
-		                responsive: true,
-		                scales: {
-		                    y: {
-		                        beginAtZero: true
-		                    }
-		                }
-		            }
-		        });
-		    });
+		let jData = JSON.parse('${ json }');
+		
+		let localList = new Array();
+		let gasUsageList = new Array();
+		let elecUsageList = new Array();
+		
+		for(i=0; i<jData.length;i++){
+			let j = jData[i];
+			localList.push(j.user_local);
+			gasUsageList.push(j.gasUsageAmount);
+			elecUsageList.push(j.elecUsageAmount);
+		}
+		
+		const ctx = document.getElementById('usgaeChart').getContext('2d');
+	    const myChart = new Chart(ctx, {
+	        type: 'bar',
+	        data: {
+	            labels: localList,
+	            datasets: [
+	                {
+	                    label: 'Gas Usage',
+	                    data: gasUsageList,
+	                    backgroundColor: 'rgba(255, 99, 132, 0.5)'
+	                },
+	                {
+	                    label: 'Electric Usage',
+	                    data: elecUsageList,
+	                    backgroundColor: 'rgba(54, 162, 235, 0.5)'
+	                }
+	            ]
+	        },
+	        options: {
+	            scales: {
+	                y: {
+	                    beginAtZero: true
+	                }
+	            }
+	        }
+	    });
 	</script>
 </body>
 </html>
