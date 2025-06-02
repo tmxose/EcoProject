@@ -50,9 +50,6 @@ public class LoginController {
 
 	@PostMapping("")
 	public String loginPost(UserVO user, HttpSession session) {
-		log.info("loginPost -------------");
-		log.info("user_id: " + user.getUser_id());
-		log.info("user_pw: " + user.getUser_pw());
 		boolean result = service.login(user);
 		if (result == true) {
 			// 로그인 처리
@@ -60,7 +57,7 @@ public class LoginController {
 			return "redirect: /usage";
 		} else {
 			// 재로그인 처리
-			return "index";
+			return "login";
 		}
 	}
 
@@ -127,7 +124,7 @@ public class LoginController {
 		}
 
 		// 2-4. ���� ����
-		session.setAttribute("loginUser", user);
-		return "redirect: /index"; // �α��� �� �̵��� ������
+		session.setAttribute("currentUserInfo", user);
+		return "redirect: /"; // �α��� �� �̵��� ������
 	}
 }
