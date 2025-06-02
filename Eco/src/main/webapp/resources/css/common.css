@@ -51,5 +51,9 @@ button{
 	font-weight: bold;
 }
 
-
+/* 소셜 로그인 버튼의 크기 통일*/
+.login-button{
+	width:	190px;
+	height: 40px;
+}
 /*id*/
