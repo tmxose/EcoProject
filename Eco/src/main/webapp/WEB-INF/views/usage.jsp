@@ -59,7 +59,7 @@
 			<a href="/"><img src="/resources/img/icon.png" id="head_icon"></a>
 			<div id="head_user">
 				<span>${userName} 님, 환영합니다.</span>
-				<a href="/logout">로그아웃</a>
+				<a href="/login/logout">로그아웃</a>
 			</div>
 			<div id="head_image">(이미지, 생략 가능)</div>
 		</div>
