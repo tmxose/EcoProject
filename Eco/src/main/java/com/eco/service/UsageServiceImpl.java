@@ -44,4 +44,10 @@ public class UsageServiceImpl implements UsageService{
 	public List<UserTypeChargeDTO> elecUsagePeriod(String userId, LocalDate startDate, LocalDate endDate) {
 		return mapper.getElecUsagePeriod(userId, startDate, endDate);
 	}
+	
+	// 지역별 가장 최근 달의 에너지 사용량 합계
+	@Override
+	public List<UserTypeChargeDTO> usageAverage(){
+		return mapper.getUsageAverage();
+	}
 }

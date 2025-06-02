@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eco.mapper.UsageMapper">	
+<mapper namespace="com.eco.mapper.UsageMapper">
 	<!-- 이번 달 가스 사용량 합 -->
 	<select id="getGasUsage" resultType="com.eco.domain.UserTypeChargeDTO">
 		SELECT u.user_id, SUM(us.gas_usage) AS gasUsageAmount
@@ -69,6 +69,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_elec e ON us.elec_cd = e.elec_cd
 		WHERE u.use_yn = 'Y'AND u.user_cd=(select user_cd from t_user where user_id = #{arg0})
 		AND us.elec_time BETWEEN #{arg1} and #{arg2}
+		]]>
+	</select>
+	
+	<!-- 지역별 가장 최근 달의 에너지 사용량 합계 -->
+	<select id="getUsageAverage" resultType="com.eco.domain.UserTypeChargeDTO">
+	 	<![CDATA[
+		select u.user_local, round(sum(us.gas_usage)) AS gasUsageAmount, round(sum(us.elec_usage)) AS elecUsageAmount
+		FROM t_user u
+		JOIN t_usage us ON u.user_cd = us.user_cd
+		JOIN t_gas g ON us.gas_cd = g.gas_cd
+		WHERE u.use_yn = 'Y' AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())-1
+		group by u.user_local;
 		]]>
 	</select>
 	<!-- INSERT -->
