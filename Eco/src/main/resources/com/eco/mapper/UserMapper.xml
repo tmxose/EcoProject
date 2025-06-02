@@ -7,15 +7,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getUserSelect" resultType="com.eco.domain.UserVO">
 		<![CDATA[
 		SELECT * FROM t_user
-		WHERE user_id = #{user_id} and user_pw = #{user_pw};
+		WHERE user_id = #{user_id} and user_pw = #{user_pw} and user_type = "B";
 		]]>
 	</select>
-	<select id="getUserCount" resultType="int">
+<!-- 	<select id="getUserCount" resultType="int">
 		<![CDATA[
 		SELECT COUNT(*) FROM t_user
 		WHERE user_id = #{user_id} and user_pw = #{user_pw};
 		]]>
-	</select>
+	</select> -->
 	
 	
 	<select id="findByUserId" resultType="com.eco.domain.UserVO">
