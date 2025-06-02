@@ -58,7 +58,7 @@ table {
 					<tr>
 					<td colspan="2">
 						<a href="/login/naverLogin">
-  							<img src="https://static.nid.naver.com/oauth/big_g_in.PNG" alt="네이버 로그인">
+  							<img src="../../resources/img/btnG_완성형.png" alt="네이버 로그인">
 						</a>
 					</td>
 				</tr>
