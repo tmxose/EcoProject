@@ -31,12 +31,14 @@
 <body>
 	<h2>회원가입 페이지 입니다.</h2>
 	<form action="signup" method="post" onsubmit="return validateForm()">
-		<p>user_id</p>
+		<p>아이디</p>
 		<input type="text" name="user_id">
-		<p>user_pw</p>
+		<p>비밀번호</p>
 		<input type="password" name="user_pw">
-		<p>user_nm</p>
+		<p>이름</p>
 		<input type="text" name="user_nm">
+		<p>지역(선택사항)</p>
+		<input type="text" name="user_local">
 		<input type="submit" value="가입하기"> 
 	</form>
 </body>
