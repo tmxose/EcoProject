@@ -31,7 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		GROUP BY u.user_cd, u.user_nm, e.type, e.charge
 		]]>
 	</select>
-	<!-- 가스 상세 내역 -->
+	
+	<!-- 당월 가스 상세 내역 -->
 	<select id="getGasChargeDetail" resultType="com.eco.domain.UserTypeChargeDTO">
 		<![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, g.type AS usageType, g.charge AS unitCharge, gas_usage, gas_time 
@@ -39,9 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_usage us ON u.user_cd = us.user_cd
 		JOIN t_gas g ON us.gas_cd = g.gas_cd
 		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
+		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
 		]]>
 	</select>
-	<!-- 전기 상세 내역 -->
+	<!-- 당월 전기 상세 내역 -->
 	<select id="getElecChargeDetail" resultType="com.eco.domain.UserTypeChargeDTO">
       <![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, e.type AS usageType, e.charge AS unitCharge, elec_usage, elec_time 
@@ -49,8 +51,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_usage us ON u.user_cd = us.user_cd
 		JOIN t_elec e ON us.elec_cd = e.elec_cd
 		WHERE u.use_yn = 'Y'AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
+		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE())
 		]]>
 	</select>
+	
+	<!-- 지정한 기간의 가스 상세 내역 -->
+	<select id="getGasChargePeriod" resultType="com.eco.domain.UserTypeChargeDTO">
+		<![CDATA[
+		SELECT u.user_cd AS userCD, u.user_nm AS userNM, g.type AS usageType, g.charge AS unitCharge, gas_usage, gas_time 
+		FROM t_user u
+		JOIN t_usage us ON u.user_cd = us.user_cd
+		JOIN t_gas g ON us.gas_cd = g.gas_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{arg0})
+		AND us.gas_time BETWEEN #{arg1} and #{arg2}
+		]]>
+	</select>
+	<!-- 지정한 기간의 전기 상세 내역 -->
+	<select id="getElecChargePeriod" resultType="com.eco.domain.UserTypeChargeDTO">
+      <![CDATA[
+		SELECT u.user_cd AS userCD, u.user_nm AS userNM, e.type AS usageType, e.charge AS unitCharge, elec_usage, elec_time 
+		FROM t_user u
+		JOIN t_usage us ON u.user_cd = us.user_cd
+		JOIN t_elec e ON us.elec_cd = e.elec_cd
+		WHERE u.use_yn = 'Y'AND u.user_cd=(select user_cd from t_user where user_id = #{arg0})
+		AND us.elec_time BETWEEN #{arg1} and #{arg2}
+		]]>
+	</select>
+	
 	<!-- INSERT -->
 	<!-- UPDATE -->
 	<!-- DELETE -->
