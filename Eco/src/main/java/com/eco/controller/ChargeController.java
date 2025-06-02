@@ -26,44 +26,19 @@ public class ChargeController {
 	public String chargePage(Model model, HttpSession session) {
 		log.info("이번 달 나의 요금 가져오기");
 		// session의 유저 아이디 가져오기
-		String userId = (String)session.getAttribute("userID");
-		
-		model.addAttribute("gasCharge", service.getGasCharge(userId));
-		model.addAttribute("elecCharge", service.getElecCharge(userId));
+		String userId = (String)session.getAttribute("currentUserID");
+		// 이번 달 에너지 사용 요금 합계
+		model.addAttribute("gasCharge", service.readGasCharge("abcd"));
+		model.addAttribute("elecCharge", service.readElecCharge("abcd"));
 		
 		//가스 상세 내역
-		List<UserTypeChargeDTO> gasUse = service.gasChargeDetail(userId);
+		List<UserTypeChargeDTO> gasUse = service.gasChargeDetail("abcd");
 		model.addAttribute("gasUse", gasUse);
 		//전기 상세 내역
-		List<UserTypeChargeDTO> elecUse = service.elecChargeDetail(userId);
+		List<UserTypeChargeDTO> elecUse = service.elecChargeDetail("abcd");
 		model.addAttribute("elecUse", elecUse);
 		
 		return "charge";
 	}
 	
-//	@GetMapping("/chargeSelect")
-//	public void chargeSelect(Model model) {
-//		//log.info("��� ��ȸ ȭ�� �̵�");
-//		UserTypeChargeDTO gasChargeDTO = service.getGasCharge("abcd");
-//		//��뷮
-//	    float gas_usage = gasChargeDTO.getGas_usage();
-//	    float elec_usage = gasChargeDTO.getElec_usage();
-//	    //ǥ�ؿ��
-//	    
-//	    //��뷮 * ǥ�ؿ��
-//	    float gas_charge = gas_usage * ǥ�ؿ��;
-//	    float elec_charge = elec_usage * ǥ�ؿ��;
-//	    
-//	    model.addAttribute("usage", gasChargeDTO);
-//	    model.addAttribute("gasCharge", gas_charge);
-//	    model.addAttribute("elecCharge", elec_charge);
-//		
-//		log.info("userCd " +gasChargeDTO.getUserCd());
-//		log.info("userNm " +gasChargeDTO.getUserNm());
-//		log.info("energyType " +gasChargeDTO.getEnergyType());
-//		log.info("usageType " +gasChargeDTO.getUsageType());
-//		log.info("usageAmount " +gasChargeDTO.getUsageAmount());
-//		log.info("unitCharge " +gasChargeDTO.getUnitCharge());
-//		log.info("totalCharge " +gasChargeDTO.getTotalCharge());
-//	}
 }

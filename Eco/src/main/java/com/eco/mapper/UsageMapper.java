@@ -1,17 +1,17 @@
 package com.eco.mapper;
 
-import java.util.List;
+import java.util.List; 
 
-import com.eco.domain.UsageVO;
 import com.eco.domain.UserTypeChargeDTO;
 
 public interface UsageMapper {
-	// 이번 달 나의 사용량 가져오기
-	public UsageVO usageSelect(String userId);
+	// 이번 달 에너지 사용량 합계
+	public UserTypeChargeDTO getGasUsage(String userId);
+	public UserTypeChargeDTO getElecUsage(String userId);
 	
 	// 가스 상세 내역
-	public List<UserTypeChargeDTO> getUserGasUsageDetail(String userId);
+	public List<UserTypeChargeDTO> getGasUsageDetail(String userId);
 	// 전기 상세 내역
-	public List<UserTypeChargeDTO> getUserElecUsageDetail(String userId);
+	public List<UserTypeChargeDTO> getElecUsageDetail(String userId);
 
 }
