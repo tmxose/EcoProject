@@ -18,4 +18,6 @@ public interface UsageService {
 	public List<UserTypeChargeDTO> gasUsagePeriod(String userId, LocalDate startDate, LocalDate endDate);
 	public List<UserTypeChargeDTO> elecUsagePeriod(String userId, LocalDate startDate, LocalDate endDate);
 
+	// 지역별 가장 최근 달의 에너지 사용량 합계
+	public List<UserTypeChargeDTO> usageAverage();
 }

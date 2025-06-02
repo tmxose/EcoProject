@@ -18,10 +18,13 @@ public class UserTypeChargeDTO {
     //당월 에너지 사용량 합계
     private float gasUsageAmount;
     private float elecUsageAmount;
+    //지역별 에너지 총량
+    private String user_local;
     
     //상세 데이터 가져오기 위한 변수
     private float gas_usage;
     private Date gas_time;
     private float elec_usage;
     private Date elec_time;
+    
 }
