@@ -22,6 +22,10 @@
 					<img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
 					alt="Google 로그인">
 				</a>
+				<a href="/login/naverLogin">
+  					<img src="https://static.nid.naver.com/oauth/big_g_in.PNG" alt="네이버 로그인">
+				</a>
+
 			</c:if>
 
 			<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
