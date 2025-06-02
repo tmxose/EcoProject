@@ -5,7 +5,8 @@ import com.eco.domain.UserVO;
 public interface UserMapper {
 	public void userInsert(UserVO user);
 	public UserVO getUserSelect(UserVO user);
+	public int getUserCount(UserVO user);
 	
-	// ¼Ò¼È·Î±×ÀÎ
-	public UserVO findByUserId(String user_id);  // ÀÌ¸ŞÀÏ ±â¹İÀ¸·Î Á¶È¸
+	// ê°€ì…ì ì •ë³´
+	public UserVO findByUserId(String user_id);  // ì•„ì´ë””ë¡œ ì‚¬ìš©ì ì¡°íšŒ
 }

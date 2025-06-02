@@ -22,17 +22,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO login(UserVO user) {
-		// TODO Auto-generated method stub
-
-		return mapper.getUserSelect(user);
+	public boolean login(UserVO user) {
+		if(mapper.getUserCount(user) > 0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
-	// ·Î±×ÀÎ ÇÔ¼ö¸¦ ¸¸µé¾î¿ä
+	// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	// mapper ÇÔ¼ö¸¦ »ç¿ëÇØ¿ä
+	// mapper ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¿ï¿½
 
-	// ¼Ò¼È ·Î±×ÀÎ ÇÔ¼ö
+	// ï¿½Ò¼ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	@Override
 	public UserVO findByUserId(String user_id) {
 		return mapper.findByUserId(user_id);

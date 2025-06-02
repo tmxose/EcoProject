@@ -10,7 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE user_id = #{user_id} and user_pw = #{user_pw};
 		]]>
 	</select>
-	
+	<select id="getUserCount" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) FROM t_user
+		WHERE user_id = #{user_id} and user_pw = #{user_pw};
+		]]>
+	</select>
 	<!-- INSERT -->
 	<insert id="userInsert">
 		<![CDATA[

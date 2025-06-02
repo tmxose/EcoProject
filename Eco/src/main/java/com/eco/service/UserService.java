@@ -4,11 +4,11 @@ import com.eco.domain.UserVO;
 
 public interface UserService {
 	public void signup(UserVO user);
-	// Á¶È¸ÇÔ¼ö¸¦ ¸¸µé¾î¿ä		
+	// ï¿½ï¿½È¸ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½		
 
-	public UserVO login(UserVO user);
+	public boolean login(UserVO user);
 	
-	// ¼Ò¼È ·Î±×ÀÎ 
+	// ï¿½Ò¼ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ 
 	public UserVO findByUserId(String user_id);
 	 
 }
