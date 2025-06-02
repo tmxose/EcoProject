@@ -1,5 +1,6 @@
 package com.eco.service;
 
+import java.time.LocalDate;
 import java.util.List; 
 
 import org.springframework.stereotype.Service;
@@ -24,14 +25,23 @@ public class UsageServiceImpl implements UsageService{
 		return mapper.getGasUsage(userId);
 	}
 	
-	// 가스 상세 내역
+	// 당월 에너지 사용 상세 내역
 	@Override
 	public List<UserTypeChargeDTO> gasUsageDetail(String userId) {
 		return mapper.getGasUsageDetail(userId);
 	}
-	// 전기 상세 내역
 	@Override
 	public List<UserTypeChargeDTO> elecUsageDetail(String userId) {
 		return mapper.getElecUsageDetail(userId);
+	}
+	
+	// 지정 기간 에너지 사용 상세 내역
+	@Override
+	public List<UserTypeChargeDTO> gasUsagePeriod(String userId, LocalDate startDate, LocalDate endDate) {
+		return mapper.getGasUsagePeriod(userId, startDate, endDate);
+	}
+	@Override
+	public List<UserTypeChargeDTO> elecUsagePeriod(String userId, LocalDate startDate, LocalDate endDate) {
+		return mapper.getElecUsagePeriod(userId, startDate, endDate);
 	}
 }

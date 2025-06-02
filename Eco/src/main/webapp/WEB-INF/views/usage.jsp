@@ -26,8 +26,8 @@
 		#main table, th, td{border: 1px dotted black; border-collapse: collapse;}
 
 		#main form{width: 90%; margin: 0 auto;}
-		#main select{width: 100px; height: 25px;}
-		#main input{width: 50px; text-align: center;}
+		#main input[type="submit"]{width: 50px; text-align: center;}
+		#main input[type="date"]{width: 120px; text-align: right;}
 		
 		#main_data{margin: 20px auto; width: 90%; border: 1px dotted black;}
 		#main_data table{margin : 25px auto}
@@ -37,10 +37,10 @@
 <body>
 	<div id="wrap">
 		<div id="head">
-			<a href="#"><img src="/resources/img/icon.png" id="head_icon"></a>
+			<a href="/"><img src="/resources/img/icon.png" id="head_icon"></a>
 			<div id="head_user">
-				<span>(사용자)님, 환영합니다.</span>
-				<a href="#">로그아웃</a>
+				<span>${userName} 님, 환영합니다.</span>
+				<a href="/logout">로그아웃</a>
 			</div>
 			<div id="head_image">(이미지, 생략 가능)</div>
 		</div>
@@ -60,19 +60,32 @@
 						<th>전기</th>
 					</tr>
 					<tr>
-						<td>${ usage.gas_usage }</td>
-						<td>${ usage.elec_usage }</td>
+						<td>
+							<c:choose>
+						        <c:when test="${not empty usage}">
+						            ${usage.gas_usage}
+						        </c:when>
+						        <c:otherwise>
+						            ${gasUsageMsg}
+						        </c:otherwise>
+						    </c:choose>
+						</td>
+						<td>
+							<c:choose>
+						        <c:when test="${not empty usage}">
+						            ${usage.elec_usage}
+						        </c:when>
+						        <c:otherwise>
+						            ${elecUsageMsg}
+						        </c:otherwise>
+						    </c:choose>
+						</td>
 					</tr>
 				</table>
 				<span class="title">과거 에너지 사용 이력</span>
 				<form>
 					<span>기간 : </span>
-					<select>
-						<option>지난 1개월</option>
-						<option>지난 3개월</option>
-						<option>지난 6개월</option>
-						<option>지난 12개월</option>
-					</select>
+					<input type="date" name="startDate"> ~ <input type="date" name="endDate">
 					<input type="submit" value="조회">
 				</form>
 				<div id="main_data">
