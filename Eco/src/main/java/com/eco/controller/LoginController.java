@@ -50,10 +50,11 @@ public class LoginController {
 
 	@PostMapping("")
 	public String loginPost(UserVO user, HttpSession session) {
-		boolean result = service.login(user);
-		if (result == true) {
+		UserVO rtnUser = service.login(user);
+		if (rtnUser == null) {
 			// 로그인 처리
-			session.setAttribute("currentUserInfo", user);
+			session.setAttribute("currentUserInfo", rtnUser);
+			log.info(rtnUser.getUser_nm());
 			return "redirect: /usage";
 		} else {
 			// 재로그인 처리

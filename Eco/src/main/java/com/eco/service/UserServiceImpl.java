@@ -22,12 +22,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean login(UserVO user) {
-		if(mapper.getUserCount(user) > 0) {
-			return true;
-		}else {
-			return false;
-		}
+	public UserVO login(UserVO user) {
+		return mapper.getUserSelect(user);
 	}
 
 	// �α��� �Լ��� ������

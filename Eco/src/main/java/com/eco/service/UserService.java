@@ -6,7 +6,7 @@ public interface UserService {
 	public void signup(UserVO user);
 	// ��ȸ�Լ��� ������		
 
-	public boolean login(UserVO user);
+	public UserVO login(UserVO user);
 	
 	// �Ҽ� �α��� 
 	public UserVO findByUserId(String user_id);
