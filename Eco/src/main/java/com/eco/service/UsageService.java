@@ -7,7 +7,6 @@ import com.eco.domain.ElecUsageVO;
 import com.eco.domain.ElecVO;
 import com.eco.domain.GasUsageVO;
 import com.eco.domain.GasVO;
-import com.eco.domain.UsageVO;
 import com.eco.domain.UserTypeChargeDTO;
 
 public interface UsageService {
