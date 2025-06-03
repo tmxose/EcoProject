@@ -31,20 +31,32 @@
 
 			<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
 			<button onclick="goToMyUsagePage()">내 사용량 조회</button>
+			<button onclick="goToUsageInsertPage()">내 사용량 등록</button>
+			
 		</div>
 		
 		<div class="inner-container">
-			<h2>지역별 평균 사용량</h2>
-			<p>지역별 평균 사용량 내용</p>
+			<h2>지역별 사용량 비교</h2>
+			<canvas id="usgaeChart" width="600" height="400"></canvas>
 		</div>
 	</div>
-	<canvas id="usgaeChart" width="600" height="400"></canvas>
 	
 	<script>
+	 	const isLoggedIn = ${not empty sessionScope.currentUserInfo};
+	 
+		// 사용량 확인 페이지 이동
 		function goToMyUsagePage() {
-			const isLoggedIn = '${not empty sessionScope.currentUserInfo}' === 'true';
 			if (isLoggedIn) {
 				location.href = '/usage'; // 실제 내 정보 보기 페이지로 변경
+			} else {
+				alert('로그인이 필요합니다.');
+				location.href = '/login';
+			}
+		}
+		// 사용량 등록 페이지 이동
+		function goToUsageInsertPage() {
+			if (isLoggedIn) {
+				location.href = '/usage/insert-form'; // 실제 내 정보 보기 페이지로 변경
 			} else {
 				alert('로그인이 필요합니다.');
 				location.href = '/login';

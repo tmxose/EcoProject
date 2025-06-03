@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.eco.domain.ElecUsageVO;
+import com.eco.domain.ElecVO;
+import com.eco.domain.GasUsageVO;
+import com.eco.domain.GasVO;
 import com.eco.domain.UserTypeChargeDTO;
 import com.eco.mapper.UsageMapper;
 
@@ -49,5 +53,27 @@ public class UsageServiceImpl implements UsageService{
 	@Override
 	public List<UserTypeChargeDTO> usageAmount(){
 		return mapper.getUsageAmount();
+	}
+	
+	
+	// 사용자의 가스 사용량 등록
+	@Override
+	public void insertGasUsage(GasUsageVO gasUsage) {
+		mapper.insertGasUsage(gasUsage);
+	}
+	
+	// 사용자의 전기 사용량 등록
+	@Override
+	public void insertElecUsage(ElecUsageVO elecUsage) {
+		mapper.insertElecUsage(elecUsage);
+	}
+	
+	@Override
+	public List<GasVO> getAllGasTypes() {
+		return mapper.getAllGasTypes();
+	}
+	@Override
+	public List<ElecVO> getAllElecTypes() {
+		return mapper.getAllElecTypes();
 	}
 }
