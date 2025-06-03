@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eco.domain.ElecUsageVO;
 import com.eco.domain.GasUsageVO;
-import com.eco.domain.UsageVO;
 import com.eco.domain.UserTypeChargeDTO;
 import com.eco.domain.UserVO;
 import com.eco.service.UsageService;
