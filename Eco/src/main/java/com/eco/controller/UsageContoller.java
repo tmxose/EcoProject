@@ -134,11 +134,12 @@ public class UsageContoller {
 		return "redirect:/usage";
 	}
 
+	// 가스/전기 타입 한글명 조회후 model 로 usageForm페이지로 넘겨주기
 	@GetMapping("/insert-form")
 	public String insertForm(Model model) {
 		model.addAttribute("gasList", service.getAllGasTypes());
 		model.addAttribute("elecList", service.getAllElecTypes());
-		return "usageForm"; // JSP 뷰 이름
+		return "usageForm"; 
 	}
 
 	// 사용량 수정/삭제
