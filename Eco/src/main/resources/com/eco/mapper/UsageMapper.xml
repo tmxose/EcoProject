@@ -139,16 +139,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by u.user_local;
 		]]>
 	</select>
-	<select id="getUsageLocalAmount0" resultType="com.eco.domain.UserTypeChargeDTO">
-	 	<![CDATA[
-		select u.user_local, round(sum(us.gas_usage)) AS gasUsageAmount, round(sum(us.elec_usage)) AS elecUsageAmount
-		FROM t_user u
-		JOIN t_usage us ON u.user_cd = us.user_cd
-		JOIN t_gas g ON us.gas_cd = g.gas_cd
-		WHERE u.use_yn = 'Y' AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())-1
-		group by u.user_local
-		]]>
-	</select>
 	<select id="getUsageLocalAmount" resultType="com.eco.domain.UserTypeChargeDTO">
 	 	<![CDATA[
 		select user_local, round(sum(gu.gas_usage)) AS gasUsageAmount, round(sum(eu.elec_usage)) AS elecUsageAmount
