@@ -3,6 +3,8 @@ package com.eco.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eco.domain.UserVO;
 import com.eco.service.UserService;
@@ -17,14 +19,14 @@ public class SignupController {
 	
 	private UserService service;
 	
-	// �쉶�썝媛��엯 �럹�씠吏�濡� �씠�룞
+	// 회원가입 페이지로 이동
 	@GetMapping("/signup")
 	public void signupPage() {
 		log.info("signup page");
 		
 	}
 	
-	// �쉶�썝媛��엯 DB INSERT
+	// 회원가입 DB INSERT
 	@PostMapping("/signup")
 	public String signupPost(UserVO user) {
 		log.info("signup Post");
@@ -32,4 +34,17 @@ public class SignupController {
 		service.signup(user);
 		return "login";
 	}
+	
+	// 아이디 중복 확인
+	@GetMapping("/check-id")
+	@ResponseBody
+	public String checkUserId(@RequestParam("user_id") String userId) {
+	    log.info("아이디 중복 확인 요청: " + userId);
+	    
+	    // 일반회원(user_type = "B") 기준으로만 중복 확인
+	    UserVO user = service.findByUserId(userId, "B");
+
+	    return (user != null) ? "duplicate" : "available";
+	}
+
 }
