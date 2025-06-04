@@ -100,7 +100,7 @@
 
             <input class="input-submit-area" type="submit" value="수정하기">
         </form>
-        <button>회원탈퇴</button>
+        <button>회원 탈퇴</button>
     </div>
 </div>
 </body>
