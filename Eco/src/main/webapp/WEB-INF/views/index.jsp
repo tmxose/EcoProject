@@ -1,46 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>메인페이지</title>
-<link rel="stylesheet" type="text/css" href="/resources/css/common.css?after">
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/common.css?after">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 	<div class="container">
 		<div class="inner-container">
+		
+		<div class="header-container">
 			<c:if test="${not empty sessionScope.currentUserInfo}">
 				<p>환영합니다, ${currentUserInfo.user_nm} 님!</p>
-				<button onclick="location.href='/login/logout'">로그아웃</button>
+				<a href="/login/logout">로그아웃</a>
 			</c:if>
-			
+
 			<c:if test="${empty sessionScope.currentUserInfo}">
-				<button onclick="location.href='/login'">로그인</button>
-				<button onclick="location.href='/signup'">회원가입</button>
-				<a href="/login/googleLogin">
-					<img class="login-button" src="../../resources/img/google_signin.png"
-					alt="Google 로그인">
-				</a>
-				<a href="/login/naverLogin">
-  					<img class="login-button" src="../../resources/img/naver_login.png" alt="네이버 로그인">
-				</a>
-
+				<a href="/login">로그인</a>
+				<a href="/signup">회원가입</a>
 			</c:if>
-
-			<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
-			<button onclick="goToMyUsagePage()">내 사용량 조회</button>
-			<button onclick="goToUsageInsertPage()">내 사용량 등록</button>
-			
 		</div>
-		
-		<div class="inner-container">
+
+		<div class="main-container">
+			<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
+			<a href="#" onclick="goToMyUsagePage()">내 사용량 조회</a> <a href="#"
+				onclick="goToUsageInsertPage()">내 사용량 등록</a>
+		</div>
+		</div>
+		<div class="green-line"></div>
+		<div class="chart-container">
 			<h2>지역별 사용량 비교</h2>
-			<canvas id="usgaeChart" width="600" height="400"></canvas>
+			<canvas class="usageChart" id="usgaeChart"></canvas>
 		</div>
 	</div>
-	
+
 	<script>
 	 	const isLoggedIn = ${not empty sessionScope.currentUserInfo};
 	 
