@@ -1,0 +1,61 @@
+@charset "UTF-8";
+.icon{width : 100px; margin-left: 10px;}
+.head-box {
+	display: flex;
+	justify-content: space-between;
+	width: 90%;
+	box-sizing: border-box;
+	margin-top: 10px;
+	font-size: 14px;
+}
+.logout:hover{text-decoration: underline;}
+
+.select-box{
+	display: flex; 
+	justify-content: center; 
+	width: 75%; 
+	align-items: center;
+	text-align: center;
+	margin-top: 80px;
+}
+
+
+.title{width: 100%; font-weight: bold; font-size: 20px;}
+table{border-collapse: collapse; margin: 20px 0; width:90%}
+th{border-bottom: 3px solid #82cd2b; border-collapse: collapse; padding: 15px;}
+td{text-align: center; padding: 10px 0;}
+caption{margin-bottom: 10px}
+tr:nth-child(odd){}
+tr:nth-child(even){background-color: #edffd8;}
+
+.form-box{
+	display: flex;
+	justify-content: left;
+	width: 100%;
+	align-items: center;
+	text-align: center;
+	margin: 10px 0;
+	gap: 10px;
+}
+
+
+.data-box{
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+width: 80%;
+box-sizing: border-box;
+padding: 25px 0;
+margin: 25px 0;
+}
+
+.table-box{
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+width: 100%;
+box-sizing: border-box;
+margin: 25px 0 105px 0;
+border: 2px solid #82cd2b}
