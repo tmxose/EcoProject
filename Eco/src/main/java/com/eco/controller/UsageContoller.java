@@ -122,7 +122,8 @@ public class UsageContoller {
 		gasUsage.setUser_cd(user.getUser_cd());
 		service.insertGasUsage(gasUsage);
 		log.info("가스 사용량 INSERT");
-		return "redirect:/usage";
+		return "redirect:/usage/insert-form";
+		//return "<script>alert('저장되었습니다.'); location.href='/insert-form';</script>";
 	}
 	// 사용자의 전기 사용량 등록
 	@PostMapping("/elec/insert")
@@ -131,7 +132,8 @@ public class UsageContoller {
 		elecUsage.setUser_cd(user.getUser_cd());
 		service.insertElecUsage(elecUsage);
 		log.info("전기 사용량 INSERT");
-		return "redirect:/usage";
+		return "redirect:/usage/insert-form";
+		//return "<script>alert('저장되었습니다.'); location.href='/insert-form';</script>";
 	}
 
 	// 가스/전기 타입 한글명 조회후 model 로 usageForm페이지로 넘겨주기

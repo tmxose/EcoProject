@@ -21,8 +21,8 @@
 						<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
 					</c:if>
 					<c:if test="${empty sessionScope.currentUserInfo}">
-						<a href="/login">로그인</a>
-						<a href="/signup">회원가입</a>
+						<button class="green-btn" onclick='location.href="/login"'>로그인</button>
+						<button class="green-btn" onclick='location.href="/signup"'>회원가입</button>
 					</c:if>
 				</div>
 			</div>
@@ -34,11 +34,10 @@
 		</div>
 		<div class="green-line"></div>
 		<div class="inner-container">
-			<h2>냉난방 사용량 등록</h2>
-		
 		    <!-- 가스 사용량 등록 폼 -->
-		    <h3>가스 사용량 등록</h3>
-		    <form action="/usage/gas/insert" method="post">
+		    <div class="data-box">
+		    <div class="title">가스 사용량 등록</div>
+		    <form action="/usage/gas/insert" method="post" class="table-box-2">
 		        <label for="gas_cd">가스 타입 선택:</label>
 		        <select id="gas_cd" name="gas_cd" required>
 		            <c:forEach var="gas" items="${gasList}">
@@ -50,12 +49,14 @@
 		        <label for="gas_usage">가스 사용량 (단위):</label>
 		        <input type="number" id="gas_usage" name="gas_usage" step="0.01" min="0" required />
 		        <br/>
-		        <button type="submit">가스 사용량 등록</button>
+		        <button class="green-btn-2" type="submit">가스 사용량 등록</button>
 		    </form>
-	   
+	   		</div>
+	   		
 		    <!-- 전기 사용량 등록 폼 -->
-		    <h3>전기 사용량 등록</h3>
-		    <form action="/usage/elec/insert" method="post">
+		    <div class="data-box">
+		    <div class="title">전기 사용량 등록</div>
+		    <form action="/usage/elec/insert" method="post" class="table-box-2">
 		        <label for="elec_cd">전기 타입 선택:</label>
 		        <select id="elec_cd" name="elec_cd" required>
 		            <c:forEach var="elec" items="${elecList}">
@@ -63,12 +64,12 @@
 		            </c:forEach>
 		        </select>
 		        <br/>
-		
 		        <label for="elec_usage">전기 사용량 (단위):</label>
 		        <input type="number" id="elec_usage" name="elec_usage" step="0.01" min="0" required />
 		        <br/>
-		        <button type="submit">전기 사용량 등록</button>
+		        <button class="green-btn-2" type="submit">전기 사용량 등록</button>
 		    </form>
+		    </div>
     	</div>
 	</div>
 </body>
