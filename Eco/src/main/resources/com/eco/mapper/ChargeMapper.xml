@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eco.mapper.ChargeMapper">
 	<!-- 이번 달 가스요금 -->
-	<select id="getGasCharge" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getGasCharge0" resultType="com.eco.domain.UserTypeChargeDTO">
 		<![CDATA[
 		SELECT u.user_cd AS userCd, u.user_nm AS userNm, '가스' AS energyType, g.type AS usageType,
 		SUM(us.gas_usage) AS usageAmount, g.charge AS unitCharge, SUM(us.gas_usage * g.charge) AS totalCharge
@@ -17,8 +17,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		GROUP BY u.user_cd, u.user_nm, g.type, g.charge
 		]]>
 	</select>
+	<select id="getGasCharge" resultType="com.eco.domain.UserTypeChargeDTO">
+		<![CDATA[
+		SELECT u.user_cd AS userCd, SUM(gu.gas_usage) AS usageAmount, SUM(gu.gas_usage * g.charge) AS totalCharge
+		FROM t_user u
+		JOIN t_gas_usage gu ON u.user_cd = gu.user_cd
+		JOIN t_gas g ON gu.gas_cd = g.gas_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id}) 
+		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
+		GROUP BY u.user_cd
+		]]>
+	</select>
 	<!-- 이번 달 전기요금 -->
-	<select id="getElecCharge" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getElecCharge0" resultType="com.eco.domain.UserTypeChargeDTO">
       <![CDATA[
 		SELECT u.user_cd AS userCd, u.user_nm AS userNm, '전기' AS energyType, e.type AS usageType,
 		SUM(us.elec_usage) AS usageAmount, e.charge AS unitCharge, SUM(us.elec_usage * e.charge) AS totalCharge
@@ -31,9 +42,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		GROUP BY u.user_cd, u.user_nm, e.type, e.charge
 		]]>
 	</select>
+	<select id="getElecCharge" resultType="com.eco.domain.UserTypeChargeDTO">
+      <![CDATA[
+		SELECT u.user_cd AS userCd, SUM(eu.elec_usage) AS usageAmount, SUM(eu.elec_usage * e.charge) AS totalCharge
+		FROM t_user u
+		JOIN t_elec_usage eu ON u.user_cd = eu.user_cd
+		JOIN t_elec e ON eu.elec_cd = e.elec_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id}) 
+		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE())
+		GROUP BY u.user_cd
+		]]>
+	</select>
 	
 	<!-- 당월 가스 상세 내역 -->
-	<select id="getGasChargeDetail" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getGasChargeDetail0" resultType="com.eco.domain.UserTypeChargeDTO">
 		<![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, g.type AS usageType, g.charge AS unitCharge, gas_usage, gas_time 
 		FROM t_user u
@@ -43,8 +65,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
 		]]>
 	</select>
+	<select id="getGasChargeDetail" resultType="com.eco.domain.UserTypeChargeDTO">
+		<![CDATA[
+		SELECT u.user_cd AS userCD, user_nm AS userNM, type AS usageType, charge AS unitCharge, gas_usage, gas_time 
+		FROM t_user u
+		JOIN t_gas_usage gu ON u.user_cd = gu.user_cd
+		JOIN t_gas g ON gu.gas_cd = g.gas_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
+		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
+		]]>
+	</select>
 	<!-- 당월 전기 상세 내역 -->
-	<select id="getElecChargeDetail" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getElecChargeDetail0" resultType="com.eco.domain.UserTypeChargeDTO">
       <![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, e.type AS usageType, e.charge AS unitCharge, elec_usage, elec_time 
 		FROM t_user u
@@ -54,14 +86,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE())
 		]]>
 	</select>
+	<select id="getElecChargeDetail" resultType="com.eco.domain.UserTypeChargeDTO">
+      <![CDATA[
+		SELECT u.user_cd AS userCD, user_nm AS userNM, type AS usageType, charge AS unitCharge, elec_usage, elec_time 
+		FROM t_user u
+		JOIN t_elec_usage eu ON u.user_cd = eu.user_cd
+		JOIN t_elec e ON eu.elec_cd = e.elec_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
+		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE())
+		]]>
+	</select>
 	
 	<!-- 지정한 기간의 가스 상세 내역 -->
-	<select id="getGasChargePeriod" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getGasChargePeriod0" resultType="com.eco.domain.UserTypeChargeDTO">
 		<![CDATA[
 		SELECT u.user_cd AS userCD, u.user_nm AS userNM, g.type AS usageType, g.charge AS unitCharge, gas_usage, gas_time 
 		FROM t_user u
 		JOIN t_usage us ON u.user_cd = us.user_cd
 		JOIN t_gas g ON us.gas_cd = g.gas_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{arg0})
+		AND us.gas_time BETWEEN #{arg1} and #{arg2}
+		]]>
+	</select>
+	<select id="getGasChargePeriod" resultType="com.eco.domain.UserTypeChargeDTO">
+		<![CDATA[
+		SELECT u.user_cd AS userCD, user_nm AS userNM, type AS usageType, charge AS unitCharge, gas_usage, gas_time 
+		FROM t_user u
+		JOIN t_gas_usage gu ON u.user_cd = gu.user_cd
+		JOIN t_gas g ON gu.gas_cd = g.gas_cd
 		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{arg0})
 		AND us.gas_time BETWEEN #{arg1} and #{arg2}
 		]]>
@@ -74,6 +126,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_usage us ON u.user_cd = us.user_cd
 		JOIN t_elec e ON us.elec_cd = e.elec_cd
 		WHERE u.use_yn = 'Y'AND u.user_cd=(select user_cd from t_user where user_id = #{arg0})
+		AND us.elec_time BETWEEN #{arg1} and #{arg2}
+		]]>
+	</select>
+	<select id="getElecChargePeriod0" resultType="com.eco.domain.UserTypeChargeDTO">
+      <![CDATA[
+		SELECT u.user_cd AS userCD, user_nm AS userNM, type AS usageType, charge AS unitCharge, elec_usage, elec_time 
+		FROM t_user u
+		JOIN t_elec_usage eu ON u.user_cd = eu.user_cd
+		JOIN t_elec e ON eu.elec_cd = e.elec_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{arg0})
 		AND us.elec_time BETWEEN #{arg1} and #{arg2}
 		]]>
 	</select>
