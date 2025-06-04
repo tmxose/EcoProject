@@ -10,8 +10,8 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/common.css?after">
 <link rel="stylesheet" type="text/css" href="/resources/css/usage.css?after">
 <style>
-.box1{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #82cd2b;}
-.box2{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #c5ee8f;}
+.box1{background-color: #82cd2b; font-weight: bold; color: white;}
+.box2{background-color: #c5ee8f; color: #82cd2b;}
 </style>
 	<script>
 		function validateDates(form) {

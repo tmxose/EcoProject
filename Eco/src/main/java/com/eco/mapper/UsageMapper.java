@@ -14,17 +14,14 @@ import com.eco.domain.UserTypeChargeDTO;
 public interface UsageMapper {
 	// 이번 달 에너지 사용량 합계
 	public UserTypeChargeDTO getGasUsage(@Param("user_id") String userId);
-
 	public UserTypeChargeDTO getElecUsage(@Param("user_id") String userId);
 
 	// 당월 에너지 사용 상세 내역
 	public List<UserTypeChargeDTO> getGasUsageDetail(@Param("user_id") String userId);
-
 	public List<UserTypeChargeDTO> getElecUsageDetail(@Param("user_id") String userId);
 
 	// 지정 기간 에너지 사용 상세 내역
 	public List<UserTypeChargeDTO> getGasUsagePeriod(@Param("user_id") String userId, @Param("start_date") LocalDate startDate, @Param("end_date") LocalDate endDate);
-
 	public List<UserTypeChargeDTO> getElecUsagePeriod(@Param("user_id") String userId, @Param("start_date") LocalDate startDate, @Param("end_date") LocalDate endDate);
 
 	// 지역별 가장 최근 달의 에너지 사용량 합계
