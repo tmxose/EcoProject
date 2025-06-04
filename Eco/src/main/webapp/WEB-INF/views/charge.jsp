@@ -4,6 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="ko_KR" />
+<%
+    // 오늘 날짜 생성
+    java.time.LocalDate today = java.time.LocalDate.now();
+	java.time.LocalDate firstDay = today.withDayOfMonth(1);
+	java.time.LocalDate lastDay = today.withDayOfMonth(today.lengthOfMonth());
+
+	request.setAttribute("firstDayStr", firstDay.toString());
+	request.setAttribute("lastDayStr", lastDay.toString());
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,8 +104,8 @@
 				<div class="title">냉/난방 요금 이력</div>
 				<form method="get" action="/charge/period" onsubmit="return validateDates(this)" class="form-box">
 					<span>기간 : </span>
-					<input type="date" name="startDate" id="startDate" value="${startDate}" pattern="yyyy-MM-dd">
-					 ~ <input type="date" name="endDate" id="endDate" value="${endDate}" pattern="yyyy-MM-dd">
+					<input type="date" name="startDate" id="startDate" value="${not empty param.startDate ? param.startDate : firstDayStr}" pattern="yyyy-MM-dd">
+					 ~ <input type="date" name="endDate" id="endDate" value="${not empty param.endDate ? param.endDate : lastDayStr}" pattern="yyyy-MM-dd">
 					<input type="submit" class="green-btn-2" value="조회">
 				</form>
 				<div class="table-box">
