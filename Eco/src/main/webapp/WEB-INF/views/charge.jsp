@@ -8,33 +8,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css"
-	href="/resources/css/common.css?after">
-	<style>
-		*{margin: 0; padding: 0;}
-		#wrap{width: 90%; margin : 0 auto}
-
-		#head{width: 100%;}
-		#head_icon{height: 50px; margin: 10px}
-		#head_user{float: right; margin-top: 20px;}
-		#head_image{clear: both; height: 250px;}
-
-		#main{width: 100%;}
-		#main_charge{display: inline-block; width: 200px; height: 40px; border: 1px solid black; text-align: center; line-height: 40px; position: relative; top:1px; left: -6px; border-top-left-radius: 15px; border-top-right-radius: 15px;}
-		#main_use{display: inline-block; width: 180px; height: 30px; border: 1px solid black; position: relative; top:6px; text-align: center; line-height: 30px; border-top-left-radius: 15px; border-top-right-radius: 15px;}
-		#main_info{border: 1px solid black; border-radius: 7px; border-top-left-radius: 0;}
-		#main .title{clear:both; display: inline-block; margin: 20px; font-size: 20px; font-weight: bold;}
-		#main table{width: 80%; margin: 0 auto;}
-		#main table, th, td{border: 1px dotted black; border-collapse: collapse;}
-
-		#main form{width: 90%; margin: 0 auto;}
-		#main input[type="submit"]{width: 50px; text-align: center;}
-		#main input[type="date"]{width: 120px; text-align: right;}
-		
-		#main_data{margin: 20px auto; width: 90%; border: 1px dotted black;}
-		#main_data table{margin : 25px auto}
-		#main_data table caption{margin-bottom : 10px}		
-	</style>
+<link rel="stylesheet" type="text/css" href="/resources/css/common.css?after">
+<link rel="stylesheet" type="text/css" href="/resources/css/usage.css?after">
+<style>
+.box1{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #c5ee8f;}
+.box2{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #82cd2b;}
+</style>
 	<script>
 		function validateDates(form) {
 			let startDay = document.getElementById("startDate").value;
@@ -55,63 +34,62 @@
 	</script>
 </head>
 <body>
-	<div id="wrap">
-		<div id="head">
-			<a href="/"><img src="/resources/img/icon.png" id="head_icon"></a>
-			<div id="head_user">
-				<span>${userName} 님, 환영합니다.</span>
-				<a href="/login/logout">로그아웃</a>
-			</div>
-			<div id="head_image">(이미지, 생략 가능)</div>
+	<div class="container">
+		<div class="head-box">
+			<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
+			<span>${userName} 님, 환영합니다. <a href="/login/logout">로그아웃</a></span>
 		</div>
-         
-		<div id="main">
-			<div id="main_use"><a href="/usage">사용량</a></div>
-			<div id="main_charge"><a href="/charge">요금</a></div>
-			<div id="main_info">
-				<span class="title">이번 달 나의 에너지 사용 요금</span><br>
-				<table>
-					<colgroup>
-						<col width="50%">
-						<col width="50%">
-					</colgroup>
-					<tr>
-						<th>도시가스</th>
-						<th>전기</th>
-					</tr>
-					<tr>
-						<td>
-							<c:choose>
-						        <c:when test="${not empty gasCharge}">
-						            ${gasCharge.totalCharge}
-						        </c:when>
-						        <c:otherwise>
-						            ${gasChargeMsg}
-						        </c:otherwise>
-						    </c:choose>
-						</td>
-						<td>
-							<c:choose>
-						        <c:when test="${not empty elecCharge}">
-						            ${elecCharge.totalCharge}
-						        </c:when>
-						        <c:otherwise>
-						            ${elecChargeMsg}
-						        </c:otherwise>
-						    </c:choose>
-						</td>
-					</tr>
-				</table>
-				<span class="title">과거 요금 이력</span>
-				<form method="get" action="/charge/period" onsubmit="return validateDates(this)">
+		<div class="container">
+			<div class="select-box">
+				<a href="/usage" class="box1">사용량</a>
+				<a href="/charge" class="box2">요금</a>
+			</div>
+			<div class="data-box">
+				<div class="title">이번 달 나의 에너지 사용 요금</div>
+				<div class="table-box">
+					<table>
+						<colgroup>
+							<col width="50%">
+							<col width="50%">
+						</colgroup>
+						<tr>
+							<th>도시가스</th>
+							<th>전기</th>
+						</tr>
+						<tr>
+							<td>
+								<c:choose>
+							        <c:when test="${not empty gasCharge}">
+							            ${gasCharge.totalCharge}
+							        </c:when>
+							        <c:otherwise>
+							            ${gasChargeMsg}
+							        </c:otherwise>
+							    </c:choose>
+							</td>
+							<td>
+								<c:choose>
+							        <c:when test="${not empty elecCharge}">
+							            ${elecCharge.totalCharge}
+							        </c:when>
+							        <c:otherwise>
+							            ${elecChargeMsg}
+							        </c:otherwise>
+							    </c:choose>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="title">과거 요금 이력</div>
+				<form method="get" action="/charge/period" onsubmit="return validateDates(this)" class="form-box">
 					<span>기간 : </span>
 					<input type="date" name="startDate" id="startDate" value="${startDate}" pattern="yyyy-MM-dd">
 					 ~ <input type="date" name="endDate" id="endDate" value="${endDate}" pattern="yyyy-MM-dd">
 					<input type="submit" value="조회">
 				</form>
-				<div id="main_data">
+				<div class="table-box">
 					<table>
-						<caption>가스 요금 상세 내역</caption>
+						<caption class="text-bold">가스 요금 상세 내역</caption>
 						<tr>
 							<th>userCD</th>
 							<th>사용자명</th>
@@ -143,7 +121,7 @@
 						</c:choose>
 					</table>
 					<table>
-						<caption>전기 요금 상세 내역</caption>
+						<caption class="text-bold">전기 요금 상세 내역</caption>
 						<tr>
 							<th>userCD</th>
 							<th>사용자명</th>
