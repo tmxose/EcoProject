@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eco.domain.ElecUsageVO;
 import com.eco.domain.GasUsageVO;
@@ -117,21 +118,24 @@ public class UsageContoller {
 
 	// 사용자의 가스 사용량 등록
 	@PostMapping("/gas/insert")
-	public String insertGasUsage(GasUsageVO gasUsage, HttpSession session) {
+	public String insertGasUsage(GasUsageVO gasUsage, HttpSession session, RedirectAttributes redirectAttributes) {
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
 		gasUsage.setUser_cd(user.getUser_cd());
 		service.insertGasUsage(gasUsage);
 		log.info("가스 사용량 INSERT");
+		
+		// alert용 메시지 전달 (FlashAttribute는 1회성 메시지)
+	    redirectAttributes.addFlashAttribute("msg", "가스 사용량이 저장되었습니다.");		
 		return "redirect:/usage/insert-form";
-		//return "<script>alert('저장되었습니다.'); location.href='/insert-form';</script>";
 	}
 	// 사용자의 전기 사용량 등록
 	@PostMapping("/elec/insert")
-	public String insertElecUsage(ElecUsageVO elecUsage, HttpSession session) {
+	public String insertElecUsage(ElecUsageVO elecUsage, HttpSession session, RedirectAttributes redirectAttributes) {
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
 		elecUsage.setUser_cd(user.getUser_cd());
 		service.insertElecUsage(elecUsage);
 		log.info("전기 사용량 INSERT");
+		redirectAttributes.addFlashAttribute("msg", "전기 사용량이 저장되었습니다.");	
 		return "redirect:/usage/insert-form";
 		//return "<script>alert('저장되었습니다.'); location.href='/insert-form';</script>";
 	}

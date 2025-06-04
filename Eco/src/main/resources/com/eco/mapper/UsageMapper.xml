@@ -155,15 +155,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 사용자의 가스 사용량 등록 -->
 	<insert id="insertGasUsage" parameterType="com.eco.domain.GasUsageVO">
     	<![CDATA[
-    	INSERT INTO T_GAS_USAGE (user_cd, gas_cd, gas_usage)
-    	VALUES (#{user_cd}, #{gas_cd}, #{gas_usage})
+    	INSERT INTO T_GAS_USAGE (user_cd, gas_cd, gas_usage, gas_time)
+    	VALUES (#{user_cd}, #{gas_cd}, #{gas_usage}, #{gas_time})
     	]]>
   	</insert>
   	
 	<!-- 사용자의 전기 사용량 등록 -->
 	  <insert id="insertElecUsage" parameterType="com.eco.domain.ElecUsageVO">
-	    INSERT INTO T_ELEC_USAGE (user_cd, elec_cd, elec_usage)
-	    VALUES (#{user_cd}, #{elec_cd}, #{elec_usage})
+	    INSERT INTO T_ELEC_USAGE (user_cd, elec_cd, elec_usage, elec_time)
+	    VALUES (#{user_cd}, #{elec_cd}, #{elec_usage}, #{elec_time})
 	  </insert>
 
 	<select id="getAllGasTypes" resultType="com.eco.domain.GasVO">
