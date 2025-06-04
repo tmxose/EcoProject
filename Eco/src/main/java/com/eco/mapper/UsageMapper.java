@@ -26,7 +26,7 @@ public interface UsageMapper {
 	public List<UserTypeChargeDTO> getElecUsagePeriod(String userId, LocalDate startDate, LocalDate endDate);
 
 	// 지역별 가장 최근 달의 에너지 사용량 합계
-	public List<UserTypeChargeDTO> getUsageAmount();
+	public List<UserTypeChargeDTO> getUsageLocalAmount();
 
 	// 사용자의 가스 사용량 등록
 	public void insertGasUsage(GasUsageVO gasUsage);

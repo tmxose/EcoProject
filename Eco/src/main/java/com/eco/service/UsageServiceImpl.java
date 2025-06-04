@@ -52,7 +52,7 @@ public class UsageServiceImpl implements UsageService{
 	// 지역별 가장 최근 달의 에너지 사용량 합계
 	@Override
 	public List<UserTypeChargeDTO> usageAmount(){
-		return mapper.getUsageAmount();
+		return mapper.getUsageLocalAmount();
 	}
 	
 	
