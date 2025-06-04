@@ -1,5 +1,9 @@
 @charset "UTF-8";
+
+/* 로고 아이콘 */
 .icon{width : 100px; margin-left: 10px;}
+
+/* 사용자정보, 로그아웃 */
 .head-box {
 	display: flex;
 	justify-content: space-between;
@@ -7,9 +11,11 @@
 	box-sizing: border-box;
 	margin-top: 10px;
 	font-size: 14px;
+	border-bottom: 3px solid #82cd2b;
 }
 .logout:hover{text-decoration: underline;}
 
+/* 사용량, 요금 선택 */
 .select-box{
 	display: flex; 
 	justify-content: center; 
@@ -19,26 +25,7 @@
 	margin-top: 80px;
 }
 
-
-.title{width: 100%; font-weight: bold; font-size: 20px;}
-table{border-collapse: collapse; margin: 20px 0; width:90%}
-th{border-bottom: 3px solid #82cd2b; border-collapse: collapse; padding: 15px;}
-td{text-align: center; padding: 10px 0;}
-caption{margin-bottom: 10px}
-tr:nth-child(odd){}
-tr:nth-child(even){background-color: #edffd8;}
-
-.form-box{
-	display: flex;
-	justify-content: left;
-	width: 100%;
-	align-items: center;
-	text-align: center;
-	margin: 10px 0;
-	gap: 10px;
-}
-
-
+/* 메인 데이터 */
 .data-box{
 display: flex;
 justify-content: center;
@@ -50,6 +37,15 @@ padding: 25px 0;
 margin: 25px 0;
 }
 
+/* 데이터 테이블 설정 */
+.title{width: 100%; font-weight: bold; font-size: 20px;}
+table{border-collapse: collapse; margin: 20px 0; width:90%}
+th{border-bottom: 3px solid #82cd2b; border-collapse: collapse; padding: 15px;}
+td{text-align: center; padding: 10px 0;}
+caption{margin-bottom: 10px}
+tr:nth-child(odd){}
+tr:nth-child(even){background-color: #edffd8;}
+
 .table-box{
 display: flex;
 justify-content: center;
@@ -58,4 +54,19 @@ align-items: center;
 width: 100%;
 box-sizing: border-box;
 margin: 25px 0 105px 0;
-border: 2px solid #82cd2b}
+border: 2px solid #82cd2b
+}
+
+/* 조회 기간 설정 */
+.form-box{
+	display: flex;
+	justify-content: left;
+	width: 100%;
+	align-items: center;
+	text-align: center;
+	margin: 10px 0;
+	gap: 10px;
+}
+
+
+
