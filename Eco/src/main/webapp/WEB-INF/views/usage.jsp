@@ -10,29 +10,68 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/common.css?after">
 	<style>
-		*{margin: 0; padding: 0;}
-		#wrap{width: 90%; margin : 0 auto}
-
-		#head{width: 100%;}
-		#head_icon{height: 50px; margin: 10px}
-		#head_user{float: right; margin-top: 20px;}
-		#head_image{clear: both; height: 250px;}
-
-		#main{width: 100%;}
-		#main_use{display: inline-block; width: 200px; height: 40px; border: 1px solid black; text-align: center; line-height: 40px; position: relative; top:1px; border-top-left-radius: 15px; border-top-right-radius: 15px;}
-		#main_charge{display: inline-block; width: 180px; height: 30px; border: 1px solid black; position: relative; top:6px; left: -6px; text-align: center; line-height: 30px; border-top-left-radius: 15px; border-top-right-radius: 15px;}
-		#main_info{border: 1px solid black; border-radius: 7px; border-top-left-radius: 0;}
-		#main .title{clear:both; display: inline-block; margin: 20px; font-size: 20px; font-weight: bold;}
-		#main table{width: 80%; margin: 0 auto;}
-		#main table, th, td{border: 1px dotted black; border-collapse: collapse;}
-
-		#main form{width: 90%; margin: 0 auto;}
-		#main input[type="submit"]{width: 50px; text-align: center;}
-		#main input[type="date"]{width: 120px; text-align: right;}
+		.blank{height: 80px;}
+		.icon{width : 100px; margin-left: 10px;}
+		.head-box {
+			display: flex;
+			justify-content: space-between;
+			width: 90%;
+			box-sizing: border-box;
+			margin-top: 10px;
+			font-size: 14px;
+		}
+		.logout:hover{text-decoration: underline;}
 		
-		#main_data{margin: 20px auto; width: 90%; border: 1px dotted black;}
-		#main_data table{margin : 25px auto}
-		#main_data table caption{margin-bottom : 10px}
+		.select-box{
+			display: flex; 
+			justify-content: center; 
+			width: 75%; 
+			align-items: center;
+			text-align: center;
+		}
+		.box1{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #82cd2b;}
+		.box2{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #c5ee8f;}
+
+		.title{width: 80%; font-weight: bold; font-size: 20px;}
+		table{border-collapse: collapse; margin: 20px 0; width:90%}
+		th{border-bottom: 3px solid #82cd2b; border-collapse: collapse; padding: 15px;}
+		td{text-align: center; padding: 10px 0;}
+		caption{margin-bottom: 10px}
+		tr:nth-child(odd){}
+		tr:nth-child(even){background-color: #edffd8;}
+
+		.form-box{
+			display: flex;
+			justify-content: left;
+			width: 80%;
+			align-items: center;
+			text-align: center;
+			margin: 10px 0;
+			gap: 10px;
+		}
+		
+		
+		.data-box{
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		width: 80%;
+		box-sizing: border-box;
+		padding: 25px 0;
+		margin: 25px 0;
+		}
+		
+		.table-box{
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 25px 0;
+		margin: 25px 0;
+		border: 2px solid #82cd2b}
 	</style>
 	<script>
 		function validateDates(form) {
@@ -54,21 +93,19 @@
 	</script>
 </head>
 <body>
-	<div id="wrap">
-		<div id="head">
-			<a href="/"><img src="/resources/img/icon.png" id="head_icon"></a>
-			<div id="head_user">
-				<span>${userName} 님, 환영합니다.</span>
-				<a href="/login/logout">로그아웃</a>
-			</div>
-			<div id="head_image">(이미지, 생략 가능)</div>
+	<div class="container">
+		<div class="head-box">
+			<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
+			<span>${userName} 님, 환영합니다. <a href="/login/logout" class="logout">로그아웃</a></span>
 		</div>
-        
-		<div id="main">
-			<div id="main_use"><a href="/usage">사용량</a></div>
-			<div id="main_charge"><a href="/charge">요금</a></div>
-			<div id="main_info">
-				<span class="title">이번 달 나의 에너지 사용 현황</span><br>
+        <div class="blank"></div>
+		<div class="container">
+			<div class="select-box">
+				<a href="/usage" class="box1">사용량</a>
+				<a href="/charge" class="box2">요금</a>
+			</div>
+			<div class="data-box">
+				<div class="title">이번 달 나의 에너지 사용 현황</div>
 				<table>
 					<colgroup>
 						<col width="50%">
@@ -81,8 +118,8 @@
 					<tr>
 						<td>
 							<c:choose>
-						        <c:when test="${not empty usage}">
-						            ${usage.gas_usage}
+						        <c:when test="${not empty gasUsage}">
+						            ${gasUsage.gasUsageAmount}
 						        </c:when>
 						        <c:otherwise>
 						            ${gasUsageMsg}
@@ -91,8 +128,8 @@
 						</td>
 						<td>
 							<c:choose>
-						        <c:when test="${not empty usage}">
-						            ${usage.elec_usage}
+						        <c:when test="${not empty elecUsage}">
+						            ${elecUsage.elecUsageAmount}
 						        </c:when>
 						        <c:otherwise>
 						            ${elecUsageMsg}
@@ -101,76 +138,78 @@
 						</td>
 					</tr>
 				</table>
-				<span class="title">과거 에너지 사용 이력</span>
-				<form method="get" action="/usage/period" onsubmit="return validateDates(this)">
+				<div class="blank"></div>
+				<div class="title">과거 에너지 사용 이력</div>
+				<form method="get" action="/usage/period" onsubmit="return validateDates(this)" class="form-box">
 					<span>기간 : </span>
 					<input type="date" name="startDate" id="startDate" value="${startDate}" pattern="yyyy-MM-dd">
 					 ~ <input type="date" name="endDate" id="endDate" value="${endDate}" pattern="yyyy-MM-dd">
 					<input type="submit" value="조회">
-				</form>
-				<div id="main_data">
-					<table>
-						<caption>가스 사용 상세 내역</caption>
-						<tr>
-							<th>userCD</th>
-							<th>사용자명</th>
-							<th>타입</th>
-							<th>표준원가</th>
-							<th>사용량</th>
-							<th>날짜</th>
-						</tr>
-						<c:choose>
-							<c:when test="${not empty gasUse}">
-								<c:forEach var="item" items="${gasUse}">
-						            <tr>
-						                <td>${item.userCd}</td>
-						                <td>${item.userNm}</td>
-						                <td>${item.usageType}</td>
-						                <td>${item.unitCharge}</td>
-						                <td>${item.gas_usage}</td>
-						                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${ item.gas_time }"/></td>
-						            </tr>
-						        </c:forEach>
-						    </c:when>
-							<c:otherwise>
+				</form>				
+				<div class="table-box">
+				<table>
+					<caption class="text-bold">가스 사용 상세 내역</caption>
+					<tr>
+						<th>userCD</th>
+						<th>사용자명</th>
+						<th>타입</th>
+						<th>표준원가</th>
+						<th>사용량</th>
+						<th>날짜</th>
+					</tr>
+					<c:choose>
+						<c:when test="${not empty gasUse}">
+							<c:forEach var="item" items="${gasUse}">
 								<tr>
-									<td colspan="6">${ gasUsageDetailMsg }</td>
+									<td>${item.userCd}</td>
+									<td>${item.userNm}</td>
+									<td>${item.usageType}</td>
+									<td>${item.unitCharge}</td>
+									<td>${item.gas_usage}</td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd" value="${ item.gas_time }"/></td>
 								</tr>
-							</c:otherwise>
-						</c:choose>
-					</table>
-					<table>
-						<caption>전기 사용 상세 내역</caption>
-						<tr>
-							<th>userCD</th>
-							<th>사용자명</th>
-							<th>타입</th>
-							<th>표준원가</th>
-							<th>사용량</th>
-							<th>날짜</th>
-						</tr>
-						<c:choose>
-							<c:when test="${not empty elecUse}">
-								<c:forEach var="item" items="${elecUse}">
-						            <tr>
-						                <td>${item.userCd}</td>
-						                <td>${item.userNm}</td>
-						                <td>${item.usageType}</td>
-						                <td>${item.unitCharge}</td>
-						                <td>${item.elec_usage}</td>
-						                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${ item.elec_time }"/></td>
-						            </tr>
-						        </c:forEach>
-						    </c:when>
-							<c:otherwise>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="6">${ gasUsageDetailMsg }</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+				</table>
+				<table>
+					<caption class="text-bold">전기 사용 상세 내역</caption>
+					<tr>
+						<th>userCD</th>
+						<th>사용자명</th>
+						<th>타입</th>
+						<th>표준원가</th>
+						<th>사용량</th>
+						<th>날짜</th>
+					</tr>
+					<c:choose>
+						<c:when test="${not empty elecUse}">
+							<c:forEach var="item" items="${elecUse}">
 								<tr>
-									<td colspan="6">${ elecUsageDetailMsg }</td>
+									<td>${item.userCd}</td>
+									<td>${item.userNm}</td>
+									<td>${item.usageType}</td>
+									<td>${item.unitCharge}</td>
+									<td>${item.elec_usage}</td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd" value="${ item.elec_time }"/></td>
 								</tr>
-							</c:otherwise>
-						</c:choose>
-					</table>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="6">${ elecUsageDetailMsg }</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+				</table>
 				</div>
-			</div>
+				</div>
+			<div class="blank"></div>
 		</div>
 	</div>
 </body>

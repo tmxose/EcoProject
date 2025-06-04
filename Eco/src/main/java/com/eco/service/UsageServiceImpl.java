@@ -26,7 +26,7 @@ public class UsageServiceImpl implements UsageService{
 	}
 	@Override
 	public UserTypeChargeDTO readElecusage(String userId) {
-		return mapper.getGasUsage(userId);
+		return mapper.getElecUsage(userId);
 	}
 	
 	// 당월 에너지 사용 상세 내역
