@@ -129,6 +129,7 @@ public class LoginController {
 			user.setUser_nm(name);
 			user.setUse_yn('Y');
 			user.setUser_type("G");
+			user.setUser_local("서울");
 			service.signup(user);
 			log.info("Google Signup");
 		}
@@ -212,6 +213,7 @@ public class LoginController {
             user.setUser_nm(name);
             user.setUse_yn('Y');
             user.setUser_type("N");
+			user.setUser_local("서울");
             service.signup(user);
             log.info("Naver Signup");
         }
