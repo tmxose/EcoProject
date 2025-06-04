@@ -55,7 +55,7 @@
 				<a href="/charge" class="box2">요금</a>
 			</div>
 			<div class="data-box">
-				<div class="title">이번 달 나의 에너지 사용 현황</div>
+				<div class="title">이번 달 냉/난방 사용 현황</div>
 				<div class="table-box">
 					<table>
 						<colgroup>
@@ -70,7 +70,7 @@
 							<td>
 								<c:choose>
 							        <c:when test="${not empty gasUsage}">
-							            ${gasUsage.gasUsageAmount}
+							            ${gasUsage.gasUsageAmount} ㎥
 							        </c:when>
 							        <c:otherwise>
 							            ${gasUsageMsg}
@@ -80,7 +80,7 @@
 							<td>
 								<c:choose>
 							        <c:when test="${not empty elecUsage}">
-							            ${elecUsage.elecUsageAmount}
+							            ${elecUsage.elecUsageAmount} kWh
 							        </c:when>
 							        <c:otherwise>
 							            ${elecUsageMsg}
@@ -90,7 +90,7 @@
 						</tr>
 					</table>
 				</div>
-				<div class="title">과거 에너지 사용 이력</div>
+				<div class="title">냉/난방 사용 이력</div>
 				<form method="get" action="/usage/period" onsubmit="return validateDates(this)" class="form-box">
 					<span>기간 : </span>
 					<input type="date" name="startDate" id="startDate" value="${startDate}" pattern="yyyy-MM-dd">

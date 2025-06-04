@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="ko_KR" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +57,7 @@
 				<a href="/charge" class="box2">요금</a>
 			</div>
 			<div class="data-box">
-				<div class="title">이번 달 나의 에너지 사용 요금</div>
+				<div class="title">이번 달 냉/난방 요금 현황</div>
 				<div class="table-box">
 					<table>
 						<colgroup>
@@ -71,7 +72,7 @@
 							<td>
 								<c:choose>
 							        <c:when test="${not empty gasCharge}">
-							            ${gasCharge.totalCharge}
+							            <fmt:formatNumber value="${gasCharge.totalCharge}" type="currency" />
 							        </c:when>
 							        <c:otherwise>
 							            ${gasChargeMsg}
@@ -81,7 +82,7 @@
 							<td>
 								<c:choose>
 							        <c:when test="${not empty elecCharge}">
-							            ${elecCharge.totalCharge}
+							        	<fmt:formatNumber value="${elecCharge.totalCharge}" type="currency" />
 							        </c:when>
 							        <c:otherwise>
 							            ${elecChargeMsg}
@@ -91,7 +92,7 @@
 						</tr>
 					</table>
 				</div>
-				<div class="title">과거 요금 이력</div>
+				<div class="title">냉/난방 요금 이력</div>
 				<form method="get" action="/charge/period" onsubmit="return validateDates(this)" class="form-box">
 					<span>기간 : </span>
 					<input type="date" name="startDate" id="startDate" value="${startDate}" pattern="yyyy-MM-dd">
