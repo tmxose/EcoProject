@@ -42,8 +42,8 @@ public class UsageContoller {
 		// 이번 달 에너지 사용량 합계
 		UserTypeChargeDTO gasTotal = service.readGasusage(user.getUser_id());
 		UserTypeChargeDTO elecTotal = service.readElecusage(user.getUser_id());
-		model.addAttribute("usage", gasTotal);
-		model.addAttribute("usage", elecTotal);
+		model.addAttribute("gasUsage", gasTotal);
+		model.addAttribute("elecUsage", elecTotal);
 		// 이번 달 사용량이 0일 때 처리
 		if (gasTotal == null) {
 			model.addAttribute("gasUsageMsg", "이번 달 가스 사용량이 없습니다.");

@@ -109,11 +109,6 @@ button {
 	background-color: #fefefe;
 }
 
-.inner-container {
-	background-color: #ffffff; /* 중간 박스 */
-	margin: 0;
-}
-
 .green-line {
 	background-color: #04c75b;
 	width: 80%;
