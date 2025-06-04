@@ -139,8 +139,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by u.user_local;
 		]]>
 	</select> -->
-	<!-- 지역별 에너지 사용의 총합을 그래프로 나타내는 거니까, 회원 탈퇴 여부와 무관하게 데이터를 다 가져와서 합계를 구해야 할 것 같음.. 
-		u.use_yn 빼도 괜찮을지 한 번 확인-->
 	<select id="getUsageLocalAmount" resultType="com.eco.domain.UserTypeChargeDTO">
 	 	<![CDATA[
 		select user_local, round(sum(gu.gas_usage)) AS gasUsageAmount, round(sum(eu.elec_usage)) AS elecUsageAmount
