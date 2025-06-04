@@ -93,6 +93,7 @@ tr:nth-child(even){background-color: #edffd8;}
 	padding: 5px;
 	border: 2px solid #82cd2b;
 	gap: 8px;
+	border-radius: 5px;
 }
 
 
