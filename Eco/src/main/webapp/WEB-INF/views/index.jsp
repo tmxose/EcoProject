@@ -8,29 +8,31 @@
 <title>메인페이지</title>
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/common.css?after">
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/usage.css?after">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 	<div class="container">
 		<div class="inner-container">
-		
-		<div class="header-container">
-			<c:if test="${not empty sessionScope.currentUserInfo}">
-				<p>환영합니다, ${currentUserInfo.user_nm} 님!</p>
-				<a href="/login/logout">로그아웃</a>
-			</c:if>
-
-			<c:if test="${empty sessionScope.currentUserInfo}">
-				<a href="/login">로그인</a>
-				<a href="/signup">회원가입</a>
-			</c:if>
-		</div>
-
-		<div class="main-container">
-			<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
-			<a href="#" onclick="goToMyUsagePage()">내 사용량 조회</a> <a href="#"
-				onclick="goToUsageInsertPage()">내 사용량 등록</a>
-		</div>
+			<div class="head-box">
+				<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
+				<div class="header-container">
+					<c:if test="${not empty sessionScope.currentUserInfo}">
+						<span>${currentUserInfo.user_nm} 님, 환영합니다.</span>
+						<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
+					</c:if>
+					<c:if test="${empty sessionScope.currentUserInfo}">
+						<button class="green-btn" onclick='location.href="/login"'>로그인</button>
+						<button class="green-btn" onclick='location.href="/signup"'>회원가입</button>
+					</c:if>
+				</div>
+			</div>
+			<div class="main-container">
+				<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
+				<button class="green-btn" onclick="goToMyUsagePage()">내 사용량 조회</button> 
+				<button class="green-btn" onclick="goToUsageInsertPage()">내 사용량 등록</button>
+			</div>
 		</div>
 		<div class="green-line"></div>
 		<div class="chart-container">

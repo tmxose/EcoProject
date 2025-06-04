@@ -114,6 +114,9 @@ button {
 	width: 80%;
 	height: 2px;
 }
+.margin-0{
+	margin:0;
+}
 /* index.jsp 메인 페이지 end--------------------------------*/
 
 /* signup.jsp 회원가입 페이지 start--------------------------------*/
@@ -174,6 +177,30 @@ button {
 	font-size: 14px;
 	box-sizing: border-box;
 	background-color: #04c75b;
+	color: white;
+}
+.green-btn{
+	width: fit-content;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 14px;
+	box-sizing: border-box;
+	background-color: #82cd2b;
+	color: white;
+}
+.green-btn-2{
+	width: fit-content;
+	padding: 5px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 14px;
+	box-sizing: border-box;
+	background-color: #82cd2b;
 	color: white;
 }
 /* signup.jsp 회원가입 페이지 end--------------------------------*/
