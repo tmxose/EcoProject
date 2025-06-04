@@ -105,13 +105,13 @@ button {
 	padding: 5px;
 	border: 1px solid black;
 	box-sizing: border-box;
-	border: 1px solid #04c75b;
+	border: 1px solid #82cd2b;
 	border-radius: 5px;
 	background-color: #fefefe;
 }
 
 .green-line {
-	background-color: #04c75b;
+	background-color: #82cd2b;
 	width: 80%;
 	height: 2px;
 }
