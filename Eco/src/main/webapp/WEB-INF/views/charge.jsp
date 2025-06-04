@@ -35,11 +35,22 @@
 </head>
 <body>
 	<div class="container">
-		<div class="head-box">
-			<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
-			<span>${userName} 님, 환영합니다. <a href="/login/logout">로그아웃</a></span>
+		<div class="inner-container">
+			<div class="head-box">
+				<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
+				<div class="header-container">
+					<span>${userName} 님, 환영합니다.</span> 
+					<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
+				</div>
+			</div>
+			<div class="main-container">
+				<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
+				<button class="green-btn" onclick='location.href="/"'>메인페이지</button> 
+				<button class="green-btn" onclick='location.href="/usage/insert-form"'>내 사용량 등록</button>
+			</div>
 		</div>
-		<div class="container">
+		<div class="green-line"></div>
+		<div class="inner-container">
 			<div class="select-box">
 				<a href="/usage" class="box1">사용량</a>
 				<a href="/charge" class="box2">요금</a>
@@ -85,7 +96,7 @@
 					<span>기간 : </span>
 					<input type="date" name="startDate" id="startDate" value="${startDate}" pattern="yyyy-MM-dd">
 					 ~ <input type="date" name="endDate" id="endDate" value="${endDate}" pattern="yyyy-MM-dd">
-					<input type="submit" value="조회">
+					<input type="submit" class="green-btn-2" value="조회">
 				</form>
 				<div class="table-box">
 					<table>
