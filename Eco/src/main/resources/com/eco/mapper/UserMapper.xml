@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- INSERT -->
 	<insert id="userInsert">
 		<![CDATA[
-		INSERT INTO t_user(user_id, user_pw, user_nm, user_type) VALUES(#{user_id}, #{user_pw}, #{user_nm}, #{user_type})
+		INSERT INTO t_user(user_id, user_pw, user_nm, user_type, user_local) VALUES(#{user_id}, #{user_pw}, #{user_nm}, #{user_type}, #{user_local})
 		]]>
 	</insert>
 	
