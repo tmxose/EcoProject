@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +46,8 @@ public class UsageContoller {
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
 		model.addAttribute("userId", user.getUser_id());
 		model.addAttribute("userName", user.getUser_nm());
-
+		model.addAttribute("IsAdmin", user.getAdmin_yn());
+		
 		// 이번 달 에너지 사용량 합계
 		UserTypeChargeDTO gasTotal = service.readGasusage(user.getUser_id());
 		UserTypeChargeDTO elecTotal = service.readElecusage(user.getUser_id());
