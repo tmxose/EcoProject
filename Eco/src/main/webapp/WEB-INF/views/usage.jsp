@@ -53,13 +53,14 @@
 					<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
 				</div>
 			</div>
+			<div class="green-line"></div>
 			<div class="main-container">
 				<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
 				<button class="green-btn" onclick='location.href="/"'>메인페이지</button> 
-				<button class="green-btn" onclick='location.href="/usage/insert-form"'>내 사용량 등록</button>
+				<!-- <button class="green-btn" onclick='location.href="/usage/insert-form"'>내 사용량 등록</button> -->
 			</div>
 		</div>
-		<div class="green-line"></div>
+		<!-- <div class="green-line"></div> -->
 		<div class="inner-container">
 			<div class="select-box">
 				<a href="/usage" class="box1">사용량</a>
