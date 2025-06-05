@@ -35,6 +35,15 @@
 				alert("종료일을 지정하여 주세요")
 				return false;
 			}
+			
+			let maxDiff = 90 * 24 * 60 * 60 * 1000;
+			let start = new Date(startDay);
+			let end = new Date(endDay);
+		    let diff = end - start;
+			if(diff > maxDiff) {
+				alert("최대 3개월 사용량만 조회 가능합니다.");
+				return false;
+			}
 			if(startDay && endDay && startDay > endDay) {
 				alert("시작일은 종료일보다 빠른 날짜여야 합니다.");
 				return false;
@@ -122,9 +131,7 @@
 					<table>
 						<caption class="text-bold">가스 사용 상세 내역</caption>
 						<tr>
-							<th>userCD</th>
-							<th>사용자명</th>
-							<th>타입</th>
+							<th>용도</th>
 							<th>표준원가</th>
 							<th>사용량</th>
 							<th>날짜</th>
@@ -133,8 +140,6 @@
 							<c:when test="${not empty gasUse}">
 								<c:forEach var="item" items="${gasUse}">
 									<tr>
-										<td>${item.userCd}</td>
-										<td>${item.userNm}</td>
 										<td>${item.usageType}</td>
 										<td>${item.unitCharge}</td>
 										<td>${item.gas_usage}</td>
@@ -144,7 +149,7 @@
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td colspan="6">${ gasUsageDetailMsg }</td>
+									<td colspan="4">${ gasUsageDetailMsg }</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
@@ -152,8 +157,6 @@
 					<table>
 						<caption class="text-bold">전기 사용 상세 내역</caption>
 						<tr>
-							<th>userCD</th>
-							<th>사용자명</th>
 							<th>타입</th>
 							<th>표준원가</th>
 							<th>사용량</th>
@@ -163,8 +166,6 @@
 							<c:when test="${not empty elecUse}">
 								<c:forEach var="item" items="${elecUse}">
 									<tr>
-										<td>${item.userCd}</td>
-										<td>${item.userNm}</td>
 										<td>${item.usageType}</td>
 										<td>${item.unitCharge}</td>
 										<td>${item.elec_usage}</td>
@@ -174,7 +175,7 @@
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td colspan="6">${ elecUsageDetailMsg }</td>
+									<td colspan="4">${ elecUsageDetailMsg }</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
