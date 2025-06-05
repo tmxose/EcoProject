@@ -23,6 +23,14 @@
 					<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
 						<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
 					</c:if>
+					<c:choose>
+					    <c:when test="${sessionScope.currentUserInfo.admin_yn.toString() eq 'Y'}">
+					        <button type="button" onclick="location.href='/admin'">관리자 기능</button>
+					    </c:when>
+					    <c:otherwise>
+					        <p>값이 없습니다</p>
+					    </c:otherwise>
+					</c:choose>
 					<c:if test="${empty sessionScope.currentUserInfo}">
 						<button class="green-btn" onclick='location.href="/login"'>로그인</button>
 						<button class="green-btn" onclick='location.href="/signup"'>회원가입</button>
