@@ -20,7 +20,7 @@
 				<div class="header-container">
 					<c:if test="${not empty sessionScope.currentUserInfo}">
 						<span>${currentUserInfo.user_nm} 님, 환영합니다.</span>
-					<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
+						<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
 						<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
 					</c:if>
 					<c:choose>
@@ -31,8 +31,8 @@
 					    </c:otherwise>
 					</c:choose>
 					<c:if test="${empty sessionScope.currentUserInfo}">
-						<button class="green-btn" onclick='location.href="/login"'>로그인</button>
-						<button class="green-btn" onclick='location.href="/signup"'>회원가입</button>
+						<button class="green-btn-2" onclick='location.href="/login"'>로그인</button>
+						<button class="green-btn-2" onclick='location.href="/signup"'>회원가입</button>
 					</c:if>
 				</div>
 			</div>
