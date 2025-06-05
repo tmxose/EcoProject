@@ -27,4 +27,11 @@ public class UserTypeChargeDTO {
     private float elec_usage;
     private Date elec_time;
     
+    //월별 데이터 가져오기 위한 변수
+    private int year;
+    private int month;
+    //월별 요금
+    private float gasCharge;
+    private float elecCharge;
+    
 }

@@ -25,6 +25,9 @@ public interface UsageService {
 	// 지역별 가장 최근 달의 에너지 사용량 합계
 	public List<UserTypeChargeDTO> usageAmount();
 	
+	// 사용자의 월별 사용량 합계
+	public List<UserTypeChargeDTO> usageMonth(String userId);
+	
 	// 사용자의 가스 사용량 등록
 	public void insertGasUsage(GasUsageVO gasUsage);
 	// 사용자의 전기 사용량 등록

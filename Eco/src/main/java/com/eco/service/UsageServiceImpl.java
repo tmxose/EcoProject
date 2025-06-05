@@ -55,6 +55,11 @@ public class UsageServiceImpl implements UsageService{
 		return mapper.getUsageLocalAmount();
 	}
 	
+	// 사용자의 월별 사용량 합계
+	@Override
+	public List<UserTypeChargeDTO> usageMonth(String userId) {
+		return mapper.getUsageMonthAmount(userId);
+		}
 	
 	// 사용자의 가스 사용량 등록
 	@Override
@@ -76,4 +81,5 @@ public class UsageServiceImpl implements UsageService{
 	public List<ElecVO> getAllElecTypes() {
 		return mapper.getAllElecTypes();
 	}
+	
 }

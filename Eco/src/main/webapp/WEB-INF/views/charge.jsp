@@ -20,6 +20,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/common.css?after">
 <link rel="stylesheet" type="text/css" href="/resources/css/usage.css?after">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 .box1{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #c5ee8f; color: #82cd2b}
 .box2{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #82cd2b; font-weight: bold; color: white;}
@@ -175,8 +176,59 @@
 						</c:choose>
 					</table>
 				</div>
+				<div class="chart-container">
+					<canvas class="usageChart" id="monthChart"></canvas>
+				</div>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		let jData = JSON.parse('<c:out value="${json}" escapeXml="false"/>');
+		
+		let monthList = new Array();
+		let gasMonthList = new Array();
+		let elecMonthList = new Array();
+		
+		for(i=0; i<jData.length;i++){
+			let j = jData[i];
+			monthList.push(j.user_month);
+			gasMonthList.push(j.gaschargeMonth);
+			elecMonthList.push(j.elecChargeMonth);
+		}
+		
+		const ctx = document.getElementById('monthChart').getContext('2d');
+	    const myChart = new Chart(ctx, {
+	        type: 'line',
+	        data: {
+	            labels: monthList,
+	            datasets: [
+	                {
+	                    label: '도시가스',
+	                    data: gasMonthList,
+	                    backgroundColor: 'rgba(95, 164, 0, 0.2)',
+	                    borderColor: 'rgba(95, 164, 0, 1)',
+	                    borderWidth: 2,
+	                    tension: 0.3
+	                },
+	                {
+	                    label: '전기',
+	                    data: elecMonthList,
+	                    backgroundColor: 'rgba(255, 166, 0, 0.2)',
+	                    borderColor: 'rgba(255, 166, 0, 1)',
+	                    borderWidth: 2,
+	                    tension: 0.3
+	                }
+	            ]
+	        },
+	        options: {
+	            scales: {
+	                y: {
+	                    beginAtZero: true
+	                }
+	            }
+	        }
+	    });
+	</script>
 </body>
 </html>

@@ -19,5 +19,8 @@ public interface ChargeMapper {
 	// 지정 기간 에너지 사용 상세 내역
 	public List<UserTypeChargeDTO> getGasChargePeriod(@Param("user_id") String userId, @Param("start_date") LocalDate startDate, @Param("end_date") LocalDate endDate);
 	public List<UserTypeChargeDTO> getElecChargePeriod(@Param("user_id") String userId, @Param("start_date") LocalDate startDate, @Param("end_date") LocalDate endDate);
-
+	
+	// 사용자의 월별 사용량 합계
+	public List<UserTypeChargeDTO> getChargeMonthAmount(@Param("user_id") String userId);
+		
 }
