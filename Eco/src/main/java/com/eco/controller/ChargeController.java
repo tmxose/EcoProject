@@ -100,10 +100,10 @@ public class ChargeController {
 		model.addAttribute("elecUse", elecUse);
 		// 지정 기간 사용량이 0일 때 처리
 		if(gasUse.isEmpty()) {
-			model.addAttribute("gasUsageDetailMsg", "해당 기간 가스 사용량이 없습니다.");
+			model.addAttribute("gasChargeDetailMsg", "해당 기간 가스 사용량이 없습니다.");
 		}
 		if(elecUse.isEmpty()) {
-			model.addAttribute("elecUsageDetailMsg", "해당 기간 전기 사용량이 없습니다.");
+			model.addAttribute("elecChargeDetailMsg", "해당 기간 전기 사용량이 없습니다.");
 		}
 		
 		return "charge";

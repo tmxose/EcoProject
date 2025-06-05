@@ -46,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * from t_user WHERE user_cd = #{user_cd}
 		]]>
 	</select>
+	
 	<!-- 회원 탈퇴 -->
 	<update id="userDelete">
 		<![CDATA[

@@ -25,10 +25,9 @@
 					</c:if>
 					<c:choose>
 					    <c:when test="${sessionScope.currentUserInfo.admin_yn.toString() eq 'Y'}">
-					        <button type="button" onclick="location.href='/admin'">관리자 기능</button>
+					        <button class="green-btn-2" type="button" onclick="location.href='/admin'">관리자 기능</button>
 					    </c:when>
 					    <c:otherwise>
-					        <p>값이 없습니다</p>
 					    </c:otherwise>
 					</c:choose>
 					<c:if test="${empty sessionScope.currentUserInfo}">
@@ -95,12 +94,14 @@
 	                {
 	                    label: '도시가스',
 	                    data: gasUsageList,
-	                    backgroundColor: 'rgba(255, 99, 132, 0.5)'
+//	                    backgroundColor: 'rgba(255, 99, 132, 0.5)'
+		                backgroundColor: 'rgba(95, 164, 0, 0.5)'
 	                },
 	                {
 	                    label: '전기',
 	                    data: elecUsageList,
-	                    backgroundColor: 'rgba(54, 162, 235, 0.5)'
+//	                    backgroundColor: 'rgba(54, 162, 235, 0.5)'
+						backgroundColor: 'rgba(255, 166, 0, 0.5)'
 	                }
 	            ]
 	        },

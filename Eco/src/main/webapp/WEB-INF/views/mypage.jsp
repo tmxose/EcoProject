@@ -23,25 +23,28 @@
 		const userPwInput = document.querySelector('input[name="user_pw"]');
 		const userNmInput = document.querySelector('input[name="user_nm"]');
 		const originalUserId = document.querySelector('input[name="original_id"]').value.trim();
-			
+		const userType = document.querySelector('input[name="user_type"]').value.trim();
+		
 		const userId = userIdInput.value.trim();
 		const userPw = userPwInput.value.trim();
 		const userNm = userNmInput.value.trim();
 	    
-		if (userId === "" || userId === null) {
-	        alert("아이디는 비워둘 수 없습니다.");
-	        userIdInput.focus();
-	        return false; // Prevent form submission
-	    }
-	    if (userId !== originalUserId && !isIdChecked) {
-	        alert("아이디 중복 확인을 해주세요.");
-	        userIdInput.focus();
-	        return false;
-	    }
-	    if (userPw === "" || userPw === null) {
-	        alert("비밀번호는 비워둘 수 없습니다.");
-	        userPwInput.focus();
-	        return false;
+		if(userType ==="B"){
+			if (userId === "" || userId === null) {
+		        alert("아이디는 비워둘 수 없습니다.");
+		        userIdInput.focus();
+		        return false; // Prevent form submission
+		    }
+		    if (userId !== originalUserId && !isIdChecked) {
+		        alert("아이디 중복 확인을 해주세요.");
+		        userIdInput.focus();
+		        return false;
+		    }
+		    if (userPw === "" || userPw === null) {
+		        alert("비밀번호는 비워둘 수 없습니다.");
+		        userPwInput.focus();
+		        return false;
+		    }
 	    }
 	    if (userNm === "" || userNm === null) {
 	        alert("이름은 비워둘 수 없습니다.");
@@ -82,21 +85,22 @@
 </head>
 <body>
 	<div class="container">
+	    <a href="/"><img src="/resources/img/icon.png" class="icon"></a>
 	    <h2>회원 정보 수정</h2>
 	    <div class="inner-container">
 	        <form action="mypageUpdate" method="post" class="signup-form" onsubmit="return validateForm()">
-	            
+	            <c:set var="isBasicLogin" value="${ loginType == 'b' }" />
 	            <div class="form-group">
 	                <label for="user_id">아이디</label>
 	                <div class="id-check-group">
-	                    <input class="input-area" type="text" name="user_id" id="user_id" value="${ userId }" autocomplete="off">
-	                    <input class="input-btn-area" type="button" value="중복확인" onclick="checkDuplicateId()">
+	                    <input class="input-area" type="text" name="user_id" id="user_id" value="${ userId }" autocomplete="off" <c:if test="${!isBasicLogin}">readonly</c:if>>
+	                    <input class="input-btn-area" type="button" value="중복확인" onclick="checkDuplicateId()" <c:if test="${!isBasicLogin}">disabled</c:if>>
 	                </div>
 	            </div>
 	
 	            <div class="form-group">
 	                <label for="user_pw">비밀번호</label>
-	                <input  class="input-area" type="password" name="user_pw" id="user_pw" value="${ userPw }" autocomplete="new-password">
+	                <input  class="input-area" type="password" name="user_pw" id="user_pw" value="${ userPw }" autocomplete="new-password" <c:if test="${!isBasicLogin}">readonly</c:if>>
 	            </div>
 	
 	            <div class="form-group">
@@ -110,6 +114,7 @@
 	            </div>
 				<input type="hidden" name="user_cd" value="${userCd}">
 				<input type="hidden" name="original_id" value="${ userId }">
+				<input type="hidden" name="user_type" value="${ userType }">
 	            <input class="input-submit-area" type="submit" value="수정하기">
 	        </form>
 	        <form action="mypageDelete" method="post" class="signup-form" onsubmit="return confirmDelete()">
