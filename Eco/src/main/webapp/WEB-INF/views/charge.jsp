@@ -103,6 +103,12 @@
 						</tr>
 					</table>
 				</div>
+				<div class="title">냉/난방 사용 이력</div>
+				<div class="chart-box">
+					<div class="chart-container">
+						<canvas class="usageChart" id="monthChart"></canvas>
+					</div>
+				</div>
 				<div class="title">냉/난방 요금 이력</div>
 				<form method="get" action="/charge/period" onsubmit="return validateDates(this)" class="form-box">
 					<span>기간 : </span>
@@ -176,9 +182,7 @@
 						</c:choose>
 					</table>
 				</div>
-				<div class="chart-container">
-					<canvas class="usageChart" id="monthChart"></canvas>
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -222,6 +226,8 @@
 	            ]
 	        },
 	        options: {
+	        	responsiv: true,
+	        	maintainAspectRatio: false,
 	            scales: {
 	                y: {
 	                    beginAtZero: true
