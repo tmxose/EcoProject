@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /* Tag */
 body {
+	min-width: 1024px;
 	margin: 0 auto;
 	min-height: 1500px;
 	background-color: #ffffff;
