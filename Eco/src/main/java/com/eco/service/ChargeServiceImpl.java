@@ -1,11 +1,10 @@
 package com.eco.service;
 
-import java.time.LocalDate;
+import java.time.LocalDate; 
 import java.util.List; 
 
 import org.springframework.stereotype.Service;
 
-import com.eco.domain.GasUsageVO;
 import com.eco.domain.UserTypeChargeDTO;
 import com.eco.mapper.ChargeMapper;
 
