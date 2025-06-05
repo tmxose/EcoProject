@@ -129,6 +129,7 @@ button {
 	flex-direction: column;
 	gap: 15px;
 	box-sizing: border-box;
+	margin-bottom: 20px
 }
 
 /* 각 입력 필드 묶음 */
