@@ -72,7 +72,7 @@
 <body>
 	<div class="container">
 	<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
-    <h2>회원가입 페이지입니다.</h2>
+    <h2>회원 가입</h2>
     <div class="inner-container">
         <form action="signup" method="post" class="signup-form" onsubmit="return validateForm()">
             
