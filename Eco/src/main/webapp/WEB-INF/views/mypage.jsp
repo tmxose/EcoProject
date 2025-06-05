@@ -82,42 +82,42 @@
 </head>
 <body>
 	<div class="container">
-    <h2>회원 정보 수정</h2>
-    <div class="inner-container">
-        <form action="mypageUpdate" method="post" class="signup-form" onsubmit="return validateForm()">
-            
-            <div class="form-group">
-                <label for="user_id">아이디</label>
-                <div class="id-check-group">
-                    <input class="input-area" type="text" name="user_id" id="user_id" value="${ userId }" autocomplete="off">
-                    <input class="input-btn-area" type="button" value="중복확인" onclick="checkDuplicateId()">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="user_pw">비밀번호</label>
-                <input  class="input-area" type="password" name="user_pw" id="user_pw" value="${ userPw }" autocomplete="new-password">
-            </div>
-
-            <div class="form-group">
-                <label for="user_nm">이름</label>
-                <input class="input-area" type="text" name="user_nm" id="user_nm" value="${ userName }" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label for="user_local">지역 (선택사항)</label>
-                <input class="input-area" type="text" name="user_local" id="user_local" value="${ userLocal }" autocomplete="off">
-            </div>
-			<input type="hidden" name="user_cd" value="${userCd}">
-			<input type="hidden" name="original_id" value="${ userId }">
-            <input class="input-submit-area" type="submit" value="수정하기">
-        </form>
-        <form action="mypageDelete" method="post" class="signup-form" onsubmit="return confirmDelete()">
-        	<input type="hidden" name="user_cd" value="${userCd}">
-            <input class="input-submit-area" type="submit" value="회원탈퇴">
-        </form>
-    </div>
-</div>
+	    <h2>회원 정보 수정</h2>
+	    <div class="inner-container">
+	        <form action="mypageUpdate" method="post" class="signup-form" onsubmit="return validateForm()">
+	            
+	            <div class="form-group">
+	                <label for="user_id">아이디</label>
+	                <div class="id-check-group">
+	                    <input class="input-area" type="text" name="user_id" id="user_id" value="${ userId }" autocomplete="off">
+	                    <input class="input-btn-area" type="button" value="중복확인" onclick="checkDuplicateId()">
+	                </div>
+	            </div>
+	
+	            <div class="form-group">
+	                <label for="user_pw">비밀번호</label>
+	                <input  class="input-area" type="password" name="user_pw" id="user_pw" value="${ userPw }" autocomplete="new-password">
+	            </div>
+	
+	            <div class="form-group">
+	                <label for="user_nm">이름</label>
+	                <input class="input-area" type="text" name="user_nm" id="user_nm" value="${ userName }" autocomplete="off">
+	            </div>
+	
+	            <div class="form-group">
+	                <label for="user_local">지역 (선택사항)</label>
+	                <input class="input-area" type="text" name="user_local" id="user_local" value="${ userLocal }" autocomplete="off">
+	            </div>
+				<input type="hidden" name="user_cd" value="${userCd}">
+				<input type="hidden" name="original_id" value="${ userId }">
+	            <input class="input-submit-area" type="submit" value="수정하기">
+	        </form>
+	        <form action="mypageDelete" method="post" class="signup-form" onsubmit="return confirmDelete()">
+	        	<input type="hidden" name="user_cd" value="${userCd}">
+	            <input class="input-submit-area" type="submit" value="회원탈퇴">
+	        </form>
+	    </div>
+	</div>
 
 </body>
 </html>
