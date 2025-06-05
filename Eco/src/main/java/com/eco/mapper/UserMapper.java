@@ -11,4 +11,11 @@ public interface UserMapper {
 	
 	// 가입자 정보
 	public UserVO findByUserId(@Param("user_id") String user_id, @Param("user_type") String user_type);  // 아이디로 사용자 조회
+	
+	// 회원 정보 수정
+	public void userUpdate(UserVO user);
+	public UserVO findByUserCD(@Param("user_cd") int user_cd);
+	
+	// 회원 탈퇴
+	public void userDelete(@Param("user_cd") int user_cd);
 }
