@@ -80,6 +80,7 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, Object> updateElec(@RequestBody ElecUsageVO vo) {
 		log.info("AdminController - updateElec");
+		log.info(vo);
 		boolean result = adminService.updateElec(vo);
 		return Map.of("success", result);
 	}
