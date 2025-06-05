@@ -50,6 +50,7 @@
 				<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
 				<div class="header-container">
 					<span>${userName} 님, 환영합니다.</span> 
+					<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
 					<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
 				</div>
 			</div>
