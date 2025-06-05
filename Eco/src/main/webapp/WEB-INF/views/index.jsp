@@ -36,13 +36,15 @@
 					</c:if>
 				</div>
 			</div>
+			<div class="green-line"></div>
+			
 			<div class="main-container">
 				<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
 				<button class="green-btn" onclick="goToMyUsagePage()">내 사용량 조회</button> 
-				<button class="green-btn" onclick="goToUsageInsertPage()">내 사용량 등록</button>
+				<!-- <button class="green-btn" onclick="goToUsageInsertPage()">내 사용량 등록</button> -->
 			</div>
 		</div>
-		<div class="green-line"></div>
+		<!-- <div class="green-line"></div> -->
 		<div class="chart-container">
 			<h2>지역별 사용량 비교</h2>
 			<canvas class="usageChart" id="usgaeChart"></canvas>
