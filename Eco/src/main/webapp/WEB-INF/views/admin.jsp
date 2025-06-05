@@ -75,8 +75,11 @@ th, td {
 			</table>
 
 			<div id="addForm" style="display: none; margin-top: 10px;">
-				날짜: <input type="date" id="newDate"> 사용량: <input
-					type="number" step="0.1" id="newUsage">
+				날짜: <input type="date" id="newDate"> 
+				<select id="energyTypeSelect">
+    				<option value="">-- 타입 선택 --</option>
+				</select>
+				사용량: <input type="number" step="0.1" id="newUsage">
 				<button onclick="addUsage()">등록</button>
 				<button onclick="hideAddForm()">취소</button>
 			</div>
@@ -87,11 +90,53 @@ th, td {
 let selectedUserCd = null;
 let selectedUsageCd = null;
 let energyType = "GAS";
+// JSP EL로 gasList -> JS 배열
+var gasList = [
+    <c:forEach var="gas" items="${gasList}" varStatus="status">
+        {
+            cd: ${gas.gas_cd},
+            type: "${gas.type}",
+            charge: ${gas.charge}
+        }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
+];
+
+// JSP EL로 elecList -> JS 배열
+var elecList = [
+    <c:forEach var="elec" items="${elecList}" varStatus="status">
+        {
+            cd: ${elec.elec_cd},
+            type: "${elec.type}",
+            charge: ${elec.charge}
+        }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
+];
 
 function selectEnergyType(type) {
 	energyType = type;
 	jQuery("#usageTitle").text(type === 'GAS' ? '가스 사용내역' : '전기 사용내역');
 	loadUsageData();
+	bindEnergyTypeSelect();
+}
+
+function bindEnergyTypeSelect() {
+    const select = document.getElementById('energyTypeSelect');
+    select.innerHTML = '<option value="">-- 타입 선택 --</option>';
+
+    let listToBind = [];
+
+    if (energyType === 'GAS') {
+        listToBind = gasList;
+    } else if (energyType === 'ELEC') {
+        listToBind = elecList;
+    }
+
+    listToBind.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.cd;
+        option.textContent = item.type;
+        select.appendChild(option);
+    });
 }
 
 function searchUser() {
@@ -124,68 +169,119 @@ function searchUser() {
 function selectUser(userCd) {
 	selectedUserCd = userCd;
 
-	  // 모든 <tr> 태그에서 'selected' 클래스 제거
-	  document.querySelectorAll("tr").forEach(tr => {
-	    tr.classList.remove("selected");
-	  });
+  // 모든 <tr> 태그에서 'selected' 클래스 제거
+  document.querySelectorAll("tr").forEach(tr => {
+    tr.classList.remove("selected");
+  });
 
-	  // userCd가 포함된 td를 찾고, 그 td가 포함된 tr에 'selected' 추가
-	  const trs = document.querySelectorAll("#userTable tbody tr");
+  // userCd가 포함된 td를 찾고, 그 td가 포함된 tr에 'selected' 추가
+  const trs = document.querySelectorAll("#userTable tbody tr");
 
-	  trs.forEach(tr => {
-	    const tds = tr.querySelectorAll("td");
-	    for (const td of tds) {
-	      if (td.textContent.trim() === String(userCd)) {
-	        tr.classList.add("selected");
-	        break;
-	      }
-	    }
-	  });
+  trs.forEach(tr => {
+    const tds = tr.querySelectorAll("td");
+    for (const td of tds) {
+      if (td.textContent.trim() === String(userCd)) {
+        tr.classList.add("selected");
+        break;
+      }
+    }
+  });
+
+	//공통 호출
 	loadUsageData();
 }
-
 function loadUsageData() {
 	if (!selectedUserCd) return;
 
-	const url = energyType === 'GAS'
-		? "/admin/user/" + selectedUserCd + "/gas-usage"
-		: "/admin/user/" + selectedUserCd + "/elec-usage";
+	if (energyType === 'GAS') {
+		loadGasUsageData();
+	} else {
+		loadElecUsageData();
+	}
+}
 
-
+// 가스사용량 조회
+function loadGasUsageData() {
 	jQuery.ajax({
-		url: url,
+		url: '/admin/user/'+selectedUserCd+'/gas-usage',
 		type: "GET",
-		dataType: "json", // JSON으로 명시
+		dataType: "json",
 		success: function(data) {
-			// 배열인지 확인
-			if (!Array.isArray(data)) {
-				alert("서버 응답이 배열이 아닙니다.");
-				console.error("data:", data);
-				return;
-			}
-
-			const tbody = jQuery("#usageTable tbody").empty();
-			selectedUsageCd = null;
-
-			data.forEach(function(row) {
-				const usage = energyType === 'GAS' ? row.gas_usage : row.elec_usage;
-				const time = row.gas_time || row.elec_time;
-				const trHtml = 
-					'<tr data-id="' + row.usage_cd + '">' +
-						'<td><input type="radio" name="selectUsage" value="' + row.usage_cd + 
-						'" onclick="selectRow(' + row.usage_cd + ', ' + usage + ', \'' + time + '\')"></td>' +
-						'<td class="date">' + time.substring(0,10) + '</td>' +
-						'<td class="usage">' + usage + '</td>' +
-					'</tr>';
-				tbody.append(trHtml);
-			});
-		},
-		error: function(xhr, status, error) {
-			alert("사용내역 로드 중 오류가 발생했습니다.");
-			console.error("AJAX error:", status, error);
+			renderUsageTable(data, 'GAS');
 		}
 	});
 }
+// 전기 사용량 조회
+function loadElecUsageData() {
+	jQuery.ajax({
+		url: '/admin/user/'+selectedUserCd+'/elec-usage',
+		type: "GET",
+		dataType: "json",
+		success: function(data) {
+			renderUsageTable(data, 'ELEC');
+		}
+	});
+}
+function renderUsageTable(data, type) {
+	if (!Array.isArray(data)) {
+		alert("데이터 형식이 잘못되었습니다.");
+		return;
+	}
+
+	const tbody = jQuery("#usageTable tbody").empty();
+	selectedUsageCd = null;
+
+	data.forEach(row => {
+		const usage = type === 'GAS' ? row.gas_usage : row.elec_usage;
+		const time = type === 'GAS' ? row.gas_time : row.elec_time;
+		const timeStr = new Date(time).toISOString().split("T")[0] || "-";
+		const trHtml =
+			'<tr data-id="' + row.usage_cd + '">' +
+				'<td><input type="radio" name="selectUsage" value="' + row.usage_cd + '" onclick="selectRow(' + row.usage_cd + ')"></td>' +
+				'<td class="date">' + timeStr + '</td>' +
+				'<td class="usage">' + usage + '</td>' +
+			'</tr>';
+
+		tbody.append(trHtml);
+	});
+}
+// 가스 사용량 등록
+function addGasUsage(date, usage) {
+	jQuery.ajax({
+		url: "/admin/gas/insert",
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify({
+			user_cd: selectedUserCd,
+			gas_cd: gasType,
+			gas_usage: usage,
+			gas_time: date
+		}),
+		success: function() {
+			alert("가스 사용량 등록됨");
+			loadGasUsageData();
+		}
+	});
+}
+
+function addElecUsage(date, usage) {
+	jQuery.ajax({
+		url: "/admin/elec/insert",
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify({
+			user_cd: selectedUserCd,
+			elec_usage: usage,
+			elec_time: date,
+			use_yn: 'Y'
+		}),
+		success: function() {
+			alert("전기 사용량 등록됨");
+			loadElecUsageData();
+		}
+	});
+}
+
 
 function selectRow(id, usage, date) {
 	selectedUsageCd = id;
@@ -194,26 +290,60 @@ function selectRow(id, usage, date) {
 function enableEdit() {
 	if (!selectedUsageCd) return alert("수정할 행을 선택하세요.");
 	const row = jQuery("tr[data-id='" + selectedUsageCd + "']");
-	const usageVal = row.find(".usage").text();
-	row.find(".usage").html("<input type='number' step='0.1' value='" + usageVal + "' />");
-	row.append("<td><button onclick='saveEdit(" + selectedUsageCd + ")'>저장</button></td>");
+	const usageCell = row.find(".usage");
+	
+	// 이미 input이 존재하면 중복 편집 방지
+	if (usageCell.find("input").length > 0) return;
+
+	const usageVal = usageCell.text();
+	usageCell.html("<input type='number' step='0.1' value='" + usageVal + "' />");
+
+	// 기존 버튼이 존재하는 경우 제거
+	row.find(".save-button-cell").remove();
+	row.append('<td class="save-button-cell"><button onclick="saveEdit(' + selectedUsageCd + ')">저장</button></td>');
 }
+
+
 function saveEdit(id) {
 	const row = jQuery("tr[data-id='" + id + "']");
-	const newVal = row.find("input").val();
-	const url = energyType === 'GAS' ? "/admin/gas/update" : "/admin/elec/update";
-
+	const newVal = row.find("td.usage input").val();
+	
+	if (energyType === 'GAS') {
+		saveGasEdit(id, newVal);
+	} else {
+		saveElecEdit(id, newVal);
+	}
+}
+// 가스사용량 수정
+function saveGasEdit(id, newVal) {
 	jQuery.ajax({
-		url: url,
+		url: "/admin/gas/update",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify({
 			usage_cd: id,
-			[energyType === 'GAS' ? 'gas_usage' : 'elec_usage']: newVal
+			gas_usage: newVal
 		}),
 		success: function() {
-			alert("수정되었습니다.");
-			loadUsageData();
+			alert("가스 사용량이 수정되었습니다.");
+			loadGasUsageData();
+		}
+	});
+}
+// 전기 사용량 수정
+function saveElecEdit(id, newVal) {
+	console.log(id,newVal);
+	jQuery.ajax({
+		url: "/admin/elec/update",
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify({
+			usage_cd: id,
+			elec_usage: newVal
+		}),
+		success: function() {
+			alert("전기 사용량이 수정되었습니다.");
+			loadElecUsageData();
 		}
 	});
 }
@@ -222,16 +352,36 @@ function deleteUsage() {
 	if (!selectedUsageCd) return alert("삭제할 행을 선택하세요.");
 	if (!confirm("정말 삭제하시겠습니까?")) return;
 
-	const url = energyType === 'GAS' ? "/admin/gas/delete" : "/admin/elec/delete";
+	if (energyType === 'GAS') {
+		deleteGasUsage();
+	} else {
+		deleteElecUsage();
+	}
+}
 
+// 가스 사용량 삭제
+function deleteGasUsage() {
 	jQuery.ajax({
-		url: url,
+		url: "/admin/gas/delete",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify({ usage_cd: selectedUsageCd }),
 		success: function() {
-			alert("삭제되었습니다.");
-			loadUsageData();
+			alert("가스 사용내역이 삭제되었습니다.");
+			loadGasUsageData();
+		}
+	});
+}
+// 전기사용량 삭제
+function deleteElecUsage() {
+	jQuery.ajax({
+		url: "/admin/elec/delete",
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify({ usage_cd: selectedUsageCd }),
+		success: function() {
+			alert("전기 사용내역이 삭제되었습니다.");
+			loadElecUsageData();
 		}
 	});
 }
@@ -245,30 +395,20 @@ function hideAddForm() {
 }
 
 function addUsage() {
+	if (!selectedUserCd) return alert("사용자를 선택하세요.");
+
 	const date = jQuery("#newDate").val();
 	const usage = jQuery("#newUsage").val();
 	if (!date || !usage) return alert("모든 값을 입력해주세요.");
-
-	const url = energyType === 'GAS' ? "/admin/gas/insert" : "/admin/elec/insert";
-	const payload = {
-		user_cd: selectedUserCd,
-		[energyType === 'GAS' ? 'gas_usage' : 'elec_usage']: usage,
-		[energyType === 'GAS' ? 'gas_time' : 'elec_time']: date,
-		use_yn: 'Y'
-	};
-
-	jQuery.ajax({
-		url: url,
-		type: "POST",
-		contentType: "application/json",
-		data: JSON.stringify(payload),
-		success: function() {
-			alert("등록되었습니다.");
-			hideAddForm();
-			loadUsageData();
-		}
-	});
+	console.log
+	if (energyType === 'GAS') {
+		addGasUsage(date, usage);
+	} else {
+		addElecUsage(date, usage);
+	}
+	hideAddForm();
 }
+
 </script>
 </body>
 </html>
