@@ -62,7 +62,7 @@
 				<!-- <button class="green-btn" onclick='location.href="/usage/insert-form"'>내 사용량 등록</button> -->
 			</div>
 		</div>
-		<div class="green-line"></div>
+		<!-- <div class="green-line"></div> -->
 		<div class="inner-container">
 			<div class="select-box">
 				<a href="/usage" class="box1">사용량</a>
