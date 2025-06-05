@@ -51,6 +51,9 @@
 					<span>${userName} 님, 환영합니다.</span> 
 					<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
 					<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
+					<c:if test="${IsAdmin.toString() eq 'Y'}">
+						<button class="green-btn-2" onclick="location.href='/admin'">관리자 기능</button>
+					</c:if>
 				</div>
 			</div>
 			<div class="green-line"></div>

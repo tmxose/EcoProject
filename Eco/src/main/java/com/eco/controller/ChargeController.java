@@ -42,6 +42,7 @@ public class ChargeController {
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
 		model.addAttribute("userId", user.getUser_id());
 		model.addAttribute("userName", user.getUser_nm());
+		model.addAttribute("IsAdmin", user.getAdmin_yn());
 		// 이번 달 에너지 사용 요금 합계
 		UserTypeChargeDTO gasCharge = service.readGasCharge(user.getUser_id());
 		UserTypeChargeDTO elecCharge = service.readElecCharge(user.getUser_id());

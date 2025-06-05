@@ -48,9 +48,6 @@ th, td {
 			</thead>
 			<tbody></tbody>
 		</table>
-
-		<button onclick="loadUsageData()">조회</button>
-
 		<!-- 에너지 타입 선택 -->
 		<div style="margin-top: 20px;">
 			<button onclick="selectEnergyType('GAS')">가스 사용량</button>
