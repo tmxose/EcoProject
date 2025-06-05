@@ -70,71 +70,53 @@ th, td {
 				</thead>
 				<tbody></tbody>
 			</table>
-
-		<!-- 	<div id="addForm" style="display: none; margin-top: 10px;">
-				날짜: <input type="date" id="newDate"> 
-				<select id="energyTypeSelect">
-    				<option value="">-- 타입 선택 --</option>
-				</select>
-				사용량: <input type="number" step="0.1" id="newUsage">
-				<button onclick="addUsage()">등록</button>
-				<button onclick="hideAddForm()">취소</button>
-			</div> -->
 			<!-- 등록 폼 전체 영역 -->
-		<div id="addForm" style="display: none; margin-top: 10px;">
-			<!-- 가스 등록 폼 -->
-			<form id="gasForm" action="/admin/gas/insert" method="post">
-				<input type="hidden" name="user_cd" id="gas_user_cd" />
-				<label>사용 일자:</label>
-				<input type="date" name="gas_time" required />
-		
-				<label for="gas_cd">가스 타입 선택:</label>
-				<select id="gas_cd" name="gas_cd" required>
-					<option value="">-- 타입 선택 --</option>
-					<c:forEach var="gas" items="${gasList}">
-						<option value="${gas.gas_cd}">${gas.type}</option>
-					</c:forEach>
-				</select>
-		
-				<label for="gas_usage">가스 사용량 (m³):</label>
-				<input type="number" id="gas_usage" name="gas_usage" step="0.01" min="0" required />
-		
-				<button type="submit">가스 사용량 등록</button>
-				<button type="button" onclick="hideAddForm()">취소</button>
-			</form>
-		
-			<!-- 전기 등록 폼 -->
-			<form id="elecForm" action="/admin/elec/insert" method="post">
-				<input type="hidden" name="user_cd" id="elec_user_cd" />
-				<label>사용 일자:</label>
-				<input type="date" name="elec_time" required />
-		
-				<label for="elec_cd">전기 타입 선택:</label>
-				<select id="elec_cd" name="elec_cd" required>
-					<option value="">-- 타입 선택 --</option>
-					<c:forEach var="elec" items="${elecList}">
-						<option value="${elec.elec_cd}">${elec.type}</option>
-					</c:forEach>
-				</select>
-		
-				<label for="elec_usage">전기 사용량 (kWh):</label>
-				<input type="number" id="elec_usage" name="elec_usage" step="0.01" min="0" required />
-		
-				<button type="submit">전기 사용량 등록</button>
-				<button type="button" onclick="hideAddForm()">취소</button>
-			</form>
-		
-		</div>
-			
+			<div id="addForm" style="display: none; margin-top: 10px;">
+				<!-- 가스 등록 폼 -->
+				<form id="gasForm" action="/admin/gas/insert" method="post">
+					<input type="hidden" name="user_cd" id="gas_user_cd" /> <label>사용
+						일자:</label> <input type="date" name="gas_time" required /> <label
+						for="gas_cd">가스 타입 선택:</label> <select id="gas_cd" name="gas_cd"
+						required>
+						<option value="">-- 타입 선택 --</option>
+						<c:forEach var="gas" items="${gasList}">
+							<option value="${gas.gas_cd}">${gas.type}</option>
+						</c:forEach>
+					</select> <label for="gas_usage">가스 사용량 (m³):</label> <input type="number"
+						id="gas_usage" name="gas_usage" step="0.01" min="0" required />
+
+					<button type="submit">가스 사용량 등록</button>
+					<button type="button" onclick="hideAddForm()">취소</button>
+				</form>
+
+				<!-- 전기 등록 폼 -->
+				<form id="elecForm" action="/admin/elec/insert" method="post">
+					<input type="hidden" name="user_cd" id="elec_user_cd" /> <label>사용
+						일자:</label> <input type="date" name="elec_time" required /> <label
+						for="elec_cd">전기 타입 선택:</label> <select id="elec_cd"
+						name="elec_cd" required>
+						<option value="">-- 타입 선택 --</option>
+						<c:forEach var="elec" items="${elecList}">
+							<option value="${elec.elec_cd}">${elec.type}</option>
+						</c:forEach>
+					</select> <label for="elec_usage">전기 사용량 (kWh):</label> <input type="number"
+						id="elec_usage" name="elec_usage" step="0.01" min="0" required />
+
+					<button type="submit">전기 사용량 등록</button>
+					<button type="button" onclick="hideAddForm()">취소</button>
+				</form>
+
+			</div>
+
 		</div>
 	</div>
 	<!-- 데이터 저장 alert메세지 -->
 	<c:if test="${not empty msg}">
-	    <script>
+		<script>
 	        alert('${msg}');
 	    </script>
 	</c:if>
-	
+
 	<script>
 let selectedUserCd = null;
 let selectedUsageCd = null;
