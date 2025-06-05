@@ -35,4 +35,20 @@ public class UserServiceImpl implements UserService {
 	public UserVO findByUserId(String user_id, String user_type) {
 		return mapper.findByUserId(user_id, user_type);
 	}
+
+	// 회원 정보 수정
+	@Override
+	public void userModify(UserVO user) {
+		mapper.userUpdate(user);
+	}
+	@Override
+	public UserVO findByUserCD(int user_cd) {
+		return mapper.findByUserCD(user_cd);
+	}
+
+	// 회원 탈퇴
+	@Override
+	public void userDelete(int user_cd) {
+		mapper.userDelete(user_cd);
+	}
 }

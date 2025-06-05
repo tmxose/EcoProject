@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getUserSelect" resultType="com.eco.domain.UserVO">
 		<![CDATA[
 		SELECT * FROM t_user
-		WHERE user_id = #{user_id} and user_pw = #{user_pw} and user_type = "B";
+		WHERE use_yn = 'Y' AND user_id = #{user_id} and user_pw = #{user_pw} and user_type = "B";
 		]]>
 	</select>
 <!-- 	<select id="getUserCount" resultType="int">
@@ -34,5 +34,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- UPDATE -->
+	<!-- 회원정보수정 -->
+	<update id="userUpdate">
+		<![CDATA[
+		UPDATE t_user SET user_id=#{user_id}, user_pw=#{user_pw}, user_nm=#{user_nm}, user_local=#{user_local} WHERE user_cd=#{user_cd}
+		]]>
+	</update>
+	<!-- 회원정보 수정 후 세션 반영용 -->
+	<select id="findByUserCD" resultType="com.eco.domain.UserVO">
+		<![CDATA[
+		SELECT * from t_user WHERE user_cd = #{user_cd}
+		]]>
+	</select>
+	<!-- 회원 탈퇴 -->
+	<update id="userDelete">
+		<![CDATA[
+		UPDATE t_user SET use_yn='N' WHERE user_cd=#{user_cd}
+		]]>
+	</update>
 	<!-- DELETE -->
 </mapper>

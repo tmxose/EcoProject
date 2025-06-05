@@ -10,6 +10,13 @@ public interface UserService {
 	
 	// 사용자 아이디 존재여부 확인
 	public UserVO findByUserId(String user_id, String user_type);
-	 
+	
+	// 회원 정보 수정
+	public void userModify(UserVO user);
+	public UserVO findByUserCD(int user_cd);
+	
+	// 회원 탈퇴
+	public void userDelete(int user_cd);
+	
 }
 	
