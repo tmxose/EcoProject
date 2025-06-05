@@ -151,7 +151,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         JOIN t_elec e ON eu.elec_cd = e.elec_cd
 		WHERE u.use_yn = 'Y' AND user_id=#{user_id}
 		GROUP BY month, year
-		ORDER BY month DESC
+		ORDER BY month
 		]]>
 	</select>
 	

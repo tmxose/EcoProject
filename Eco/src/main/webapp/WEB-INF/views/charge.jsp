@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Eco</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/common.css?after">
 <link rel="stylesheet" type="text/css" href="/resources/css/usage.css?after">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

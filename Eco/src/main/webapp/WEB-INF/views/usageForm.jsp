@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사용량 등록</title>
+<title>Eco</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/common.css?after">
 <link rel="stylesheet" type="text/css" href="/resources/css/usage.css?after">
 </head>

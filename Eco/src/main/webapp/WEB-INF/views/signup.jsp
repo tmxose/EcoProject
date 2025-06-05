@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 페이지</title>
+<title>Eco</title>
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/common.css?after">
 

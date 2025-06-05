@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원정보수정</title>
+<title>Eco</title>
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/common.css?after">
 

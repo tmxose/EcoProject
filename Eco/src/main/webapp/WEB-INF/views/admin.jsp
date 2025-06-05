@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 페이지</title>
+<title>Eco</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 table {
