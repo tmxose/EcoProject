@@ -102,6 +102,12 @@
 					</table>
 				</div>
 				<div class="title">냉/난방 사용 이력</div>
+				<div class="chart-box">
+					<div class="chart-container">
+						<canvas class="usageChart" id="monthChart"></canvas>
+					</div>
+				</div>
+				<div class="title">냉/난방 사용 이력</div>
 				<form method="get" action="/usage/period" onsubmit="return validateDates(this)" class="form-box">
 					<span>기간 : </span>
 					<input type="date" name="startDate" id="startDate" value="${not empty param.startDate ? param.startDate : firstDayStr}" pattern="yyyy-MM-dd">
@@ -169,9 +175,6 @@
 							</c:otherwise>
 						</c:choose>
 					</table>
-				</div>
-				<div class="chart-container">
-					<canvas class="usageChart" id="monthChart"></canvas>
 				</div>
 			</div>
 		</div>
