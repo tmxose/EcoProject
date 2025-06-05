@@ -31,6 +31,7 @@ public class MypageController {
 		model.addAttribute("userName", user.getUser_nm());
 		model.addAttribute("userLocal", user.getUser_local());
 		model.addAttribute("userCd", user.getUser_cd());
+		model.addAttribute("userType", user.getUser_type());
 		return "mypage";
 	}
 	
