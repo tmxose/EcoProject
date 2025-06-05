@@ -19,4 +19,6 @@ public interface ChargeService {
 	public List<UserTypeChargeDTO> gasChargePeriod(String userId, LocalDate startDate, LocalDate endDate);
 	public List<UserTypeChargeDTO> elecChargePeriod(String userId, LocalDate startDate, LocalDate endDate);
 
+	// 사용자의 월별 사용량 합계
+	public List<UserTypeChargeDTO> chargeMonth(String userId);
 }

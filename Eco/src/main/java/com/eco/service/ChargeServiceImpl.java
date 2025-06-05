@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.eco.domain.GasUsageVO;
 import com.eco.domain.UserTypeChargeDTO;
 import com.eco.mapper.ChargeMapper;
 
@@ -44,5 +45,11 @@ public class ChargeServiceImpl implements ChargeService{
 	public List<UserTypeChargeDTO> elecChargePeriod(String userId, LocalDate startDate, LocalDate endDate) {
 		return mapper.getElecChargePeriod(userId, startDate, endDate);
 	}
+	
+	// 사용자의 월별 사용량 합계
+	@Override
+	public List<UserTypeChargeDTO> chargeMonth(String userId) {
+		return mapper.getChargeMonthAmount(userId);
+		}
 
 }

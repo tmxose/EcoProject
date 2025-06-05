@@ -1,7 +1,11 @@
 package com.eco.controller;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.eco.domain.UserTypeChargeDTO;
 import com.eco.domain.UserVO;
 import com.eco.service.ChargeService;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -63,6 +70,40 @@ public class ChargeController {
 			model.addAttribute("elecChargeDetailMsg", "이번 달 전기 사용량이 없습니다.");
 		}
 		
+		//월별 사용량 합계 그래프 자료
+		List<UserTypeChargeDTO> usageMonth = service.chargeMonth(user.getUser_id());
+		Gson gson = new Gson();
+		JsonArray jArray = new JsonArray();
+		Map<String, UserTypeChargeDTO> monthMap = new HashMap<>();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+
+		for (UserTypeChargeDTO dto : usageMonth) {
+		    String yearMonth = dto.getYear() + "-" + String.format("%02d", dto.getMonth());
+		    monthMap.put(yearMonth, dto);
+		}
+
+		YearMonth current = YearMonth.now();
+		for(int i=0; i<12 ;i++) {
+			YearMonth ym = current.minusMonths(i);
+		    String key = ym.format(formatter);
+		    
+		    UserTypeChargeDTO monthDTO = monthMap.get(key);
+		    JsonObject object = new JsonObject();
+		    object.addProperty("user_month", key);
+			
+			if(monthDTO != null) {
+				object.addProperty("gaschargeMonth", (int) monthDTO.getGasCharge());
+				object.addProperty("elecChargeMonth", (int) monthDTO.getElecCharge());
+			} else {
+				object.addProperty("gaschargeMonth", 0);
+				object.addProperty("elecChargeMonth", 0);
+			}
+			
+			jArray.add(object);
+		}
+		String json = gson.toJson(jArray);
+		model.addAttribute("json",json);
+		
 		return "charge";
 	}
 	
@@ -105,6 +146,41 @@ public class ChargeController {
 		if(elecUse.isEmpty()) {
 			model.addAttribute("elecChargeDetailMsg", "해당 기간 전기 사용량이 없습니다.");
 		}
+		
+		
+		//월별 사용량 합계 그래프 자료
+		List<UserTypeChargeDTO> usageMonth = service.chargeMonth(user.getUser_id());
+		Gson gson = new Gson();
+		JsonArray jArray = new JsonArray();
+		Map<String, UserTypeChargeDTO> monthMap = new HashMap<>();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+
+		for (UserTypeChargeDTO dto : usageMonth) {
+		    String yearMonth = dto.getYear() + "-" + String.format("%02d", dto.getMonth());
+		    monthMap.put(yearMonth, dto);
+		}
+
+		YearMonth current = YearMonth.now();
+		for(int i=0; i<12 ;i++) {
+			YearMonth ym = current.minusMonths(i);
+		    String key = ym.format(formatter);
+		    
+		    UserTypeChargeDTO monthDTO = monthMap.get(key);
+		    JsonObject object = new JsonObject();
+		    object.addProperty("user_month", key);
+			
+		    if(monthDTO != null) {
+				object.addProperty("gaschargeMonth", (int) monthDTO.getGasCharge());
+				object.addProperty("elecChargeMonth", (int) monthDTO.getElecCharge());
+			} else {
+				object.addProperty("gaschargeMonth", 0);
+				object.addProperty("elecChargeMonth", 0);
+			}
+			
+			jArray.add(object);
+		}
+		String json = gson.toJson(jArray);
+		model.addAttribute("json",json);
 		
 		return "charge";
 	}
