@@ -1,9 +1,13 @@
 package com.eco.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +20,7 @@ import com.eco.domain.ElecUsageVO;
 import com.eco.domain.GasUsageVO;
 import com.eco.domain.UserVO;
 import com.eco.service.AdminService;
+import com.eco.service.UsageService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -26,11 +31,16 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/admin")
 public class AdminController {
 	private AdminService adminService;
+	private UsageService service; // 또는 final + 생성자 주입
 	
 	// admin 페이지로 이동
 	@GetMapping("")
-	public void adminPage() {
+	public String adminPage(Model model) {
 		log.info("AdminController - adminPage");
+		// 가스/전기 타입 목록 조회 후 admin 페이지로 전달
+		model.addAttribute("gasList", service.getAllGasTypes());
+	    model.addAttribute("elecList", service.getAllElecTypes());
+	    return "admin"; 
 	}
 
 	// 사용자 검색
@@ -64,7 +74,13 @@ public class AdminController {
 	@ResponseBody
 	public boolean insertGasUsage(@RequestBody GasUsageVO vo) {
 		log.info("AdminController - insertGasUsage");
-		return adminService.insertGas(vo); // user_cd, gas_usage, gas_time 등이 포함됨
+		if (vo.getGas_time() != null) {
+		        // Date → Timestamp 변환 (직접 변환해도 됨)
+		        Timestamp timestamp = new Timestamp(vo.getGas_time().getTime());
+		        vo.setGas_time(timestamp);
+		        log.info("Timestamp : " + timestamp);
+		}
+	    return adminService.insertGas(vo);  // boolean true/false 반환
 	}
 
 	// 전기 사용량 등록
@@ -72,6 +88,12 @@ public class AdminController {
 	@ResponseBody
 	public boolean insertElecUsage(@RequestBody ElecUsageVO vo) {
 		log.info("AdminController - insertElecUsage");
+		if (vo.getElec_time() != null) {
+	        // Date → Timestamp 변환 (직접 변환해도 됨)
+	        Timestamp timestamp = new Timestamp(vo.getElec_time().getTime());
+	        vo.setElec_time(timestamp);
+	        log.info("Timestamp : " + timestamp);
+		}
 		return adminService.insertElec(vo); // user_cd, gas_usage, gas_time 등이 포함됨
 	}
 
@@ -111,4 +133,5 @@ public class AdminController {
 		boolean result = adminService.deleteGas(vo.getUsage_cd());
 		return Map.of("success", result);
 	}
+	
 }
