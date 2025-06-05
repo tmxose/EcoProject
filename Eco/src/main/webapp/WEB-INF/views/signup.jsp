@@ -102,6 +102,10 @@
             <input class="input-submit-area" type="submit" value="가입하기">
         </form>
     </div>
+    	
+	<!-- 여긴 높이 보정용 푸터 입니다. -->
+	<footer></footer>
+    
 </div>
 </body>
 </html>

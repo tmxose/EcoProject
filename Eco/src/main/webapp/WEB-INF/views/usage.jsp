@@ -55,14 +55,24 @@
 	<div class="container">
 		<div class="inner-container">
 			<div class="head-box">
+				<!-- 아이콘 -->
 				<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
+				<!-- 메인화면 글씨 -->
+				<div class="title-container"><h2>사용량 조회 페이지</h2></div>
+				<!-- 버튼 내비게이션 -->
 				<div class="header-container">
-					<span>${userName} 님, 환영합니다.</span> 
-					<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
-					<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
-					<c:if test="${IsAdmin.toString() eq 'Y'}">
-						<button class="green-btn-2" onclick="location.href='/admin'">관리자 기능</button>
-					</c:if>
+					<!-- 위쪽 텍스트 -->
+					<div class="header-inner-container">
+						<span>${userName} 님, 환영합니다.</span> 
+					</div>
+					<!-- 아래쪽 버튼 -->
+					<div class="header-inner-container">
+						<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
+						<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
+						<c:if test="${IsAdmin.toString() eq 'Y'}">
+							<button class="green-btn-2" onclick="location.href='/admin'">관리자 기능</button>
+						</c:if>
+					</div>
 				</div>
 			</div>
 			<div class="green-line"></div>
@@ -184,6 +194,9 @@
 			</div>
 		</div>
 	</div>
+		
+	<!-- 여긴 높이 보정용 푸터 입니다. -->
+	<footer></footer>
 	
 	<script>
 		let jData = JSON.parse('<c:out value="${json}" escapeXml="false"/>');

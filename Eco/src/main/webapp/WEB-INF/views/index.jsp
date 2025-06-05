@@ -11,29 +11,44 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/usage.css?after">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+
+</style>
 </head>
 <body>
 	<div class="container">
 		<div class="inner-container">
 			<div class="head-box">
+				<!-- 아이콘 -->
 				<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
+				<!-- 메인화면 글씨 -->
+				<div class="title-container"><h2>메인 페이지</h2></div>
+				<!-- 버튼 내비게이션 -->
 				<div class="header-container">
-					<c:if test="${not empty sessionScope.currentUserInfo}">
-						<span>${currentUserInfo.user_nm} 님, 환영합니다.</span>
-						<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
-						<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
-					</c:if>
-					<c:choose>
-					    <c:when test="${sessionScope.currentUserInfo.admin_yn.toString() eq 'Y'}">
-					        <button class="green-btn-2" type="button" onclick="location.href='/admin'">관리자 기능</button>
-					    </c:when>
-					    <c:otherwise>
-					    </c:otherwise>
-					</c:choose>
-					<c:if test="${empty sessionScope.currentUserInfo}">
-						<button class="green-btn-2" onclick='location.href="/login"'>로그인</button>
-						<button class="green-btn-2" onclick='location.href="/signup"'>회원가입</button>
-					</c:if>
+					<!-- 위쪽 텍스트 -->
+					<div class="header-inner-container">
+						<c:if test="${not empty sessionScope.currentUserInfo}">
+							<span>${currentUserInfo.user_nm} 님, 환영합니다.</span>
+						</c:if>
+					</div>
+					<!-- 아래쪽 버튼 -->
+					<div class="header-inner-container">
+						<c:if test="${not empty sessionScope.currentUserInfo}">
+							<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
+							<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
+						</c:if>
+						<c:choose>
+						    <c:when test="${sessionScope.currentUserInfo.admin_yn.toString() eq 'Y'}">
+						        <button class="green-btn-2" type="button" onclick="location.href='/admin'">관리자 기능</button>
+						    </c:when>
+						    <c:otherwise>
+						    </c:otherwise>
+						</c:choose>
+						<c:if test="${empty sessionScope.currentUserInfo}">
+							<button class="green-btn-2" onclick='location.href="/login"'>로그인</button>
+							<button class="green-btn-2" onclick='location.href="/signup"'>회원가입</button>
+						</c:if>
+					</div>
 				</div>
 			</div>
 			<div class="green-line"></div>
@@ -50,7 +65,10 @@
 			<canvas class="usageChart" id="usgaeChart"></canvas>
 		</div>
 	</div>
-
+	
+	<!-- 여긴 높이 보정용 푸터 입니다. -->
+	<footer></footer>
+	
 	<script>
 	 	const isLoggedIn = ${not empty sessionScope.currentUserInfo};
 	 
