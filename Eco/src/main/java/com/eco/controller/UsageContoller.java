@@ -89,7 +89,7 @@ public class UsageContoller {
 		}
 
 		YearMonth current = YearMonth.now();
-		for(int i=0; i<12 ;i++) {
+		for(int i=11; i>=0 ;i--) {
 			YearMonth ym = current.minusMonths(i);
 		    String key = ym.format(formatter);
 		    
@@ -170,7 +170,7 @@ public class UsageContoller {
 		}
 
 		YearMonth current = YearMonth.now();
-		for(int i=0; i<12 ;i++) {
+		for(int i=11; i>=0 ;i--) {
 			YearMonth ym = current.minusMonths(i);
 		    String key = ym.format(formatter);
 		    
