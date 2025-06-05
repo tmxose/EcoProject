@@ -110,6 +110,10 @@ th, td {
 
 		</div>
 	</div>
+		
+	<!-- 여긴 높이 보정용 푸터 입니다. -->
+	<footer></footer>
+	
 	<!-- 데이터 저장 alert메세지 -->
 	<c:if test="${not empty msg}">
 		<script>

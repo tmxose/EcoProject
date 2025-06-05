@@ -98,5 +98,10 @@ align-items: center;
 			</table>
 		</form>
 	</div>
+		
+	<!-- 여긴 높이 보정용 푸터 입니다. -->
+	<footer></footer>
+	
+	
 </body>
 </html>
