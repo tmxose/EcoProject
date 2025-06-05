@@ -60,7 +60,7 @@ public class LoginController {
 			// 로그인 처리
 			session.setAttribute("currentUserInfo", rtnUser);
 			log.info("web login");
-			return "redirect: /usage";
+			return "redirect: /";
 		} else {
 			// 재로그인 처리
 			return "login";
