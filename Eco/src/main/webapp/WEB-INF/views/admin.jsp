@@ -74,7 +74,7 @@ th, td {
 				<tbody></tbody>
 			</table>
 
-			<div id="addForm" style="display: none; margin-top: 10px;">
+		<!-- 	<div id="addForm" style="display: none; margin-top: 10px;">
 				날짜: <input type="date" id="newDate"> 
 				<select id="energyTypeSelect">
     				<option value="">-- 타입 선택 --</option>
@@ -82,66 +82,176 @@ th, td {
 				사용량: <input type="number" step="0.1" id="newUsage">
 				<button onclick="addUsage()">등록</button>
 				<button onclick="hideAddForm()">취소</button>
-			</div>
+			</div> -->
+			<!-- 등록 폼 전체 영역 -->
+		<div id="addForm" style="display: none; margin-top: 10px;">
+			<!-- 가스 등록 폼 -->
+			<form id="gasForm" action="/admin/gas/insert" method="post">
+				<input type="hidden" name="user_cd" id="gas_user_cd" />
+				<label>사용 일자:</label>
+				<input type="date" name="gas_time" required />
+		
+				<label for="gas_cd">가스 타입 선택:</label>
+				<select id="gas_cd" name="gas_cd" required>
+					<option value="">-- 타입 선택 --</option>
+					<c:forEach var="gas" items="${gasList}">
+						<option value="${gas.gas_cd}">${gas.type}</option>
+					</c:forEach>
+				</select>
+		
+				<label for="gas_usage">가스 사용량 (m³):</label>
+				<input type="number" id="gas_usage" name="gas_usage" step="0.01" min="0" required />
+		
+				<button type="submit">가스 사용량 등록</button>
+				<button type="button" onclick="hideAddForm()">취소</button>
+			</form>
+		
+			<!-- 전기 등록 폼 -->
+			<form id="elecForm" action="/admin/elec/insert" method="post">
+				<input type="hidden" name="user_cd" id="elec_user_cd" />
+				<label>사용 일자:</label>
+				<input type="date" name="elec_time" required />
+		
+				<label for="elec_cd">전기 타입 선택:</label>
+				<select id="elec_cd" name="elec_cd" required>
+					<option value="">-- 타입 선택 --</option>
+					<c:forEach var="elec" items="${elecList}">
+						<option value="${elec.elec_cd}">${elec.type}</option>
+					</c:forEach>
+				</select>
+		
+				<label for="elec_usage">전기 사용량 (kWh):</label>
+				<input type="number" id="elec_usage" name="elec_usage" step="0.01" min="0" required />
+		
+				<button type="submit">전기 사용량 등록</button>
+				<button type="button" onclick="hideAddForm()">취소</button>
+			</form>
+		
+		</div>
+			
 		</div>
 	</div>
-
+	<!-- 데이터 저장 alert메세지 -->
+	<c:if test="${not empty msg}">
+	    <script>
+	        alert('${msg}');
+	    </script>
+	</c:if>
+	
 	<script>
 let selectedUserCd = null;
 let selectedUsageCd = null;
 let energyType = "GAS";
-// JSP EL로 gasList -> JS 배열
-var gasList = [
-    <c:forEach var="gas" items="${gasList}" varStatus="status">
-        {
-            cd: ${gas.gas_cd},
-            type: "${gas.type}",
-            charge: ${gas.charge}
-        }<c:if test="${!status.last}">,</c:if>
-    </c:forEach>
-];
-
-// JSP EL로 elecList -> JS 배열
-var elecList = [
-    <c:forEach var="elec" items="${elecList}" varStatus="status">
-        {
-            cd: ${elec.elec_cd},
-            type: "${elec.type}",
-            charge: ${elec.charge}
-        }<c:if test="${!status.last}">,</c:if>
-    </c:forEach>
-];
 
 function selectEnergyType(type) {
 	energyType = type;
 	jQuery("#usageTitle").text(type === 'GAS' ? '가스 사용내역' : '전기 사용내역');
 	loadUsageData();
-	bindEnergyTypeSelect();
+	jQuery("#gasForm").hide();
+	jQuery("#elecForm").hide();
 }
 
-function bindEnergyTypeSelect() {
-    const select = document.getElementById('energyTypeSelect');
-    select.innerHTML = '<option value="">-- 타입 선택 --</option>';
+//가스 사용량 등록폼 이벤트리스너
+document.getElementById('gasForm').addEventListener('submit', function (e) {
+    e.preventDefault();  // 기본 제출 막기
 
-    let listToBind = [];
-
-    if (energyType === 'GAS') {
-        listToBind = gasList;
-    } else if (energyType === 'ELEC') {
-        listToBind = elecList;
+    if (!selectedUserCd) {
+        alert('사용자를 선택해주세요.');
+        return;
     }
 
-    listToBind.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.cd;
-        option.textContent = item.type;
-        select.appendChild(option);
-    });
-}
+    // user_cd 세팅
+    document.getElementById('gas_user_cd').value = selectedUserCd;
+    const gasCd = document.getElementById('gas_cd').value;
+    // 날짜 포맷 (yyyy-MM-dd로 고정)
+    const dateInput = this.querySelector('input[name="gas_time"]').value;
+ 	
+    // 폼 데이터 수집
+    const gasUsage = this.querySelector('input[name="gas_usage"]').value;
 
+    // JSON 형태로 데이터 구성
+    const jsonData = {
+        user_cd: selectedUserCd,
+        gas_cd: gasCd,
+        gas_usage: parseFloat(gasUsage),
+        gas_time: dateInput
+    };
+
+    // AJAX 호출
+    jQuery.ajax({
+        url: '/admin/gas/insert',
+        method: 'POST',
+        data: JSON.stringify(jsonData),
+        contentType: 'application/json',
+        dataType: 'json', 
+        success: function (response) {
+            if (response == 'true' || response == true) {
+                alert('가스 사용량 등록 성공');
+                loadGasUsageData();
+                hideAddForm();
+                document.getElementById('gasForm').reset();
+            } else {
+                alert('가스 사용량 등록 실패');
+            }
+        },
+        error: function () {
+            alert('서버 통신 오류가 발생했습니다.');
+        }
+    });
+});
+
+// 전기 사용량 등록폼 이벤트리스너
+document.getElementById('elecForm').addEventListener('submit', function (e) {
+	 e.preventDefault();  // 기본 제출 막기
+
+	    if (!selectedUserCd) {
+	        alert('사용자를 선택해주세요.');
+	        return;
+	    }
+
+	    // user_cd 세팅
+	    document.getElementById('elec_user_cd').value = selectedUserCd;
+	    const elecCd = document.getElementById('elec_cd').value;
+	    // 날짜 포맷 (yyyy-MM-dd로 고정)
+	    const dateInput = this.querySelector('input[name="elec_time"]').value;
+	 	
+	    // 폼 데이터 수집
+	    const elecUsage = this.querySelector('input[name="elec_usage"]').value;
+
+	    // JSON 형태로 데이터 구성
+	    const jsonData = {
+	        user_cd: selectedUserCd,
+	        elec_cd: elecCd,
+	        elec_usage: parseFloat(elecUsage),
+	        elec_time: dateInput
+	    };
+
+	    // AJAX 호출
+	    jQuery.ajax({
+	        url: '/admin/elec/insert',
+	        method: 'POST',
+	        data: JSON.stringify(jsonData),
+	        contentType: 'application/json',
+	        dataType: 'json', 
+	        success: function (response) {
+	            if (response == 'true' || response == true) {
+	                alert('전기 사용량 등록 성공');
+	                loadElecUsageData();
+	                hideAddForm();
+	                document.getElementById('elecForm').reset();
+	            } else {
+	                alert('전기 사용량 등록 실패');
+	            }
+	        },
+	        error: function () {
+	            alert('서버 통신 오류가 발생했습니다.');
+	        }
+	    });
+});
+	
 function searchUser() {
 	const keyword = jQuery("#searchKeyword").val();
-	if (!keyword) return alert("검색어를 입력하세요.");
+	if (!keyword) return alert("사용자 이름을 입력하세요.");
 
 	jQuery.ajax({
 		url: "/admin/search-users",
@@ -150,6 +260,7 @@ function searchUser() {
 		dataType: "json", // JSON으로 받기
 		success: function(users) {
 			const tbody = jQuery("#userTable tbody").empty();
+			jQuery("#usageTable tbody").empty(); 
 			users.forEach(user => {
 				 // 각 항목을 안전하게 문자열로 변환
 				  const rowHtml =
@@ -387,26 +498,26 @@ function deleteElecUsage() {
 }
 
 function showAddForm() {
+    if (!selectedUserCd) {
+        alert('사용자를 선택해주세요.');
+        return;
+    }
+    
 	jQuery("#addForm").show();
+
+	if (energyType === 'GAS') {
+		jQuery("#gasForm").show();
+		jQuery("#elecForm").find("input").val("").end().hide();
+	} else {
+		jQuery("#elecForm").show();
+		jQuery("#gasForm").find("input").val("").end().hide();
+	}
 }
 
 function hideAddForm() {
 	jQuery("#addForm").hide();
-}
-
-function addUsage() {
-	if (!selectedUserCd) return alert("사용자를 선택하세요.");
-
-	const date = jQuery("#newDate").val();
-	const usage = jQuery("#newUsage").val();
-	if (!date || !usage) return alert("모든 값을 입력해주세요.");
-	console.log
-	if (energyType === 'GAS') {
-		addGasUsage(date, usage);
-	} else {
-		addElecUsage(date, usage);
-	}
-	hideAddForm();
+	jQuery("#gasForm").find("input").val("").end().hide();
+	jQuery("#elecForm").find("input").val("").end().hide();
 }
 
 </script>

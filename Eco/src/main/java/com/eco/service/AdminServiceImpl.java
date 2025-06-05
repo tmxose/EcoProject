@@ -10,9 +10,11 @@ import com.eco.domain.UserVO;
 import com.eco.mapper.AdminMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 
 @Service
 @AllArgsConstructor
+@Log4j
 public class AdminServiceImpl implements AdminService {
 
 	private AdminMapper mapper;
@@ -39,6 +41,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public boolean insertGas(GasUsageVO vo) {
 		int rows = mapper.insertGasUsage(vo);
+		log.info("insertGasUsage 영향 받은 행 수: " + rows);
 		return rows > 0;
 	}
 
