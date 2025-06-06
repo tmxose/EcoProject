@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Eco</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/common.css?after">
+<link rel="stylesheet" type="text/css" href="/resources/css/usage.css?after">
 <style>
 table {
 	border-collapse: collapse;
@@ -23,92 +25,214 @@ th, td {
 .selected {
 	background-color: #f0f8ff;
 }
+.search-container{
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 8px;
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: #fefefe;
+}
 
-.container {
-	width: 90%;
-	margin: auto;
-	padding: 20px;
+.search-area{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center; /* 추가 */
+	gap: 10px;
+}
+.search-area input[type="text"] {
+  height: 36px;
+  padding: 0 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-area button.green-btn {
+  height: 36px;
+  padding: 0 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background-color: #82cd2b;
+  color: white;
+  cursor: pointer;
+}
+
+.search-area button.green-btn:hover {
+  background-color: #218838;
+}
+.search-inner-container{
+	display: flex;
+	width:100%;
+	flex-direction: column;
+	align-items: center;
+	min-height: 200px;
+	border: 1px solid #82cd2b;
+	border-radius: 4px;
+	padding:10px;
+	box-sizing: border-box;
+}
+.type-tab{
+	display: flex; 
+	justify-content: center; 
+	width: 100%; 
+	align-items: center;
+	text-align: center;
+	padding:10px;	
+}
+.result-container{
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 8px;
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: #fefefe;
+}
+.result-inner-container{
+	display: flex;
+	width:100%;
+	flex-direction: column;
+	align-items: center;
+	min-height: 200px;
+	border: 1px solid #82cd2b;
+	border-radius: 4px;
+	padding:10px;
+	box-sizing: border-box;
 }
 </style>
 </head>
 <body>
 	<div class="container">
-		<h2>사용자 검색</h2>
-		<input type="text" id="searchKeyword" placeholder="사용자명 입력" />
-		<button onclick="searchUser()">검색</button>
-
-		<table id="userTable">
-			<thead>
-				<tr>
-					<th>사용자 번호</th>
-					<th>사용자 아이디</th>
-					<th>이름</th>
-					<th>지역</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
-		<!-- 에너지 타입 선택 -->
-		<div style="margin-top: 20px;">
-			<button onclick="selectEnergyType('GAS')">가스 사용량</button>
-			<button onclick="selectEnergyType('ELEC')">전기 사용량</button>
-		</div>
-
-		<div id="usageSection">
-			<h3 id="usageTitle">가스 사용내역</h3>
-			<button onclick="enableEdit()">수정</button>
-			<button onclick="deleteUsage()">삭제</button>
-			<button onclick="showAddForm()">등록</button>
-
-			<table id="usageTable" border="1">
-				<thead>
-					<tr>
-						<th>선택</th>
-						<th>날짜</th>
-						<th>사용량</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
-			<!-- 등록 폼 전체 영역 -->
-			<div id="addForm" style="display: none; margin-top: 10px;">
-				<!-- 가스 등록 폼 -->
-				<form id="gasForm" action="/admin/gas/insert" method="post">
-					<input type="hidden" name="user_cd" id="gas_user_cd" /> <label>사용
-						일자:</label> <input type="date" name="gas_time" required /> <label
-						for="gas_cd">가스 타입 선택:</label> <select id="gas_cd" name="gas_cd"
-						required>
-						<option value="">-- 타입 선택 --</option>
-						<c:forEach var="gas" items="${gasList}">
-							<option value="${gas.gas_cd}">${gas.type}</option>
-						</c:forEach>
-					</select> <label for="gas_usage">가스 사용량 (m³):</label> <input type="number"
-						id="gas_usage" name="gas_usage" step="0.01" min="0" required />
-
-					<button type="submit">가스 사용량 등록</button>
-					<button type="button" onclick="hideAddForm()">취소</button>
-				</form>
-
-				<!-- 전기 등록 폼 -->
-				<form id="elecForm" action="/admin/elec/insert" method="post">
-					<input type="hidden" name="user_cd" id="elec_user_cd" /> <label>사용
-						일자:</label> <input type="date" name="elec_time" required /> <label
-						for="elec_cd">전기 타입 선택:</label> <select id="elec_cd"
-						name="elec_cd" required>
-						<option value="">-- 타입 선택 --</option>
-						<c:forEach var="elec" items="${elecList}">
-							<option value="${elec.elec_cd}">${elec.type}</option>
-						</c:forEach>
-					</select> <label for="elec_usage">전기 사용량 (kWh):</label> <input type="number"
-						id="elec_usage" name="elec_usage" step="0.01" min="0" required />
-
-					<button type="submit">전기 사용량 등록</button>
-					<button type="button" onclick="hideAddForm()">취소</button>
-				</form>
-
+		<div class="inner-container">
+			<div class="head-box">
+				<!-- 아이콘 -->
+				<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
+				<!-- 메인화면 글씨 -->
+				<div class="title-container"><h2>관리자 페이지</h2></div>
+				<!-- 버튼 내비게이션 -->
+				<div class="header-container">
+					<!-- 위쪽 텍스트 -->
+					<div class="header-inner-container">
+						<span>${userName} 님, 환영합니다.</span> 
+					</div>
+					<!-- 아래쪽 버튼 -->
+					<div class="header-inner-container">
+						<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
+						<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
+					</div>
+				</div>
 			</div>
-
+			<div class="green-line"></div>
+			<div class="main-container">
+				<!-- 페이지 이동 버튼 -->
+				<button class="green-btn" onclick='location.href="/"'>메인페이지</button> 
+				<button class="green-btn" onclick="goToMyUsagePage()">내 사용량 조회</button> 
+			</div>
 		</div>
+
+		<!-- 사용자 검색 영역 start------------------------------ -->
+		<div class="inner-container">
+			<div class="search-container">
+					<h2>사용자 검색</h2>
+				<div class="search-inner-container">
+				<div class="search-area">
+					<input type="text" id="searchKeyword" placeholder="사용자명 입력" />
+					<button class="green-btn" onclick="searchUser()">검색</button>
+				</div>
+					<table id="userTable">
+						<thead>
+							<tr>
+								<th>사용자 번호</th>
+								<th>사용자 아이디</th>
+								<th>이름</th>
+								<th>지역</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				
+			</div>
+		</div>
+		<!-- 사용자 검색 영역 end------------------------------ -->
+
+		<!-- 사용자별 에너지 사용량 관리 영역 start ------------------------ -->
+		<div class="inner-container">
+			<!-- 에너지 타입 선택 -->
+			<div class="type-tab">
+				<button class="box1" onclick="selectEnergyType('GAS')">가스 사용량</button>
+				<button class="box1" onclick="selectEnergyType('ELEC')">전기 사용량</button>
+			</div>
+			
+			<div id="usageSection" class="result-container">
+				<div class="search-area">
+					<h3 id="usageTitle">가스 사용내역</h3>
+					<button class="green-btn" onclick="showAddForm()">등록</button>
+					<button class="green-btn" onclick="enableEdit()">수정</button>
+					<button class="green-btn" onclick="deleteUsage()">삭제</button>
+				</div>
+				<div class="result-inner-container">
+					<table id="usageTable" border="1">
+						<thead>
+							<tr>
+								<th>선택</th>
+								<th>날짜</th>
+								<th>사용량</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+					<!-- 등록 폼 전체 영역 -->
+					<div id="addForm" style="display: none; margin-top: 10px;">
+						<!-- 가스 등록 폼 -->
+						<form id="gasForm" action="/admin/gas/insert" method="post">
+							<input type="hidden" name="user_cd" id="gas_user_cd" /> <label>사용
+								일자:</label> <input type="date" name="gas_time" required /> <label
+								for="gas_cd">가스 타입 선택:</label> <select id="gas_cd" name="gas_cd"
+								required>
+								<option value="">-- 타입 선택 --</option>
+								<c:forEach var="gas" items="${gasList}">
+									<option value="${gas.gas_cd}">${gas.type}</option>
+								</c:forEach>
+							</select> <label for="gas_usage">가스 사용량 (m³):</label> <input type="number"
+								id="gas_usage" name="gas_usage" step="0.01" min="0" required />
+		
+							<button type="submit">가스 사용량 등록</button>
+							<button type="button" onclick="hideAddForm()">취소</button>
+						</form>
+		
+						<!-- 전기 등록 폼 -->
+						<form id="elecForm" action="/admin/elec/insert" method="post">
+							<input type="hidden" name="user_cd" id="elec_user_cd" /> <label>사용
+								일자:</label> <input type="date" name="elec_time" required /> <label
+								for="elec_cd">전기 타입 선택:</label> <select id="elec_cd"
+								name="elec_cd" required>
+								<option value="">-- 타입 선택 --</option>
+								<c:forEach var="elec" items="${elecList}">
+									<option value="${elec.elec_cd}">${elec.type}</option>
+								</c:forEach>
+							</select> <label for="elec_usage">전기 사용량 (kWh):</label> <input type="number"
+								id="elec_usage" name="elec_usage" step="0.01" min="0" required />
+		
+							<button type="submit">전기 사용량 등록</button>
+							<button type="button" onclick="hideAddForm()">취소</button>
+						</form>
+					</div>
+				</div>
+	
+			</div>
+		</div>			
+		<!-- 사용자별 에너지 사용량 관리 영역 end ------------------------ -->
+	
 	</div>
 		
 	<!-- 여긴 높이 보정용 푸터 입니다. -->
