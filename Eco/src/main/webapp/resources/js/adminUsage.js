@@ -50,8 +50,6 @@ function selectEnergyType(type) {
 }
 
 // 사용자 검색 함수
-
-
 function searchUser() {
 	selectedUserCd = null;
 	const keyword = jQuery("#searchKeyword").val();
