@@ -195,7 +195,9 @@ th, td {
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
-
+#usageTable tbody tr.selected, #userTable tbody tr.selected {
+    background-color: #f0f8ff !important; /* 예시: #ADD8E6 (밝은 파란색) */
+}
 </style>
 </head>
 <body>
