@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +35,11 @@ public class AdminController {
 	
 	// admin 페이지로 이동
 	@GetMapping("")
-	public String adminPage(Model model) {
+	public String adminPage(Model model, HttpSession session) {
 		log.info("AdminController - adminPage");
+		// session의 유저 정보 가져오기
+		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
+		model.addAttribute("currentUserInfo", user);
 		// 가스/전기 타입 목록 조회 후 admin 페이지로 전달
 		model.addAttribute("gasList", service.getAllGasTypes());
 	    model.addAttribute("elecList", service.getAllElecTypes());
