@@ -52,7 +52,7 @@ public class AdminController {
 	public List<UserVO> searchUser(@RequestParam String keyword) {
 		log.info("AdminController - searchUser");
 		List<UserVO> result = adminService.searchUsers(keyword);
-		log.info("result:" + result);
+		/* log.info("result:" + result); */
 		return result;
 	}
 
@@ -68,7 +68,7 @@ public class AdminController {
 	@GetMapping("/user/{userCd}/gas-usage")
 	@ResponseBody
 	public List<GasUsageVO> getGasUsage(@PathVariable int userCd) {
-		log.info("AdminController - getGasUsage");
+		log.info("getGasUsage");
 		return adminService.getGasUsageByUser(userCd);
 	}
 
@@ -76,7 +76,7 @@ public class AdminController {
 	@PostMapping("/gas/insert")
 	@ResponseBody
 	public boolean insertGasUsage(@RequestBody GasUsageVO vo) {
-		log.info("AdminController - insertGasUsage");
+		log.info("insertGasUsage");
 		if (vo.getGas_time() != null) {
 		        // Date → Timestamp 변환 (직접 변환해도 됨)
 		        Timestamp timestamp = new Timestamp(vo.getGas_time().getTime());
@@ -90,12 +90,12 @@ public class AdminController {
 	@PostMapping("/elec/insert")
 	@ResponseBody
 	public boolean insertElecUsage(@RequestBody ElecUsageVO vo) {
-		log.info("AdminController - insertElecUsage");
+		log.info("insertElecUsage");
 		if (vo.getElec_time() != null) {
 	        // Date → Timestamp 변환 (직접 변환해도 됨)
 	        Timestamp timestamp = new Timestamp(vo.getElec_time().getTime());
 	        vo.setElec_time(timestamp);
-	        log.info("Timestamp : " + timestamp);
+	        //log.info("Timestamp : " + timestamp);
 		}
 		return adminService.insertElec(vo); // user_cd, gas_usage, gas_time 등이 포함됨
 	}
@@ -104,8 +104,8 @@ public class AdminController {
 	@PostMapping("/elec/update")
 	@ResponseBody
 	public Map<String, Object> updateElec(@RequestBody ElecUsageVO vo) {
-		log.info("AdminController - updateElec");
-		log.info(vo);
+		log.info("updateElec");
+		//log.info(vo);
 		boolean result = adminService.updateElec(vo);
 		return Map.of("success", result);
 	}
@@ -114,7 +114,7 @@ public class AdminController {
 	@PostMapping("/elec/delete")
 	@ResponseBody
 	public Map<String, Object> deleteElec(@RequestBody ElecUsageVO vo) {
-		log.info("AdminController - deleteElec");
+		log.info("deleteElec");
 		boolean result = adminService.deleteElec(vo.getUsage_cd());
 		return Map.of("success", result);
 	}
@@ -123,7 +123,7 @@ public class AdminController {
 	@PostMapping("/gas/update")
 	@ResponseBody
 	public Map<String, Object> updateGas(@RequestBody GasUsageVO vo) {
-		log.info("AdminController - updateGas");
+		log.info("updateGas");
 		boolean result = adminService.updateGas(vo);
 		return Map.of("success", result);
 	}
@@ -132,7 +132,7 @@ public class AdminController {
 	@PostMapping("/gas/delete")
 	@ResponseBody
 	public Map<String, Object> deleteGas(@RequestBody GasUsageVO vo) {
-		log.info("AdminController - deleteGas");
+		log.info("deleteGas");
 		boolean result = adminService.deleteGas(vo.getUsage_cd());
 		return Map.of("success", result);
 	}
