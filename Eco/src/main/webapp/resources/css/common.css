@@ -80,6 +80,7 @@ button {
 /* 로그인/회원가입 버튼 */
 .header-container {
 	width: 30%;
+	min-width: 260px;
 	display: flex;
 	justify-content: flex-end;
 	flex-direction: column;
