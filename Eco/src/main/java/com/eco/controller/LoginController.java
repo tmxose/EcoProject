@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,14 +63,15 @@ public class LoginController {
 
 	// 로그인 버튼 클릭시 실행
 	@PostMapping("")
-	public String loginPost(UserVO user, HttpSession session) {
+	public String loginPost(UserVO user, HttpSession session, Model model) {
 		UserVO rtnUser = service.login(user);
 		if (rtnUser != null) {
 			// 로그인 성공 처리
 			session.setAttribute("currentUserInfo", rtnUser);
 			return "redirect: /";
-		} else {
+		} else { 
 			// 로그인 실패 처리
+	        model.addAttribute("errorMessage", "아이디 및 비밀번호가 틀립니다.");
 			return "login";
 		}
 	}
