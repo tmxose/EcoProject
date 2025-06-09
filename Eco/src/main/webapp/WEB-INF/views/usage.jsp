@@ -241,6 +241,8 @@
 	            ]
 	        },
 	        options: {
+	        	responsiv: true,
+	        	maintainAspectRatio: false,
 	            scales: {
 	                y: {
 	                    beginAtZero: true
