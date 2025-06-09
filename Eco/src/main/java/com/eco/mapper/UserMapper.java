@@ -18,4 +18,7 @@ public interface UserMapper {
 	
 	// 회원 탈퇴
 	public void userDelete(@Param("user_cd") int user_cd);
+	
+	// 간편요금조회에서 사용자 검색
+	public UserVO findByUserCdUserNm(@Param("user_cd") int user_cd, @Param("user_nm") String user_nm);
 }

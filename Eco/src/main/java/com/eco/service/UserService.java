@@ -18,5 +18,8 @@ public interface UserService {
 	// 회원 탈퇴
 	public void userDelete(int user_cd);
 	
+	// 간편 요금 조회에서 사용자 검색
+	public UserVO findByUserCdUserNm(int user_cd, String user_nm);
+	
 }
 	
