@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,25 +23,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.eco.domain.UserVO;
 import com.eco.service.UserService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/login")
 public class LoginController {
-
-	private UserService service;
+	
+	//@Value 사용을위해 @AllArgsConstructor 주석 처리후 @RequiredArgsConstructor 생성
+	// service객체에는 final 할당
+	
+	// 사용자 서비스
+	private final UserService service;
+	
 	// Google OAuth2 Info
-	private final String CLIENT_ID = "851862848030-5533gqa556ubk6f09hqicorf10jnvsk3.apps.googleusercontent.com";
-	private final String CLIENT_SECRET = "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";
-	private final String REDIRECT_URI = "http://localhost:8080/login/oauth2callback";
+	@Value("${google.client.id}")
+	private String GOOGLE_CLIENT_ID;
+	@Value("${google.client.secret}")
+	private String GOOGLE_CLIENT_SECRET;
+	@Value("${google.redirect.uri}")
+	private String GOOGLE_REDIRECT_URI;
+
 	// Naver OAuth2 Info
-    private final String NAVER_CLIENT_ID = "6WfWa8u2QHh5FValpecg";
-    private final String NAVER_CLIENT_SECRET = "460jNBxXnU";
-    private final String NAVER_REDIRECT_URI = "http://localhost:8080/login/oauth2/callback/naver";
-	 	 
+    @Value("${naver.client.id}")
+    private String NAVER_CLIENT_ID; 
+    @Value("${naver.client.secret}")
+    private String NAVER_CLIENT_SECRET;
+    @Value("${naver.redirect.uri}")
+    private String NAVER_REDIRECT_URI; 
+    
+    @GetMapping("/test")
+    public void test() {
+        log.info("clientId = " + NAVER_CLIENT_ID);
+        log.info("clientSecret = " + NAVER_CLIENT_SECRET);
+        log.info("redirectUri = " + NAVER_REDIRECT_URI);
+    }
+    
     // 로그인 페이지 진입
 	@GetMapping("")
 	public String loginPage() {
@@ -67,7 +87,7 @@ public class LoginController {
 	public void googleLogin(HttpServletResponse response) throws IOException {
 		String oauthUrl = "https://accounts.google.com/o/oauth2/v2/auth" + "?scope=email%20profile"
 				+ "&access_type=offline" + "&include_granted_scopes=true" + "&response_type=code" + "&client_id="
-				+ CLIENT_ID + "&redirect_uri=" + REDIRECT_URI + "&prompt=select_account";
+				+ GOOGLE_CLIENT_ID + "&redirect_uri=" + GOOGLE_REDIRECT_URI + "&prompt=select_account";
 		response.sendRedirect(oauthUrl);
 	}
 
@@ -81,8 +101,8 @@ public class LoginController {
 		conn.setRequestMethod("POST");
 		conn.setDoOutput(true);
 
-		String data = "code=" + code + "&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&redirect_uri="
-				+ REDIRECT_URI + "&grant_type=authorization_code";
+		String data = "code=" + code + "&client_id=" + GOOGLE_CLIENT_ID + "&client_secret=" + GOOGLE_CLIENT_SECRET + "&redirect_uri="
+				+ GOOGLE_REDIRECT_URI + "&grant_type=authorization_code";
 
 		OutputStream os = conn.getOutputStream();
 		os.write(data.getBytes());
