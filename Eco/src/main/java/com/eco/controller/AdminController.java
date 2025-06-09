@@ -75,27 +75,28 @@ public class AdminController {
 	// 가스 사용량 등록
 	@PostMapping("/gas/insert")
 	@ResponseBody
-	public boolean insertGasUsage(@RequestBody GasUsageVO vo) {
+	public Map<String, Object> insertGasUsage(@RequestBody GasUsageVO vo) {
 		// Date ( YYYY-MM-DD )형식 포맷을위한 Timestamp 사용
 		if (vo.getGas_time() != null) {
 	        Timestamp timestamp = new Timestamp(vo.getGas_time().getTime());
 	        vo.setGas_time(timestamp);
 		}
-		// boolean true/false 반환
-	    return adminService.insertGas(vo);  
+		
+		boolean result = adminService.insertGas(vo);
+		return Map.of("success", result);
 	}
 
 	// 전기 사용량 등록
 	@PostMapping("/elec/insert")
 	@ResponseBody
-	public boolean insertElecUsage(@RequestBody ElecUsageVO vo) {
+	public Map<String, Object> insertElecUsage(@RequestBody ElecUsageVO vo) {
 		// Date ( YYYY-MM-DD )형식 포맷을위한 Timestamp 사용
 		if (vo.getElec_time() != null) {
 	        Timestamp timestamp = new Timestamp(vo.getElec_time().getTime());
 	        vo.setElec_time(timestamp);
-		}
-		// boolean true/false 반환
-		return adminService.insertElec(vo); 
+		} 
+		boolean result = adminService.insertElec(vo);
+		return Map.of("success", result);
 	}
 
 	// 전기 수정
