@@ -24,7 +24,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE user_id = #{user_id} and user_type = #{user_type};
 		]]>
 	</select>
-	
+	<!-- 간편요금조회에서 사용자 검색 -->
+	<select id="findByUserCdUserNm" resultType="com.eco.domain.UserVO">
+		<![CDATA[
+		SELECT * from t_user WHERE user_cd = #{user_cd} AND user_nm = #{user_nm}
+		]]>
+	</select>
 	
 	<!-- INSERT -->
 	<insert id="userInsert">

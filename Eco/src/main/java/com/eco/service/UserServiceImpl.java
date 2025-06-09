@@ -51,4 +51,10 @@ public class UserServiceImpl implements UserService {
 	public void userDelete(int user_cd) {
 		mapper.userDelete(user_cd);
 	}
+
+	// 간편 요금 조회에서 사용자 검색
+	@Override
+	public UserVO findByUserCdUserNm(int user_cd, String user_nm) {
+		return mapper.findByUserCdUserNm(user_cd, user_nm);
+	}
 }
