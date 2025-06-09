@@ -144,6 +144,12 @@
 				<div class="table-box">
 					<table>
 						<caption class="text-bold">가스 사용 상세 내역</caption>
+						<colgroup>
+							<col width="25%">
+							<col width="25%">
+							<col width="25%">
+							<col width="25%">
+						</colgroup>
 						<tr>
 							<th>용도</th>
 							<th>표준원가</th>
@@ -170,6 +176,12 @@
 					</table>
 					<table>
 						<caption class="text-bold">전기 사용 상세 내역</caption>
+						<colgroup>
+							<col width="25%">
+							<col width="25%">
+							<col width="25%">
+							<col width="25%">
+						</colgroup>
 						<tr>
 							<th>타입</th>
 							<th>표준원가</th>

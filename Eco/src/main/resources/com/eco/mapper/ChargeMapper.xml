@@ -37,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_gas g ON gu.gas_cd = g.gas_cd
 		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
 		AND YEAR(gas_time) = YEAR(CURDATE()) AND MONTH(gas_time) = MONTH(CURDATE())
+		ORDER BY gas_time
 		]]>
 	</select>
 	<!-- 당월 전기 상세 내역 -->
@@ -48,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_elec e ON eu.elec_cd = e.elec_cd
 		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
 		AND YEAR(elec_time) = YEAR(CURDATE()) AND MONTH(elec_time) = MONTH(CURDATE())
+		ORDER BY elec_time
 		]]>
 	</select>
 	
@@ -59,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_gas_usage gu ON u.user_cd = gu.user_cd
 		JOIN t_gas g ON gu.gas_cd = g.gas_cd
 		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
-		AND gas_time BETWEEN #{start_date} and #{end_date}
+		AND gas_time BETWEEN #{start_date} and #{end_date} ORDER BY gas_time
 		]]>
 	</select>
 	<!-- 지정한 기간의 전기 상세 내역 -->
@@ -70,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_elec_usage eu ON u.user_cd = eu.user_cd
 		JOIN t_elec e ON eu.elec_cd = e.elec_cd
 		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_id = #{user_id})
-		AND elec_time BETWEEN #{start_date} and #{end_date}
+		AND elec_time BETWEEN #{start_date} and #{end_date} ORDER BY elec_time
 		]]>
 	</select>
 	
@@ -85,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         JOIN t_elec e ON eu.elec_cd = e.elec_cd
 		WHERE u.use_yn = 'Y' AND user_id=#{user_id}
 		GROUP BY month, year
-		ORDER BY month
+		ORDER BY year, month
 		]]>
 	</select>
 	
