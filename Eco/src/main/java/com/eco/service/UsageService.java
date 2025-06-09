@@ -28,10 +28,10 @@ public interface UsageService {
 	// 사용자의 월별 사용량 합계
 	public List<UserTypeChargeDTO> usageMonth(String userId);
 	
-	// 사용자의 가스 사용량 등록
-	public void insertGasUsage(GasUsageVO gasUsage);
-	// 사용자의 전기 사용량 등록
-	public void insertElecUsage(ElecUsageVO elecUsage);
+//	// 사용자의 가스 사용량 등록
+//	public void insertGasUsage(GasUsageVO gasUsage);
+//	// 사용자의 전기 사용량 등록
+//	public void insertElecUsage(ElecUsageVO elecUsage);
 	// 가스 타입 조회
 	public List<GasVO> getAllGasTypes(); 
 	// 전기 타입 조회
