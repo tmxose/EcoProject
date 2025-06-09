@@ -215,7 +215,7 @@
 	<footer></footer>
 	
 	<script>
-		let jData = JSON.parse('<c:out value="${json}" escapeXml="false"/>');
+		let jData = JSON.parse('${json}');
 		
 		let monthList = new Array();
 		let gasMonthList = new Array();
