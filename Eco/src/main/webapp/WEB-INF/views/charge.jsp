@@ -145,6 +145,13 @@
 				<div class="table-box">
 					<table>
 						<caption class="text-bold">가스 요금 상세 내역</caption>
+						<colgroup>
+							<col width="20%">
+							<col width="20%">
+							<col width="20%">
+							<col width="20%">
+							<col width="20%">
+						</colgroup>
 						<tr>
 							<th>용도</th>
 							<th>표준원가</th>
@@ -157,9 +164,9 @@
 								<c:forEach var="item" items="${gasUse}">
 						            <tr>
 						                <td>${item.usageType}</td>
-						                <td>${item.unitCharge}</td>
+						                <td><fmt:formatNumber value="${item.unitCharge}" type="currency" /></td>
 						                <td>${item.gas_usage}</td>
-						                <td>${item.gas_usage * item.unitCharge}</td>
+						                <td><fmt:formatNumber value="${item.gas_usage * item.unitCharge}" type="currency" /></td>
 						                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${ item.gas_time }"/></td>
 						            </tr>
 						        </c:forEach>
@@ -173,6 +180,13 @@
 					</table>
 					<table>
 						<caption class="text-bold">전기 요금 상세 내역</caption>
+						<colgroup>
+							<col width="20%">
+							<col width="20%">
+							<col width="20%">
+							<col width="20%">
+							<col width="20%">
+						</colgroup>
 						<tr>
 							<th>용도</th>
 							<th>표준원가</th>
@@ -185,9 +199,9 @@
 								<c:forEach var="item" items="${elecUse}">
 						            <tr>
 						                <td>${item.usageType}</td>
-						                <td>${item.unitCharge}</td>
+						                <td><fmt:formatNumber value="${item.unitCharge}" type="currency" /></td>
 						                <td>${item.elec_usage}</td>
-						                <td>${item.elec_usage * item.unitCharge}</td>
+						                <td><fmt:formatNumber value="${item.elec_usage * item.unitCharge}" type="currency" /></td>
 						                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${ item.elec_time }"/></td>
 						            </tr>
 						        </c:forEach>

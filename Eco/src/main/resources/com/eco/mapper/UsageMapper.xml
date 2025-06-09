@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN t_elec_usage eu ON u.user_cd = eu.user_cd AND MONTH(gu.gas_time) = MONTH(eu.elec_time)
 		WHERE u.use_yn = 'Y' AND user_id=#{user_id}
 		GROUP BY month, year
-		ORDER BY month
+		ORDER BY  year, month
 		]]>
 	</select>
 	
