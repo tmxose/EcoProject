@@ -41,7 +41,6 @@ public class UsageContoller {
 	// 이번 달 나의 에너지 사용량 가져오기
 	@GetMapping("")
 	public String usageSelect(Model model, HttpSession session) {
-		log.info("이번 달 나의 사용량 가져오기");
 		// session의 유저 정보 가져오기
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
 		model.addAttribute("userId", user.getUser_id());
@@ -118,7 +117,6 @@ public class UsageContoller {
 	public String usageSelectPeriod(Model model, HttpSession session,
 			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
 			@RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
-		log.info("이번 달 나의 사용량 가져오기");
 		// session의 유저 정보 가져오기
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
 		String userID = user.getUser_id();
