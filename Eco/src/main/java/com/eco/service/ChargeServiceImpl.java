@@ -50,5 +50,15 @@ public class ChargeServiceImpl implements ChargeService{
 	public List<UserTypeChargeDTO> chargeMonth(String userId) {
 		return mapper.getChargeMonthAmount(userId);
 		}
+	
+	// 간편 요금 조회
+	@Override
+	public UserTypeChargeDTO simpleGasCharge(int userCd, LocalDate startDate, LocalDate endDate) {
+		return mapper.simpleGasCharge(userCd, startDate, endDate);
+	}
+	@Override
+	public UserTypeChargeDTO simpleElecCharge(int userCd, LocalDate startDate, LocalDate endDate) {
+		return mapper.simpleElecCharge(userCd, startDate, endDate);
+	}
 
 }
