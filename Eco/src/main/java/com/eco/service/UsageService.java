@@ -12,7 +12,7 @@ public interface UsageService {
 	public UserTypeChargeDTO readGasusage(String userId);
 	public UserTypeChargeDTO readElecusage(String userId);
 	
-	// 당월 에너지 사용 상세 내역
+	// 디폴트값 에너지 사용 상세 내역
 	public List<UserTypeChargeDTO> gasUsageDetail(String userId);
 	public List<UserTypeChargeDTO> elecUsageDetail(String userId);
 	
