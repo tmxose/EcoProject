@@ -36,12 +36,12 @@
 				return false;
 			}
 			
-			let maxDiff = 90 * 24 * 60 * 60 * 1000;
+			let maxDiff = 24 * 30 * 24 * 60 * 60 * 1000;
 			let start = new Date(startDay);
 			let end = new Date(endDay);
 		    let diff = end - start;
 			if(diff > maxDiff) {
-				alert("최대 3개월 사용량만 조회 가능합니다.");
+				alert("최대 24개월 사용량만 조회 가능합니다.");
 				return false;
 			}
 			if(startDay && endDay && startDay > endDay) {
