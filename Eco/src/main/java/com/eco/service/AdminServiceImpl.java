@@ -24,7 +24,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<UserVO> searchUsers(String user_nm) {
 		try {
-			return mapper.selectUers(user_nm);
+			return mapper.selectUsers(user_nm);
 		} catch (Exception e) {
 			throw new ServiceException("사용자 검색 실패", e);
 		}

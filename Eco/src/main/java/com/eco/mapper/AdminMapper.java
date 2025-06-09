@@ -10,7 +10,7 @@ import com.eco.domain.UserVO;
 
 public interface AdminMapper {
 
-	public List<UserVO> selectUers(@Param("user_nm") String user_nm);
+	public List<UserVO> selectUsers(@Param("user_nm") String user_nm);
 
 	public List<ElecUsageVO> selectElecUsageByUser(@Param("user_cd") int user_cd);
 
