@@ -71,48 +71,67 @@ public class UsageContoller {
 		}
 		
 		
-		//월별 사용량 합계 그래프 자료
-//		List<UserTypeChargeDTO> gasMonth = service.getGasUsageMonth(user.getUser_id());
-//		List<UserTypeChargeDTO> elecMonth = service.getElecUsageMonth(user.getUser_id());
-//		Gson gson = new Gson();
-//		
-//		Map<String, UserTypeChargeDTO> monthMap = new HashMap<>();
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-//
-//		for (UserTypeChargeDTO dto : gasMonth) {
-//		    String yearMonth = dto.getYear() + "-" + String.format("%02d", dto.getMonth());
-//		    monthMap.computeIfAbsent(yearMonth, k -> new UserTypeChargeDTO(dto.getYear(), dto.getMonth()))
-//            .setGasUsageAmount(dto.getGasUsageAmount());
-//		}
-//		for (UserTypeChargeDTO dto : elecMonth) {
-//		    String yearMonth = dto.getYear() + "-" + String.format("%02d", dto.getMonth());
-//		    monthMap.computeIfAbsent(yearMonth, k -> new UserTypeChargeDTO(dto.getYear(), dto.getMonth()))
-//            .setElecUsageAmount(dto.getElecUsageAmount());
-//		}
-//		
-//		JsonArray jArray = new JsonArray();
-//		YearMonth current = YearMonth.now();
-//
-//		for(int i=11; i>=0 ;i--) {
-//			YearMonth ym = current.minusMonths(i);
-//		    String key = ym.format(formatter);
-//		    
-//		    UserTypeChargeDTO monthDTO = monthMap.getOrDefault(key, new UserTypeChargeDTO(ym.getYear(), ym.getMonthValue()));
-//		    JsonObject object = new JsonObject();
-//		    object.addProperty("user_month", key);
-//			
-//			if(monthDTO != null) {
-//				object.addProperty("gasUsageMonth", (int) monthDTO.getGasUsageAmount());
-//				object.addProperty("elecUsageMonth", (int) monthDTO.getElecUsageAmount());
-//			} else {
-//				object.addProperty("gasUsageMonth", 0);
-//				object.addProperty("elecUsageMonth", 0);
-//			}
-//			
-//			jArray.add(object);
-//		}
-//		String json = gson.toJson(jArray);
-//		model.addAttribute("json",json);
+		// 월별 사용량 합계 그래프 자료
+		List<UserTypeChargeDTO> gasMonth = service.getGasUsageMonth(user.getUser_id());
+		List<UserTypeChargeDTO> elecMonth = service.getElecUsageMonth(user.getUser_id());
+		Gson gson = new Gson();
+		
+		Map<String, UserTypeChargeDTO> monthMap = new HashMap<>();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+		YearMonth current = YearMonth.now();
+		
+		// 12개월 미리 초기화
+		for(int i=11; i>=0; i--) {
+			YearMonth ym = current.minusMonths(i);
+			String key = ym.format(formatter);
+			
+			UserTypeChargeDTO dto = new UserTypeChargeDTO();
+			dto.setYear(ym.getYear());
+			dto.setMonth(ym.getMonthValue());
+			dto.setGasUsageAmount(0);
+			dto.setElecUsageAmount(0);
+			
+			monthMap.put(key, dto);
+		}
+		
+		// 사용량 덮어쓰기
+		for (UserTypeChargeDTO dto : gasMonth) {
+			String yearMonth = dto.getYear() + "-" + String.format("%02d", dto.getMonth());
+		    UserTypeChargeDTO target = monthMap.get(yearMonth);
+		    if(target != null) {
+		    	target.setGasUsageAmount(dto.getGasUsageAmount());
+		    }
+		}
+		for (UserTypeChargeDTO dto : elecMonth) {
+		    String yearMonth = dto.getYear() + "-" + String.format("%02d", dto.getMonth());
+		    UserTypeChargeDTO target = monthMap.get(yearMonth);
+		    if(target != null) {
+		    	target.setElecUsageAmount(dto.getElecUsageAmount());
+		    }
+		}
+		
+		JsonArray jArray = new JsonArray();
+
+		for(int i=11; i>=0 ;i--) {
+			YearMonth ym = current.minusMonths(i);
+		    String key = ym.format(formatter);
+		    
+		    UserTypeChargeDTO monthDTO = monthMap.get(key);
+		    JsonObject object = new JsonObject();
+		    object.addProperty("user_month", key);
+			
+			if(monthDTO != null) {
+				object.addProperty("gasUsageMonth", (int) monthDTO.getGasUsageAmount());
+				object.addProperty("elecUsageMonth", (int) monthDTO.getElecUsageAmount());
+			} else {
+				object.addProperty("gasUsageMonth", 0);
+				object.addProperty("elecUsageMonth", 0);
+			}
+			
+			jArray.add(object);
+		}
+		String json = gson.toJson(jArray);
+		model.addAttribute("json",json);
 
 		return "usage";
 	}
@@ -161,38 +180,66 @@ public class UsageContoller {
 		
 		
 		//월별 사용량 합계 그래프 자료
-//		List<UserTypeChargeDTO> usageMonth = service.usageMonth(user.getUser_id());
-//		Gson gson = new Gson();
-//		JsonArray jArray = new JsonArray();
-//		Map<String, UserTypeChargeDTO> monthMap = new HashMap<>();
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-//
-//		for (UserTypeChargeDTO dto : usageMonth) {
-//		    String yearMonth = dto.getYear() + "-" + String.format("%02d", dto.getMonth());
-//		    monthMap.put(yearMonth, dto);
-//		}
-//
-//		YearMonth current = YearMonth.now();
-//		for(int i=11; i>=0 ;i--) {
-//			YearMonth ym = current.minusMonths(i);
-//		    String key = ym.format(formatter);
-//		    
-//		    UserTypeChargeDTO monthDTO = monthMap.get(key);
-//		    JsonObject object = new JsonObject();
-//		    object.addProperty("user_month", key);
-//			
-//			if(monthDTO != null) {
-//				object.addProperty("gasUsageMonth", (int) monthDTO.getGasUsageAmount());
-//				object.addProperty("elecUsageMonth", (int) monthDTO.getElecUsageAmount());
-//			} else {
-//				object.addProperty("gasUsageMonth", 0);
-//				object.addProperty("elecUsageMonth", 0);
-//			}
-//			
-//			jArray.add(object);
-//		}
-//		String json = gson.toJson(jArray);
-//		model.addAttribute("json",json);
+		List<UserTypeChargeDTO> gasMonth = service.getGasUsageMonth(user.getUser_id());
+		List<UserTypeChargeDTO> elecMonth = service.getElecUsageMonth(user.getUser_id());
+		Gson gson = new Gson();
+		
+		Map<String, UserTypeChargeDTO> monthMap = new HashMap<>();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+		YearMonth current = YearMonth.now();
+		
+		// 12개월 미리 초기화
+		for(int i=11; i>=0; i--) {
+			YearMonth ym = current.minusMonths(i);
+			String key = ym.format(formatter);
+			
+			UserTypeChargeDTO dto = new UserTypeChargeDTO();
+			dto.setYear(ym.getYear());
+			dto.setMonth(ym.getMonthValue());
+			dto.setGasUsageAmount(0);
+			dto.setElecUsageAmount(0);
+			
+			monthMap.put(key, dto);
+		}
+		
+		// 사용량 덮어쓰기
+		for (UserTypeChargeDTO dto : gasMonth) {
+			String yearMonth = dto.getYear() + "-" + String.format("%02d", dto.getMonth());
+		    UserTypeChargeDTO target = monthMap.get(yearMonth);
+		    if(target != null) {
+		    	target.setGasUsageAmount(dto.getGasUsageAmount());
+		    }
+		}
+		for (UserTypeChargeDTO dto : elecMonth) {
+		    String yearMonth = dto.getYear() + "-" + String.format("%02d", dto.getMonth());
+		    UserTypeChargeDTO target = monthMap.get(yearMonth);
+		    if(target != null) {
+		    	target.setElecUsageAmount(dto.getElecUsageAmount());
+		    }
+		}
+		
+		JsonArray jArray = new JsonArray();
+
+		for(int i=11; i>=0 ;i--) {
+			YearMonth ym = current.minusMonths(i);
+		    String key = ym.format(formatter);
+		    
+		    UserTypeChargeDTO monthDTO = monthMap.get(key);
+		    JsonObject object = new JsonObject();
+		    object.addProperty("user_month", key);
+			
+			if(monthDTO != null) {
+				object.addProperty("gasUsageMonth", (int) monthDTO.getGasUsageAmount());
+				object.addProperty("elecUsageMonth", (int) monthDTO.getElecUsageAmount());
+			} else {
+				object.addProperty("gasUsageMonth", 0);
+				object.addProperty("elecUsageMonth", 0);
+			}
+			
+			jArray.add(object);
+		}
+		String json = gson.toJson(jArray);
+		model.addAttribute("json",json);
 
 		return "usage";
 	}
