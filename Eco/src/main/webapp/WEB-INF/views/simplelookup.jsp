@@ -195,7 +195,7 @@
 	        </div>
 	    </div>
 	</div>
-	
+	<footer></footer>
 	<c:if test="${not empty msg}">
 	    <script>
 	        alert('${msg}');
