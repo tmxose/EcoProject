@@ -51,7 +51,7 @@
 }
 
 /* 데이터 테이블 설정 */
-.title{width: 100%; font-weight: bold; font-size: 20px;margin-top: 50px;}
+.title{width: 100%; font-weight: bold; font-size: 20px; margin-top: 50px;}
 table{border-collapse: collapse; margin: 20px 0; width:90%}
 th{border-bottom: 3px solid #82cd2b; border-collapse: collapse; padding: 15px;}
 td{text-align: center; padding: 10px 0;}
@@ -84,6 +84,7 @@ tr:nth-child(even){background-color: #edffd8;}
 }
 
 /* 조회 기간 설정 */
+.form-title{width: 100%; font-weight: bold; font-size: 20px;}
 .form-box{
 	display: flex;
 	justify-content: flex-start;
@@ -94,15 +95,30 @@ tr:nth-child(even){background-color: #edffd8;}
 	gap: 10px;
 }
 
+.form-box-2{
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	margin: 10px 0;
+}
+
 .inner-form-box{
 	display: flex;
 	justify-content: flex-start;
 	width: 100%;
 	align-content: center;
-	text-align: left;
 	gap: 10px;
 }
 
+.inner-form-box-2{
+	display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-content: center;
+    gap: 10px;
+    height: 38px;
+    align-items: center;
+}
 
 .table-box-2 {
 	display: flex;

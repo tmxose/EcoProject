@@ -155,6 +155,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
+	
+	<!-- 간편요금조회 -->
+	<select id="simpleGasCharge" resultType="com.eco.domain.UserTypeChargeDTO">
+      <![CDATA[
+		SELECT u.user_cd AS userCd, SUM(gu.gas_usage) AS gasUsageAmount, SUM(gu.gas_usage * g.charge) AS totalCharge
+		FROM t_user u
+		JOIN t_gas_usage gu ON u.user_cd = gu.user_cd
+		JOIN t_gas g ON gu.gas_cd = g.gas_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_cd = #{user_cd})
+		AND gas_time BETWEEN #{start_date} and #{end_date}
+		GROUP by u.user_cd
+		]]>
+	</select>
+	<select id="simpleElecCharge" resultType="com.eco.domain.UserTypeChargeDTO">
+      <![CDATA[
+		SELECT u.user_cd AS userCd, SUM(eu.elec_usage) AS elecUsageAmount, SUM(eu.elec_usage * e.charge) AS totalCharge
+		FROM t_user u
+		JOIN t_elec_usage eu ON u.user_cd = eu.user_cd
+		JOIN t_elec e ON eu.elec_cd = e.elec_cd
+		WHERE u.use_yn = 'Y' AND u.user_cd=(select user_cd from t_user where user_cd = #{user_cd}) 
+		AND elec_time BETWEEN #{start_date} and #{end_date}
+		GROUP BY u.user_cd
+		]]>
+	</select>
+	
 	<!-- INSERT -->
 	<!-- UPDATE -->
 	<!-- DELETE -->

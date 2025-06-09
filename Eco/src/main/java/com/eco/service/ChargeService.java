@@ -1,7 +1,9 @@
 package com.eco.service;
 
 import java.time.LocalDate;
-import java.util.List; 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.eco.domain.UserTypeChargeDTO;
 
@@ -21,4 +23,9 @@ public interface ChargeService {
 
 	// 사용자의 월별 사용량 합계
 	public List<UserTypeChargeDTO> chargeMonth(String userId);
+	
+	// 간편 요금 조회
+	public UserTypeChargeDTO simpleGasCharge(@Param("user_cd") int userCd, LocalDate startDate, LocalDate endDate);
+	public UserTypeChargeDTO simpleElecCharge(@Param("user_cd") int userCd, LocalDate startDate, LocalDate endDate);
+
 }

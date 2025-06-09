@@ -18,22 +18,6 @@
 <title>Eco</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/common.css?after">
 <link rel="stylesheet" type="text/css" href="/resources/css/usage.css?after">
-<style>
-.input-area-2 {
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	background-color: white;
-	box-sizing: border-box;
-	width: 40%;
-	font-size: 14px;
-}
-.form-group-2 {
-	display: flex;
-	justify-content: space-between;
-	gap: 5px;
-}
-</style>
 <script>
     function validateForm() {
     	const userNumber = document.querySelector('input[name="user_num"]');
@@ -42,26 +26,18 @@
 		const userNm = userNmInput.value.trim();
         
 		if (userNum === "" || userNum === null) {
-            alert("아이디를 입력해주세요.");
+            alert("납입자 번호를 입력해주세요.");
             userNumber.focus();
             return false; // Prevent form submission
-
+		}
         if (userNm === "" || userNm === null) {
-            alert("비밀번호를 입력해주세요.");
+            alert("성함을 입력해주세요.");
             userNmInput.focus();
             return false;
         }
             
         let startDay = document.getElementById("startDate").value;
 		let endDay = document.getElementById("endDate").value;
-		if(!startDay){
-			alert("시작일을 지정하여 주세요")
-			return false;
-		}
-		if(!endDay){
-			alert("종료일을 지정하여 주세요")
-			return false;
-		}
 		
 		let maxDiff = 90 * 24 * 60 * 60 * 1000;
 		let start = new Date(startDay);
@@ -121,27 +97,101 @@
 		</div>
 	    <div class="inner-container">
 	    	<div class="data-box">
-	    		<div class="title">간편 요금 조회</div>
+	    		<div class="form-title">간편 요금 조회</div>
 		    	<div class="table-box">
-			        <form action="#" method="post" onsubmit="return validateForm()" class="form-box">
-			        	<div>
+			        <form action="/simplelookup" method="post" onsubmit="return validateForm()" class="form-box-2">
+		        		<div class="form-group">
 			                <label for="user_num">납입자 번호</label>
-			                <input  class="input-area" type="text" name="user_num" id="user_num" autocomplete="off">
-	
+			                <input  class="input-area" type="password" name="user_num" id="user_num" value="${ empty param.user_num ? '' : param.user_num }" autocomplete="off">
+			            </div>
+						
+						<div class="form-group">
 			                <label for="user_nm">이름</label>
-			                <input class="input-area" type="text" name="user_nm" id="user_nm" autocomplete="off">
-	
+			                <input class="input-area" type="text" name="user_nm" id="user_nm" value="${ empty param.user_nm ? '' : param.user_nm }" autocomplete="off">
+			            </div>
+
+						<div class="form-group">
 			                <label for="user_local">조회 기간</label>
-			                <div class="inner-form-box">
-				                <input type="date" name="startDate" id="startDate" autocomplete="off" pattern="yyyy-MM-dd">
+			                <div class="inner-form-box-2">
+				                <input class="input-area" type="date" name="startDate" id="startDate" autocomplete="off" value="${not empty param.startDate ? param.startDate : firstDayStr}" pattern="yyyy-MM-dd">
 				                <p>~</p>
-				                <input type="date" name="endDate" id="endDate" autocomplete="off" pattern="yyyy-MM-dd">
+				                <input class="input-area" type="date" name="endDate" id="endDate" autocomplete="off" value="${not empty param.endDate ? param.endDate : lastDayStr}" pattern="yyyy-MM-dd">
 			                </div>
 			                <div>* 최대 3개월 분의 자료만 조회가 가능합니다.</div>
-				            <input class="input-submit-area" type="submit" value="조회하기">
 			            </div>
+			            <input class="input-submit-area" type="submit" value="조회하기">
 			        </form>
 		        </div>
+		        
+		        
+		        <div class="title">지정 기간 요금</div>
+				<div class="table-box">
+					<table>
+						<colgroup>
+							<col width="50%">
+							<col width="50%">
+						</colgroup>
+						<tr>
+							<th>도시가스 사용량</th>
+							<th>전기 사용량</th>
+						</tr>
+						<tr>
+							<td>
+								<c:choose>
+							        <c:when test="${not empty gasCharge}">
+							            ${gasCharge.gasUsageAmount} ㎥
+							        </c:when>
+							        <c:otherwise>
+							            ${gasChargeMsg}
+							        </c:otherwise>
+							    </c:choose>
+							</td>
+							<td>
+								<c:choose>
+							        <c:when test="${not empty elecCharge}">
+							            ${elecCharge.elecUsageAmount} kWh
+							        </c:when>
+							        <c:otherwise>
+							            ${elecChargeMsg}
+							        </c:otherwise>
+							    </c:choose>
+							</td>
+						</tr>
+					</table>
+					
+					<table>
+						<colgroup>
+							<col width="50%">
+							<col width="50%">
+						</colgroup>
+						<tr>
+							<th>도시가스 요금</th>
+							<th>전기 요금</th>
+						</tr>
+						<tr>
+							<td>
+								<c:choose>
+							        <c:when test="${not empty gasCharge}">
+							            <fmt:formatNumber value="${gasCharge.totalCharge}" type="currency" />
+							        </c:when>
+							        <c:otherwise>
+							            ${gasChargeMsg}
+							        </c:otherwise>
+							    </c:choose>
+							</td>
+							<td>
+								<c:choose>
+							        <c:when test="${not empty elecCharge}">
+							        	<fmt:formatNumber value="${elecCharge.totalCharge}" type="currency" />
+							        </c:when>
+							        <c:otherwise>
+							            ${elecChargeMsg}
+							        </c:otherwise>
+							    </c:choose>
+							</td>
+						</tr>
+					</table>
+				</div>
 	        </div>
 	    </div>
 	</div>

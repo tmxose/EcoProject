@@ -22,5 +22,9 @@ public interface ChargeMapper {
 	
 	// 사용자의 월별 사용량 합계
 	public List<UserTypeChargeDTO> getChargeMonthAmount(@Param("user_id") String userId);
+	
+	// 간편 요금 조회
+	public UserTypeChargeDTO simpleGasCharge(@Param("user_cd") int userCd, @Param("start_date") LocalDate startDate, @Param("end_date") LocalDate endDate);
+	public UserTypeChargeDTO simpleElecCharge(@Param("user_cd") int userCd,  @Param("start_date") LocalDate startDate, @Param("end_date") LocalDate endDate);
 		
 }
