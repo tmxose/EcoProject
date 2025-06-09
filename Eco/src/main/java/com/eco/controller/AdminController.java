@@ -30,13 +30,14 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
+	// 관리자 서비스
 	private AdminService adminService;
-	private UsageService service; // 또는 final + 생성자 주입
+	// 사용량 서비스
+	private UsageService service; 
 	
 	// admin 페이지로 이동
 	@GetMapping("")
 	public String adminPage(Model model, HttpSession session) {
-		log.info("AdminController - adminPage");
 		// session의 유저 정보 가져오기
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
 		model.addAttribute("currentUserInfo", user);
@@ -50,9 +51,8 @@ public class AdminController {
 	@GetMapping("/search-users")
 	@ResponseBody
 	public List<UserVO> searchUser(@RequestParam String keyword) {
-		log.info("AdminController - searchUser");
+		// 사용자 이름 기반으로 검색하여 결과를 List로 반환
 		List<UserVO> result = adminService.searchUsers(keyword);
-		/* log.info("result:" + result); */
 		return result;
 	}
 
@@ -60,7 +60,7 @@ public class AdminController {
 	@GetMapping("/user/{userCd}/elec-usage")
 	@ResponseBody
 	public List<ElecUsageVO> getElecUsage(@PathVariable int userCd) {
-		log.info("AdminController - getElecUsage");
+		// 사용자 cd값 기준 전기 사용량 전체 조회
 		return adminService.getElecUsageByUser(userCd);
 	}
 
@@ -68,7 +68,7 @@ public class AdminController {
 	@GetMapping("/user/{userCd}/gas-usage")
 	@ResponseBody
 	public List<GasUsageVO> getGasUsage(@PathVariable int userCd) {
-		log.info("getGasUsage");
+		// 사용자 cd값 기준 가스 사용량 전체 조회
 		return adminService.getGasUsageByUser(userCd);
 	}
 
@@ -76,37 +76,34 @@ public class AdminController {
 	@PostMapping("/gas/insert")
 	@ResponseBody
 	public boolean insertGasUsage(@RequestBody GasUsageVO vo) {
-		log.info("insertGasUsage");
+		// Date ( YYYY-MM-DD )형식 포맷을위한 Timestamp 사용
 		if (vo.getGas_time() != null) {
-		        // Date → Timestamp 변환 (직접 변환해도 됨)
-		        Timestamp timestamp = new Timestamp(vo.getGas_time().getTime());
-		        vo.setGas_time(timestamp);
-		        log.info("Timestamp : " + timestamp);
+	        Timestamp timestamp = new Timestamp(vo.getGas_time().getTime());
+	        vo.setGas_time(timestamp);
 		}
-	    return adminService.insertGas(vo);  // boolean true/false 반환
+		// boolean true/false 반환
+	    return adminService.insertGas(vo);  
 	}
 
 	// 전기 사용량 등록
 	@PostMapping("/elec/insert")
 	@ResponseBody
 	public boolean insertElecUsage(@RequestBody ElecUsageVO vo) {
-		log.info("insertElecUsage");
+		// Date ( YYYY-MM-DD )형식 포맷을위한 Timestamp 사용
 		if (vo.getElec_time() != null) {
-	        // Date → Timestamp 변환 (직접 변환해도 됨)
 	        Timestamp timestamp = new Timestamp(vo.getElec_time().getTime());
 	        vo.setElec_time(timestamp);
-	        //log.info("Timestamp : " + timestamp);
 		}
-		return adminService.insertElec(vo); // user_cd, gas_usage, gas_time 등이 포함됨
+		// boolean true/false 반환
+		return adminService.insertElec(vo); 
 	}
 
 	// 전기 수정
 	@PostMapping("/elec/update")
 	@ResponseBody
 	public Map<String, Object> updateElec(@RequestBody ElecUsageVO vo) {
-		log.info("updateElec");
-		//log.info(vo);
 		boolean result = adminService.updateElec(vo);
+		// 서비스 결과에 따라 "success" 키와 함께 boolean 값을 JSON 응답으로 반환
 		return Map.of("success", result);
 	}
 
@@ -114,8 +111,8 @@ public class AdminController {
 	@PostMapping("/elec/delete")
 	@ResponseBody
 	public Map<String, Object> deleteElec(@RequestBody ElecUsageVO vo) {
-		log.info("deleteElec");
 		boolean result = adminService.deleteElec(vo.getUsage_cd());
+		// 서비스 결과에 따라 "success" 키와 함께 boolean 값을 JSON 응답으로 반환
 		return Map.of("success", result);
 	}
 
@@ -123,8 +120,8 @@ public class AdminController {
 	@PostMapping("/gas/update")
 	@ResponseBody
 	public Map<String, Object> updateGas(@RequestBody GasUsageVO vo) {
-		log.info("updateGas");
 		boolean result = adminService.updateGas(vo);
+		// 서비스 결과에 따라 "success" 키와 함께 boolean 값을 JSON 응답으로 반환
 		return Map.of("success", result);
 	}
 
@@ -132,8 +129,8 @@ public class AdminController {
 	@PostMapping("/gas/delete")
 	@ResponseBody
 	public Map<String, Object> deleteGas(@RequestBody GasUsageVO vo) {
-		log.info("deleteGas");
 		boolean result = adminService.deleteGas(vo.getUsage_cd());
+		// 서비스 결과에 따라 "success" 키와 함께 boolean 값을 JSON 응답으로 반환
 		return Map.of("success", result);
 	}
 	

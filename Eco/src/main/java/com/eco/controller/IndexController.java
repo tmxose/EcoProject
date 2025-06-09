@@ -25,8 +25,6 @@ public class IndexController {
 	
 	@GetMapping("/")
 	public String Index(Model model) {
-		log.info("index 페이지 진입");
-		
 		// 지역별 가장 최근 달의 에너지 사용량 합계
 		List<UserTypeChargeDTO> usageAmount = usageService.usageAmount();
 		Gson gson = new Gson();
@@ -38,9 +36,6 @@ public class IndexController {
 			String user_local = amountDTO.getUser_local();
 			int gasUsageAmount = (int) amountDTO.getGasUsageAmount();
 			int elecUsageAmount = (int) amountDTO.getElecUsageAmount();
-//			log.info(user_local);
-//			log.info(gasUsageAmount);
-//			log.info(elecUsageAmount);
 			
 			object.addProperty("user_local", user_local);
 			object.addProperty("gasUsageAmount", gasUsageAmount);

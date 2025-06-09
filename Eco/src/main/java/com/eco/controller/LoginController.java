@@ -40,29 +40,23 @@ public class LoginController {
     private final String NAVER_CLIENT_ID = "6WfWa8u2QHh5FValpecg";
     private final String NAVER_CLIENT_SECRET = "460jNBxXnU";
     private final String NAVER_REDIRECT_URI = "http://localhost:8080/login/oauth2/callback/naver";
-
-	// @Value("${google.client.id}")
-	// private String CLIENT_ID;
-	// @Value("${google.client.secret}")
-	// private String CLIENT_SECRET;
-	// @Value("${google.redirect.uri}")
-	// private String REDIRECT_URI;
-
+	 	 
+    // 로그인 페이지 진입
 	@GetMapping("")
-	public void loginPage() {
-		log.info("login Page");
+	public String loginPage() {
+		return "login";
 	}
 
+	// 로그인 버튼 클릭시 실행
 	@PostMapping("")
 	public String loginPost(UserVO user, HttpSession session) {
 		UserVO rtnUser = service.login(user);
 		if (rtnUser != null) {
-			// 로그인 처리
+			// 로그인 성공 처리
 			session.setAttribute("currentUserInfo", rtnUser);
-			log.info("web login");
 			return "redirect: /";
 		} else {
-			// 재로그인 처리
+			// 로그인 실패 처리
 			return "login";
 		}
 	}
@@ -131,12 +125,10 @@ public class LoginController {
 			user.setUser_type("G");
 			user.setUser_local("서울");
 			service.signup(user);
-			log.info("Google Signup");
 		}
 
 		// 2-4. 로그인 처리
 		session.setAttribute("currentUserInfo", user);
-		log.info("Google Login");
 		return "redirect: /"; // 로그인 후 이동할 페이지 설정
 	}
 	// # 구글 로그인 End --------------------------------------------------------
@@ -215,12 +207,10 @@ public class LoginController {
             user.setUser_type("N");
 			user.setUser_local("서울");
             service.signup(user);
-            log.info("Naver Signup");
         }
 
         // 4. 세션에 로그인 정보 저장
         session.setAttribute("currentUserInfo", user);
-        log.info("Naver Login");
         return "redirect:/"; // 로그인 후 이동할 페이지
     }
 	// # Naver Login End ---------------------------------------------------
