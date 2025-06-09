@@ -53,14 +53,7 @@ public class LoginController {
     private String NAVER_CLIENT_SECRET;
     @Value("${naver.redirect.uri}")
     private String NAVER_REDIRECT_URI; 
-    
-    @GetMapping("/test")
-    public void test() {
-        log.info("clientId = " + NAVER_CLIENT_ID);
-        log.info("clientSecret = " + NAVER_CLIENT_SECRET);
-        log.info("redirectUri = " + NAVER_REDIRECT_URI);
-    }
-    
+        
     // 로그인 페이지 진입
 	@GetMapping("")
 	public String loginPage() {
