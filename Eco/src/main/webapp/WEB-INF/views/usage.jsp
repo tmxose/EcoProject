@@ -5,7 +5,7 @@
 <%
     // 오늘 날짜 생성
     java.time.LocalDate today = java.time.LocalDate.now();
-	java.time.LocalDate firstDay = today.withDayOfMonth(1);
+	java.time.LocalDate firstDay = today.minusMonths(3).withDayOfMonth(1);
 	java.time.LocalDate lastDay = today.withDayOfMonth(today.lengthOfMonth());
 
 	request.setAttribute("firstDayStr", firstDay.toString());
@@ -253,7 +253,7 @@
 	            ]
 	        },
 	        options: {
-	        	responsiv: true,
+	        	responsive: true,
 	        	maintainAspectRatio: false,
 	            scales: {
 	                y: {
