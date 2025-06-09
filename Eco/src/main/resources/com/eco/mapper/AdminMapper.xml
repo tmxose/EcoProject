@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.eco.mapper.AdminMapper">
 	<!-- SELECT -->
 	<!-- 사용자 이름으로 사용자 조회 -->
-	<select id="selectUers" resultType="com.eco.domain.UserVO">
+	<select id="selectUsers" resultType="com.eco.domain.UserVO">
 		<![CDATA[
 		SELECT * FROM t_user
 		WHERE user_nm = #{user_nm} AND use_yn = 'Y'
