@@ -21,15 +21,13 @@ public class SignupController {
 	
 	// 회원가입 페이지로 이동
 	@GetMapping("/signup")
-	public void signupPage() {
-		log.info("signup page");
-		
+	public String signupPage() {
+		return "signup";
 	}
 	
 	// 회원가입 DB INSERT
 	@PostMapping("/signup")
 	public String signupPost(UserVO user) {
-		log.info("signup Post");
 		user.setUser_type("B");
 		service.signup(user);
 		return "login";
@@ -39,11 +37,8 @@ public class SignupController {
 	@GetMapping("/check-id")
 	@ResponseBody
 	public String checkUserId(@RequestParam("user_id") String userId) {
-	    log.info("아이디 중복 확인 요청: " + userId);
-	    
 	    // 일반회원(user_type = "B") 기준으로만 중복 확인
 	    UserVO user = service.findByUserId(userId, "B");
-
 	    return (user != null) ? "duplicate" : "available";
 	}
 
