@@ -196,7 +196,7 @@ th, td {
     z-index: 999;
 }
 #usageTable tbody tr.selected, #userTable tbody tr.selected {
-    background-color: #f0f8ff !important; /* 예시: #ADD8E6 (밝은 파란색) */
+    background-color: #f0f8ff !important; 
 }
 </style>
 </head>
@@ -218,7 +218,7 @@ th, td {
 					</div>
 					<!-- 아래쪽 버튼 -->
 					<div class="header-inner-container">
-						<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
+						<button class="green-btn-2" onclick='location.href="/mypage"'>회원정보수정</button>
 						<button class="green-btn-2"
 							onclick='location.href="/login/logout"'>로그아웃</button>
 					</div>

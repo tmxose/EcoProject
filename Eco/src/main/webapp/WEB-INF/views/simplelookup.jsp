@@ -73,7 +73,7 @@
 					<!-- 아래쪽 버튼 -->
 					<div class="header-inner-container">
 						<c:if test="${not empty sessionScope.currentUserInfo}">
-							<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
+							<button class="green-btn-2" onclick='location.href="/mypage"'>회원정보수정</button>
 							<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
 						</c:if>
 						<c:choose>

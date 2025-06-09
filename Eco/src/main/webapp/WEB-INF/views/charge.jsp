@@ -68,7 +68,7 @@
 					</div>
 					<!-- 아래쪽 버튼 -->
 					<div class="header-inner-container">
-						<button class="green-btn-2" onclick='location.href="/mypage"'>마이페이지</button>
+						<button class="green-btn-2" onclick='location.href="/mypage"'>회원정보수정</button>
 						<button class="green-btn-2" onclick='location.href="/login/logout"'>로그아웃</button>
 						<c:if test="${IsAdmin.toString() eq 'Y'}">
 							<button class="green-btn-2" onclick="location.href='/admin'">관리자 기능</button>
