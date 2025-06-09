@@ -1,13 +1,11 @@
 package com.eco.service;
 
-import java.time.LocalDate;
+import java.time.LocalDate; 
 import java.util.List; 
 
 import org.springframework.stereotype.Service;
 
-import com.eco.domain.ElecUsageVO;
 import com.eco.domain.ElecVO;
-import com.eco.domain.GasUsageVO;
 import com.eco.domain.GasVO;
 import com.eco.domain.UserTypeChargeDTO;
 import com.eco.exception.ServiceException;
@@ -74,7 +72,7 @@ public class UsageServiceImpl implements UsageService{
 		}
 	}
 	
-	// 
+	// 지역별 가장 최근 달의 에너지 사용량 합계 조회
 	@Override
 	public List<UserTypeChargeDTO> usageAmount(){
 		try {
@@ -94,29 +92,22 @@ public class UsageServiceImpl implements UsageService{
 		}
 	}
 	
-	// 사용자의 가스 사용량 등록
-//	@Override
-//	public void insertGasUsage(GasUsageVO gasUsage) {
-//		try {
-//			mapper.insertGasUsage(gasUsage);
-//		} catch(Exception e) {
-//			throw new ServiceException("사용자의 월별 가스 사용량 등록 실패", e);
-//		}
-//	}
-//	
-//	// 사용자의 전기 사용량 등록
-//	@Override
-//	public void insertElecUsage(ElecUsageVO elecUsage) {
-//		mapper.insertElecUsage(elecUsage);
-//	}
-	
+	// 에너지 별 타입 조회
 	@Override
 	public List<GasVO> getAllGasTypes() {
-		return mapper.getAllGasTypes();
+		try {
+			return mapper.getAllGasTypes();
+		} catch(Exception e) {
+			throw new ServiceException("가스 타입 조회 실패", e);
+		}
 	}
 	@Override
 	public List<ElecVO> getAllElecTypes() {
-		return mapper.getAllElecTypes();
+		try {
+			return mapper.getAllElecTypes();
+		} catch(Exception e) {
+			throw new ServiceException("전기 타입 조회 실패", e);
+		}
 	}
 	
 }

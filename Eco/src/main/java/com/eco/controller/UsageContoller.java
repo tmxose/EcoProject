@@ -1,6 +1,6 @@
 package com.eco.controller;
 
-import java.time.LocalDate;
+import java.time.LocalDate; 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -13,13 +13,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.eco.domain.ElecUsageVO;
-import com.eco.domain.GasUsageVO;
 import com.eco.domain.UserTypeChargeDTO;
 import com.eco.domain.UserVO;
 import com.eco.service.UsageService;
@@ -192,38 +188,12 @@ public class UsageContoller {
 		return "usage";
 	}
 
-	// 사용자의 가스 사용량 등록
-//	@PostMapping("/gas/insert")
-//	public String insertGasUsage(GasUsageVO gasUsage, HttpSession session, RedirectAttributes redirectAttributes) {
-//		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
-//		gasUsage.setUser_cd(user.getUser_cd());
-//		service.insertGasUsage(gasUsage);
-//		log.info("가스 사용량 INSERT");
-//		
-//		// alert용 메시지 전달 (FlashAttribute는 1회성 메시지)
-//	    redirectAttributes.addFlashAttribute("msg", "가스 사용량이 저장되었습니다.");		
-//		return "redirect:/usage/insert-form";
-//	}
-//	// 사용자의 전기 사용량 등록
-//	@PostMapping("/elec/insert")
-//	public String insertElecUsage(ElecUsageVO elecUsage, HttpSession session, RedirectAttributes redirectAttributes) {
-//		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
-//		elecUsage.setUser_cd(user.getUser_cd());
-//		service.insertElecUsage(elecUsage);
-//		log.info("전기 사용량 INSERT");
-//		redirectAttributes.addFlashAttribute("msg", "전기 사용량이 저장되었습니다.");	
-//		return "redirect:/usage/insert-form";
-//		//return "<script>alert('저장되었습니다.'); location.href='/insert-form';</script>";
-//	}
-
-	// 가스/전기 타입 한글명 조회후 model 로 usageForm페이지로 넘겨주기
+	//가스/전기 타입 한글명 조회후 model 로 usageForm페이지로 넘겨주기
 	@GetMapping("/insert-form")
 	public String insertForm(Model model) {
 		model.addAttribute("gasList", service.getAllGasTypes());
 		model.addAttribute("elecList", service.getAllElecTypes());
 		return "usageForm"; 
 	}
-
-	// 사용량 수정/삭제
 
 }

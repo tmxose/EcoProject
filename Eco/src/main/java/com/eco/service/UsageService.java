@@ -1,11 +1,9 @@
 package com.eco.service;
 
-import java.time.LocalDate;
+import java.time.LocalDate; 
 import java.util.List;
 
-import com.eco.domain.ElecUsageVO;
 import com.eco.domain.ElecVO;
-import com.eco.domain.GasUsageVO;
 import com.eco.domain.GasVO;
 import com.eco.domain.UserTypeChargeDTO;
 
@@ -28,10 +26,6 @@ public interface UsageService {
 	// 사용자의 월별 사용량 합계
 	public List<UserTypeChargeDTO> usageMonth(String userId);
 	
-//	// 사용자의 가스 사용량 등록
-//	public void insertGasUsage(GasUsageVO gasUsage);
-//	// 사용자의 전기 사용량 등록
-//	public void insertElecUsage(ElecUsageVO elecUsage);
 	// 가스 타입 조회
 	public List<GasVO> getAllGasTypes(); 
 	// 전기 타입 조회
