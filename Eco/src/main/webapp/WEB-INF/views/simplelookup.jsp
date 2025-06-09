@@ -92,6 +92,7 @@
 			</div>
 			<div class="green-line"></div>
 			<div class="main-container">
+				<button class="green-btn" onclick="goToMyUsagePage()">내 사용량 조회</button>
 				<button class="green-btn" onclick='location.href="/"'>메인페이지</button> 
 			</div>
 		</div>
@@ -201,5 +202,16 @@
 	        alert('${msg}');
 	    </script>
 	</c:if>
+	<script>
+		const isLoggedIn = ${not empty sessionScope.currentUserInfo};
+		function goToMyUsagePage() {
+			if (isLoggedIn) {
+				location.href = '/usage'; // 실제 내 정보 보기 페이지로 변경
+			} else {
+				alert('로그인이 필요합니다.');
+				location.href = '/login';
+			}
+		}
+	</script>
 </body>
 </html>
