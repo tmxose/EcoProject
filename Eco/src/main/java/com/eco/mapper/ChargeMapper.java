@@ -12,7 +12,7 @@ public interface ChargeMapper {
 	public UserTypeChargeDTO getGasCharge(@Param("user_id") String userId);
 	public UserTypeChargeDTO getElecCharge(@Param("user_id") String userId);
 	
-	// 당월 에너지 사용 상세 내역
+	// 디폴트값 에너지 사용 상세 내역
 	public List<UserTypeChargeDTO> getGasChargeDetail(@Param("user_id") String userId);
 	public List<UserTypeChargeDTO> getElecChargeDetail(@Param("user_id") String userId);
 	

@@ -13,7 +13,7 @@ public interface ChargeService {
 	// 이번 달 전기요금
 	public UserTypeChargeDTO readElecCharge(String userId);
 	
-	// 당월 에너지 사용 상세 내역
+	// 디폴트값 에너지 사용 상세 내역
 	public List<UserTypeChargeDTO> gasChargeDetail(String userId);
 	public List<UserTypeChargeDTO> elecChargeDetail(String userId);
 	

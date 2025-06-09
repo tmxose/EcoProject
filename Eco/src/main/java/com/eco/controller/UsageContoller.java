@@ -56,13 +56,13 @@ public class UsageContoller {
 			model.addAttribute("elecUsageMsg", "이번 달 전기 사용량이 없습니다.");
 		}
 
-		// 가스 상세 내역
+		// 디폴트값 가스 상세 내역
 		List<UserTypeChargeDTO> gasUse = service.gasUsageDetail(user.getUser_id());
 		model.addAttribute("gasUse", gasUse);
-		// 전기 상세 내역
+		// 디폴트값 전기 상세 내역
 		List<UserTypeChargeDTO> elecUse = service.elecUsageDetail(user.getUser_id());
 		model.addAttribute("elecUse", elecUse);
-		// 이번 달 사용량이 0일 때 처리
+		// 사용량이 0일 때 처리
 		if (gasUse.isEmpty()) {
 			model.addAttribute("gasUsageDetailMsg", "이번 달 가스 사용량이 없습니다.");
 		}

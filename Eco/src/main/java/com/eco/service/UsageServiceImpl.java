@@ -36,7 +36,7 @@ public class UsageServiceImpl implements UsageService{
 		}
 	}
 	
-	// 당월 에너지 사용 상세 내역
+	// 디폴트값 에너지 사용 상세 내역
 	@Override
 	public List<UserTypeChargeDTO> gasUsageDetail(String userId) {
 		try {
