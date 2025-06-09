@@ -24,7 +24,6 @@ public class MypageController {
 	//회원 정보 수정 페이지 이동
 	@GetMapping("/mypage")
 	public String myPage(Model model, HttpSession session) {
-		log.info("회원 정보 수정 페이지 이동");
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
 		model.addAttribute("userId", user.getUser_id());
 		model.addAttribute("userPw", user.getUser_pw());
@@ -38,15 +37,13 @@ public class MypageController {
 	//회원 정보 수정
 	@PostMapping("/mypageUpdate")
 	public String userUpdate(UserVO user, HttpSession session, RedirectAttributes redirectAttributes) {
-		log.info("회원 정보 수정");
 		service.userModify(user);
 		
-		// 수정된 최신 사용자 정보를 다시 조회
+		// 수정된 최신 사용자 정보를 다시 조회, 세션에 최신 정보 반영
 	    UserVO updatedUser = service.findByUserCD(user.getUser_cd());
-	    // 세션에 최신 정보 반영
 	    session.setAttribute("currentUserInfo", updatedUser);
 	    
-		// alert용 메시지 전달 (FlashAttribute는 1회성 메시지)
+		// alert용 메시지 전달
 	    redirectAttributes.addFlashAttribute("msg", "회원정보가 수정 되었습니다.");		
 		return "redirect:/";
 	}
@@ -54,7 +51,6 @@ public class MypageController {
 	//회원 탈퇴
 	@PostMapping("/mypageDelete")
 	public String userDelete(HttpSession session, RedirectAttributes redirectAttributes) {
-		log.info("회원탈퇴");
 		UserVO user = (UserVO) session.getAttribute("currentUserInfo");
 		service.userDelete(user.getUser_cd());
 		

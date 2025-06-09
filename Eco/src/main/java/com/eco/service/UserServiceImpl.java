@@ -26,10 +26,6 @@ public class UserServiceImpl implements UserService {
 		return mapper.getUserSelect(user);
 	}
 
-	// �α��� �Լ��� ������
-
-	// mapper �Լ��� ����ؿ�
-
 	// �Ҽ� �α��� �Լ�
 	@Override
 	public UserVO findByUserId(String user_id, String user_type) {

@@ -39,19 +39,20 @@ public class SimpleLookUpController {
 			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, 
 			@RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate, RedirectAttributes redirectAttributes) {
 		
+		// DB에서 사용자 조회
 		UserVO user = userService.findByUserCdUserNm(userCd, userNm);
 		if (user == null) {
 			redirectAttributes.addFlashAttribute("msg", "입력한 정보와 일치하는 사용자가 없습니다.");		
 			return "redirect:/simplelookup";
 	    }
 		
-		// 이번 달 에너지 사용 요금 합계
+		// 에너지 사용 요금 합계
 		UserTypeChargeDTO gasCharge = chargeService.simpleGasCharge(userCd, startDate, endDate);
 		UserTypeChargeDTO elecCharge = chargeService.simpleElecCharge(userCd, startDate, endDate);
 		model.addAttribute("gasCharge", gasCharge);
 		model.addAttribute("elecCharge", elecCharge);
 		
-		// 이번 달 사용량이 0일 때 처리
+		// 사용량이 0일 때 처리
 		if(gasCharge == null) {
 			model.addAttribute("gasChargeMsg", "해당 기간 가스 사용량이 없습니다.");
 		}
