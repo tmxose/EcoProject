@@ -118,7 +118,7 @@
 				                <p>~</p>
 				                <input class="input-area" type="date" name="endDate" id="endDate" autocomplete="off" value="${not empty param.endDate ? param.endDate : lastDayStr}" pattern="yyyy-MM-dd">
 			                </div>
-			                <div>* 최대 3개월 분의 자료만 조회가 가능합니다.</div>
+			                <div>* 최대 24개월 분의 자료만 조회가 가능합니다.</div>
 			            </div>
 			            <input class="input-submit-area" type="submit" value="조회하기">
 			        </form>

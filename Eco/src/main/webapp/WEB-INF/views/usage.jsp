@@ -139,7 +139,7 @@
 						 ~ <input type="date" name="endDate" id="endDate" value="${not empty param.endDate ? param.endDate : lastDayStr}" pattern="yyyy-MM-dd">
 						<input type="submit" class="green-btn-2" value="조회">
 					</div>
-					<div>* 최대 3개월 분의 자료만 조회가 가능합니다.</div>
+					<div>* 최대 24개월 분의 자료만 조회가 가능합니다.</div>
 				</form>				
 				<div class="table-box">
 					<table>
