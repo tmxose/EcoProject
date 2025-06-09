@@ -85,7 +85,11 @@ function searchUser() {
 					    tbody.append(rowHtml);
 				});
 			}
-		}
+		},
+	    error: function(xhr, status, error) {
+	        alert("서버 오류 발생: " + xhr.status + " " + xhr.statusText);
+	        console.error("서버 오류 내용:", xhr.responseText);
+	    }
 	});
 }
 
