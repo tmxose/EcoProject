@@ -24,7 +24,8 @@ public interface UsageService {
 	public List<UserTypeChargeDTO> usageAmount();
 	
 	// 사용자의 월별 사용량 합계
-	public List<UserTypeChargeDTO> usageMonth(String userId);
+	public List<UserTypeChargeDTO> getGasUsageMonth(String userId);
+	public List<UserTypeChargeDTO> getElecUsageMonth(String userId);
 	
 	// 가스 타입 조회
 	public List<GasVO> getAllGasTypes(); 

@@ -84,11 +84,19 @@ public class UsageServiceImpl implements UsageService{
 	
 	// 사용자의 월별 사용량 합계
 	@Override
-	public List<UserTypeChargeDTO> usageMonth(String userId) {
+	public List<UserTypeChargeDTO> getGasUsageMonth(String userId) {
 		try {
-			return mapper.getUsageMonthAmount(userId);
+			return mapper.getGasUsageMonth(userId);
 		} catch(Exception e) {
-			throw new ServiceException("사용자의 월별 사용량 합계 조회 실패", e);
+			throw new ServiceException("사용자의 월별 가스 사용량 합계 조회 실패", e);
+		}
+	}
+	@Override
+	public List<UserTypeChargeDTO> getElecUsageMonth(String userId) {
+		try {
+			return mapper.getElecUsageMonth(userId);
+		} catch(Exception e) {
+			throw new ServiceException("사용자의 월별 전기 사용량 합계 조회 실패", e);
 		}
 	}
 	

@@ -34,4 +34,23 @@ public class UserTypeChargeDTO {
     private float gasCharge;
     private float elecCharge;
     
+    
+//    
+//    public UserTypeChargeDTO(int year, int month) {
+//        this.year = year;
+//        this.month = month;
+//        this.gasUsageAmount = 0;
+//        this.elecUsageAmount = 0;
+//    }
+//
+//    // Setter chaining 용
+//    public UserTypeChargeDTO setGasUsageAmount(float amount) {
+//        this.gasUsageAmount = amount;
+//        return this;
+//    }
+//    public UserTypeChargeDTO setElecUsageAmount(float amount) {
+//        this.elecUsageAmount = amount;
+//        return this;
+//    }
+    
 }

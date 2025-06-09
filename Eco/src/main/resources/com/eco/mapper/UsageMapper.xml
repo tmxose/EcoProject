@@ -84,15 +84,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 사용자의 월별 사용량 합계 -->
-	<select id="getUsageMonthAmount" resultType="com.eco.domain.UserTypeChargeDTO">
+	<select id="getGasUsageMonth" resultType="com.eco.domain.UserTypeChargeDTO">
 		<![CDATA[
-		SELECT MONTH(gu.gas_time) AS month, YEAR(gu.gas_time) AS year, round(sum(gu.gas_usage)) AS gasUsageAmount, round(sum(eu.elec_usage)) AS elecUsageAmount
+		SELECT MONTH(gu.gas_time) AS month, YEAR(gu.gas_time) AS year, SUM(gu.gas_usage) AS gasUsageAmount
 		FROM t_user u
 		JOIN t_gas_usage gu ON u.user_cd = gu.user_cd
-		JOIN t_elec_usage eu ON u.user_cd = eu.user_cd AND MONTH(gu.gas_time) = MONTH(eu.elec_time)
+		JOIN t_gas g ON gu.gas_cd = g.gas_cd
 		WHERE u.use_yn = 'Y' AND user_id=#{user_id}
 		GROUP BY month, year
-		ORDER BY  year, month
+		ORDER BY year, month
+		]]>
+	</select>
+	<select id="getElecUsageMonth" resultType="com.eco.domain.UserTypeChargeDTO">
+		<![CDATA[
+		SELECT MONTH(eu.elec_time) AS month, YEAR(eu.elec_time) AS year, SUM(eu.elec_usage) AS elecUsageAmount
+		FROM t_user u
+		JOIN t_elec_usage eu ON u.user_cd = eu.user_cd
+		JOIN t_elec e ON eu.elec_cd = e.elec_cd
+		WHERE u.use_yn = 'Y' AND user_id=#{user_id}
+		GROUP BY month, year
+		ORDER BY year, month
 		]]>
 	</select>
 	
