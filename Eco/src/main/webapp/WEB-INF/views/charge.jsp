@@ -133,10 +133,13 @@
 				</div>
 				<div class="title">냉/난방 요금 이력</div>
 				<form method="get" action="/charge/period" onsubmit="return validateDates(this)" class="form-box">
-					<span>기간 : </span>
-					<input type="date" name="startDate" id="startDate" value="${not empty param.startDate ? param.startDate : firstDayStr}" pattern="yyyy-MM-dd">
-					 ~ <input type="date" name="endDate" id="endDate" value="${not empty param.endDate ? param.endDate : lastDayStr}" pattern="yyyy-MM-dd">
-					<input type="submit" class="green-btn-2" value="조회">
+					<div class="inner-form-box">
+						<span>기간 : </span>
+						<input type="date" name="startDate" id="startDate" value="${not empty param.startDate ? param.startDate : firstDayStr}" pattern="yyyy-MM-dd">
+						 ~ <input type="date" name="endDate" id="endDate" value="${not empty param.endDate ? param.endDate : lastDayStr}" pattern="yyyy-MM-dd">
+						<input type="submit" class="green-btn-2" value="조회">
+					</div>
+					<div>* 최대 3개월 분의 자료만 조회가 가능합니다.</div>
 				</form>
 				<div class="table-box">
 					<table>
