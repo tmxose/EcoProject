@@ -160,6 +160,7 @@ public class LoginController {
             user.setUse_yn('Y');
             user.setUser_type("N");
 			user.setUser_local("서울");
+			user.setUser_email(email);
             service.signup(user);
         }
 
