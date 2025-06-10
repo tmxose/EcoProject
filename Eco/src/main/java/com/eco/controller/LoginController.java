@@ -3,7 +3,6 @@ package com.eco.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eco.domain.UserVO;
+import com.eco.service.OAuthService;
 import com.eco.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -38,15 +38,8 @@ public class LoginController {
 	
 	// 사용자 서비스
 	private final UserService service;
-	
-	// Google OAuth2 Info
-	@Value("${google.client.id}")
-	private String GOOGLE_CLIENT_ID;
-	@Value("${google.client.secret}")
-	private String GOOGLE_CLIENT_SECRET;
-	@Value("${google.redirect.uri}")
-	private String GOOGLE_REDIRECT_URI;
-
+	private final OAuthService oAuthService;
+	 
 	// Naver OAuth2 Info
     @Value("${naver.client.id}")
     private String NAVER_CLIENT_ID; 
@@ -80,70 +73,16 @@ public class LoginController {
 	// 1. 사용자 로그인 URL을 반환
 	@GetMapping("/googleLogin")
 	public void googleLogin(HttpServletResponse response) throws IOException {
-		String oauthUrl = "https://accounts.google.com/o/oauth2/v2/auth" + "?scope=email%20profile"
-				+ "&access_type=offline" + "&include_granted_scopes=true" + "&response_type=code" + "&client_id="
-				+ GOOGLE_CLIENT_ID + "&redirect_uri=" + GOOGLE_REDIRECT_URI + "&prompt=select_account";
-		response.sendRedirect(oauthUrl);
+		response.sendRedirect(oAuthService.getGoogleLoginUrl());
 	}
 
 	// 2. 예외 처리
 	@GetMapping("/oauth2callback")
 	public String oauth2Callback(@RequestParam("code") String code, HttpSession session) throws IOException {
-		// 2-1. code 로 access_token 발급
-		String tokenUrl = "https://oauth2.googleapis.com/token";
-		URL url = new URL(tokenUrl);
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("POST");
-		conn.setDoOutput(true);
-
-		String data = "code=" + code + "&client_id=" + GOOGLE_CLIENT_ID + "&client_secret=" + GOOGLE_CLIENT_SECRET + "&redirect_uri="
-				+ GOOGLE_REDIRECT_URI + "&grant_type=authorization_code";
-
-		OutputStream os = conn.getOutputStream();
-		os.write(data.getBytes());
-		os.flush();
-		os.close();
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		StringBuilder sb = new StringBuilder();
-		String line;
-		while ((line = br.readLine()) != null)
-			sb.append(line);
-		br.close();
-
-		JSONObject json = new JSONObject(sb.toString());
-		String accessToken = json.getString("access_token");
-
-		// 2-2. access_token 으로 사용자 정보 조회
-		URL userInfoUrl = new URL("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + accessToken);
-		HttpURLConnection userConn = (HttpURLConnection) userInfoUrl.openConnection();
-		BufferedReader userReader = new BufferedReader(new InputStreamReader(userConn.getInputStream()));
-		StringBuilder userSb = new StringBuilder();
-		String userLine;
-		while ((userLine = userReader.readLine()) != null)
-			userSb.append(userLine);
-		userReader.close();
-
-		JSONObject userInfo = new JSONObject(userSb.toString());
-		String email = userInfo.getString("email");
-		String name = userInfo.getString("name");
-		String type = "G";
-		
-		// 2-3. DB 조회 후 사용자 등록 또는 수정
-		UserVO user = service.findByUserId(email, type);
-		if (user == null) {
-			user = new UserVO();
-			user.setUser_id(email);
-			user.setUser_pw(""); // 마이 페이지 가입자 로그인
-			user.setUser_nm(name);
-			user.setUse_yn('Y');
-			user.setUser_type("G");
-			user.setUser_local("서울");
-			service.signup(user);
-		}
-
-		// 2-4. 로그인 처리
-		session.setAttribute("currentUserInfo", user);
+        UserVO user = oAuthService.processGoogleLogin(code);
+        if (user != null) {
+            session.setAttribute("currentUserInfo", user);
+        }
 		return "redirect: /"; // 로그인 후 이동할 페이지 설정
 	}
 	// # 구글 로그인 End --------------------------------------------------------

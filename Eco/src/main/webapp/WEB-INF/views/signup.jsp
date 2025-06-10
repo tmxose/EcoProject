@@ -46,11 +46,27 @@
 					</div>
 
 					<div class="form-group">
-						<label for="user_local">지역 (선택사항)</label> <input
-							class="input-area" type="text" name="user_local" id="user_local"
+						<label for="user_local">지역 (선택사항)</label> 
+						<input class="input-area" type="text" name="user_local" id="user_local"
 							autocomplete="off">
 					</div>
-
+							
+					<div class="form-group">
+						<label for="user_local">이메일 입력</label> 
+						<div class="id-check-group"> 
+							<input class="input-area" type="email" name="user_email" id="user_email" autocomplete="off">
+							<input type="button" class="input-btn-area" onclick="sendEmailCode()" value="인증코드 보내기"></input>
+						</div>
+					</div>
+					
+					<div class="form-group">	
+						<label for="email_code">인증코드 입력</label> 
+						<div class="id-check-group"> 
+							<input class="input-area" type="text" id="email_code" autocomplete="off">
+							<input type="button" class="input-btn-area" onclick="verifyEmailCode()" value="코드 확인"></input>
+						</div>
+						<div id="email_status"></div>
+					</div>
 					<input class="input-submit-area" type="submit" value="가입하기">
 				</div>
 			</form>
