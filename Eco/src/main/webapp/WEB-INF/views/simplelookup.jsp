@@ -61,7 +61,16 @@
 				<!-- 아이콘 -->
 				<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
 				<!-- 메인화면 글씨 -->
-				<div class="title-container"><h2>비회원 사용 요금 조회</h2></div>
+				<div class="title-container">
+					<c:choose>
+					    <c:when test="${empty sessionScope.currentUserInfo}">
+					        <h2>비회원 사용 요금 조회</h2>
+					    </c:when>
+					    <c:otherwise>
+					    	<h2>간편 요금 조회</h2>
+					    </c:otherwise>
+					</c:choose>
+				</div>
 				<!-- 버튼 내비게이션 -->
 				<div class="header-container">
 					<!-- 위쪽 텍스트 -->
