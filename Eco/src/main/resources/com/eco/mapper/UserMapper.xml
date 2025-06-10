@@ -10,14 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE use_yn = 'Y' AND user_id = #{user_id} and user_pw = #{user_pw} and user_type = "B";
 		]]>
 	</select>
-<!-- 	<select id="getUserCount" resultType="int">
-		<![CDATA[
-		SELECT COUNT(*) FROM t_user
-		WHERE user_id = #{user_id} and user_pw = #{user_pw};
-		]]>
-	</select> -->
-	
-	
+
 	<select id="findByUserId" resultType="com.eco.domain.UserVO">
 		<![CDATA[
 		SELECT * FROM t_user
@@ -31,10 +24,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
+	<!-- 회원가입시 이메일 인증을위한 이메일 중복검사 -->
+	<select id="existsByEmail" resultType="int">
+		<![CDATA[
+		 SELECT COUNT(*) FROM t_user WHERE user_email = #{user_email}
+		]]>
+	</select>
+	
 	<!-- INSERT -->
 	<insert id="userInsert">
 		<![CDATA[
-		INSERT INTO t_user(user_id, user_pw, user_nm, user_type, user_local) VALUES(#{user_id}, #{user_pw}, #{user_nm}, #{user_type}, #{user_local})
+		INSERT INTO t_user(user_id, user_pw, user_nm, user_type, user_local, user_email) VALUES(#{user_id}, #{user_pw}, #{user_nm}, #{user_type}, #{user_local}, #{user_email})
 		]]>
 	</insert>
 	

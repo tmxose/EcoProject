@@ -88,6 +88,7 @@ public class OAuthServiceImpl implements OAuthService {
 				user.setUse_yn('Y');
 				user.setUser_type("G");
 				user.setUser_local("서울");
+				user.setUser_email(email);
 				userService.signup(user);
 			}
 

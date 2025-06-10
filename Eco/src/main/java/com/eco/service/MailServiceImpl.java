@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.eco.exception.ServiceException;
+import com.eco.mapper.UserMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +18,8 @@ public class MailServiceImpl implements MailService {
 
 	private final JavaMailSender mailSender;
 
+	private UserMapper mapper;
+	
 	@Value("${spring.mail.username}") // application.properties 에서 읽어옴
 	private String fromEmail;
 
@@ -34,6 +37,17 @@ public class MailServiceImpl implements MailService {
 	        throw new ServiceException("이메일 전송 중 오류가 발생했습니다.", e);
 		}
 		return code;
+	}
+
+	@Override
+	public boolean existsByEmail(String email) {
+		boolean result = false;
+		try {
+			result =  mapper.existsByEmail(email) > 0;
+		} catch (Exception e) {
+	        throw new ServiceException("이메일 중복 검사중 오류가 발생했습니다.", e);
+		}
+		return result;
 	}
 
 }

@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class EmailAuthController {
 	private MailService mailService;
-
+	
 	@PostMapping(value="/send-code", produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public String sendCode(@RequestParam("email") String email, HttpSession session) {
@@ -23,6 +23,9 @@ public class EmailAuthController {
 			return "잘못된 이메일 주소입니다.";
 		}
 
+	   if (mailService.existsByEmail(email)) {
+	        return "이미 등록된 이메일입니다.";
+	    }
 		try {
 			String code = mailService.sendAuthCode(email);
 			session.setAttribute("authCode", code);
