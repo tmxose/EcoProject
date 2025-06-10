@@ -53,33 +53,9 @@
 	    }
 	    return true;
 	}
-	// 아이디 중복 확인
-	function checkDuplicateId() {
-		 const userId = document.querySelector('input[name="user_id"]').value;
-		    if (!userId) {
-		        alert("아이디를 입력하세요.");
-		        return;
-		    }
-	
-		    fetch("/check-id?user_id=" + encodeURIComponent(userId))
-		        .then(res => res.text())
-		        .then(result => {
-		            if (result === "duplicate") {
-		                alert("이미 사용 중인 아이디입니다.");
-		                isIdChecked = false;
-		            } else {
-		                alert("사용 가능한 아이디입니다!");
-		                isIdChecked = true;
-		            }
-		        })
-		        .catch(err => {
-		            console.error("중복 확인 에러:", err);
-		            isIdChecked = false;
-		        });
-	}
 	// 탈퇴 최종 확인
 	function confirmDelete() {
-        return confirm("정말로 회원을 탈퇴하시겠습니까?\n탈퇴 후에는 계정 복구가 불가능합니다.");
+        return confirm("정말로 회원을 탈퇴하시겠습니까?\n 계정복구는 당사로 문의해주시기 바랍니다.");
     }
 </script>
 </head>
@@ -89,12 +65,12 @@
 	    <h2>회원 정보 수정</h2>
 	    <div class="inner-container">
 	        <form action="mypageUpdate" method="post" class="signup-form" onsubmit="return validateForm()">
-	            <c:set var="isBasicLogin" value="${ loginType == 'b' }" />
+	            <c:set var="isBasicLogin" value="${ userType == 'B' }" />
+	            <input type="hidden" value="${ userType}">
 	            <div class="form-group">
 	                <label for="user_id">아이디</label>
 	                <div class="id-check-group">
-	                    <input class="input-area" type="text" name="user_id" id="user_id" value="${ userId }" autocomplete="off" <c:if test="${!isBasicLogin}">readonly</c:if>>
-	                    <input class="input-btn-area" type="button" value="중복확인" onclick="checkDuplicateId()" <c:if test="${!isBasicLogin}">disabled</c:if>>
+	                    <input class="input-area" type="text" name="user_id" id="user_id" value="${ userId }" autocomplete="off" readonly>
 	                </div>
 	            </div>
 	
