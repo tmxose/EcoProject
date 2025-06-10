@@ -8,9 +8,6 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/common.css?after">
 <script src="/resources/js/signup.js"></script>
-<style>
-	
-</style>
 </head>
 <body>
 	<div class="container">
@@ -32,13 +29,13 @@
 
 				<div class="form-group">
 					<label for="user_pw">비밀번호</label> <input class="input-area"
-						type="password" name="user_pwd" id="user_pwd"
+						type="password" name="user_pw" id="user_pw"
 						autocomplete="new-password" oninput="checkPwd()">
 
 
 					<div class="form-group">
-						<label for="user_pw2">비밀번호 확인</label> <input class="input-area"
-							type="password" name="user_pwd2" id="user_pwd2"
+						<label for="user_pw_ck">비밀번호 확인</label> <input class="input-area"
+							type="password" name="user_pw_ck" id="user_pw_ck"
 							autocomplete="new-password" oninput="checkPwd()">
 						<div class="invalid_feedback"></div>
 					</div>
@@ -63,36 +60,6 @@
 	<footer></footer>
 
 	</div>
-	<script>
-		// 유형성 유무를 저장할 변수를 만들고 초기값 대입
-		let isPwdValid = false;
-
-		function checkPwd() {
-			const pwd = document.querySelector("#user_pwd").value;
-			const pwd2 = document.querySelector("#user_pwd2").value;
-
-			const pwd2Input = document.querySelector("#user_pwd2");
-			pwd2Input.classList.remove("is-valid", "is-invalid");
-			if (pwd !== pwd2 || pwd === "") {
-				pwd2Input.classList.add("is-invalid");
-				isPwdValid = false;
-			} else {
-				pwd2Input.classList.add("is-valid")
-				isPwdValid = true;
-			}
-		}
-
-		document.querySelector("#user_pwd").addEventListener("input", checkPwd);
-		document.querySelector("#user_pwd_ck")
-				.addEventListener("input", checkPwd);
-
-		document.querySelector("#signupForm").addEventListener("submit",
-				function(event) {
-					if (!isPwdValid) {
-						event.preventDefault();
-						alert("비밀번호가 일치하지 않습니다.");
-					}
-				});
-	</script>
+	
 </body>
 </html>
