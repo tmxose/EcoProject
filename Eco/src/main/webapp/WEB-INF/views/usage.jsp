@@ -162,7 +162,7 @@
 									<tr>
 										<td>${item.usageType}</td>
 										<td>${item.unitCharge}</td>
-										<td>${item.gas_usage}</td>
+										<td>${item.gas_usage} ㎥</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${ item.gas_time }"/></td>
 									</tr>
 								</c:forEach>
@@ -194,7 +194,7 @@
 									<tr>
 										<td>${item.usageType}</td>
 										<td>${item.unitCharge}</td>
-										<td>${item.elec_usage}</td>
+										<td>${item.elec_usage} kWh</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${ item.elec_time }"/></td>
 									</tr>
 								</c:forEach>
