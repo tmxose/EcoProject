@@ -1,5 +1,6 @@
 let isIdChecked = false; // 아이디 중복 확인 완료 여부
 let isPwdValid = false;  // 비밀번호 확인 완료 여부
+let isEmailVerified = false; // 이메일 인증 완료 여부
 
 function validateForm() {
     const userIdInput = document.querySelector('input[name="user_id"]');
@@ -35,7 +36,11 @@ function validateForm() {
         userNmInput.focus();
         return false;
     }
-
+	if (!isEmailVerified) {
+	    alert("이메일 인증을 완료해주세요.");
+	    document.getElementById("email_code").focus();
+	    return false;
+	}
     return true;
 }
 // 아이디 중복 확인
@@ -103,3 +108,46 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+// 이메일 정규식 
+function isValidEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+// 이메일 본인인증
+function sendEmailCode() {
+    const email = document.getElementById("user_email").value;
+    
+    if (!isValidEmail(email)) {
+        alert("올바른 이메일 형식을 입력해주세요.");
+        document.getElementById("user_email").focus();
+        return;
+    }
+    
+    fetch("/send-code", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "email=" + encodeURIComponent(email)
+    }).then(res => res.text())
+      .then(alert);
+}
+
+function verifyEmailCode() {
+    const code = document.getElementById("email_code").value;
+    fetch("/verify-code", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "code=" + encodeURIComponent(code)
+    }).then(res => res.text())
+      .then(result => {
+          const div = document.getElementById("email_status");
+          if (result === "success") {
+              div.innerText = "인증 완료";
+               isEmailVerified = true;
+          } else {
+              div.innerText = "인증 실패";
+              isEmailVerified = false;
+          }
+      });
+}
