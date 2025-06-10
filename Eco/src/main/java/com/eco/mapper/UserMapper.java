@@ -7,7 +7,6 @@ import com.eco.domain.UserVO;
 public interface UserMapper {
 	public void userInsert(UserVO user);
 	public UserVO getUserSelect(UserVO user);
-	//	public int getUserCount(UserVO user);
 	
 	// 가입자 정보
 	public UserVO findByUserId(@Param("user_id") String user_id, @Param("user_type") String user_type);  // 아이디로 사용자 조회
@@ -21,4 +20,7 @@ public interface UserMapper {
 	
 	// 간편요금조회에서 사용자 검색
 	public UserVO findByUserCdUserNm(@Param("user_cd") int user_cd, @Param("user_nm") String user_nm);
+	
+	// 회원가입시 이메일 인증을위한 이메일 중복검사
+	public int existsByEmail(@Param("user_email") String user_email);
 }

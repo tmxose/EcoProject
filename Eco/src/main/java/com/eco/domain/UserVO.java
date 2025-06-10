@@ -12,4 +12,5 @@ public class UserVO {
 	private String user_type;
 	private String user_local;
 	private char admin_yn;
+	private String user_email;
 }
