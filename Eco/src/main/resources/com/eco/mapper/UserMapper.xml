@@ -25,9 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 회원가입시 이메일 인증을위한 이메일 중복검사 -->
-	<select id="existsByEmail" resultType="int">
+	<select id="existsByEmail" resultType="com.eco.domain.UserVO" parameterType="string">
 		<![CDATA[
-		 SELECT COUNT(*) FROM t_user WHERE user_email = #{user_email}
+		 SELECT * FROM t_user WHERE user_email = #{user_email}
 		]]>
 	</select>
 	
