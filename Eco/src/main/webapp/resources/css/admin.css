@@ -101,15 +101,15 @@ th, td {
 	justify-content: center;
 	margin: 0;
 	background-color: #c5ee8f;
-	color: white;
+	color: black;
 	cursor: pointer;
-	font-size: 25px;
-	font-weight: bolder;
+	font-size: 20px;
 	border: none;
 }
 
 .type-tab-btn.active {
 	background-color: #008000; /* 활성화 색상 */
+	font-weight: bold;
 	color: white;
 }
 

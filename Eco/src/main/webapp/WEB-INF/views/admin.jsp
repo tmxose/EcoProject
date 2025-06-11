@@ -58,7 +58,7 @@
 				<h2>사용자 검색</h2>
 				<div class="search-inner-container">
 					<div class="search-area">
-						<input type="text" id="searchKeyword" placeholder="사용자명 입력" />
+						<input type="text" id="searchKeyword" placeholder="사용자명 입력" autocomplete="off" />
 						<button class="green-btn" onclick="searchUser()">검색</button>
 					</div>
 					<table id="userTable">

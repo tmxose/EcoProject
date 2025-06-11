@@ -92,11 +92,12 @@ button {
 	background-color: #fefefe;
 }
 .title-container{
-display: flex;
-justify-content: center;
-align-items: center;
-font-size:30px;
-width: 100%;	
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 30px;
+    width: 60%;
+    margin-right: 210px;
 }
 .header-inner-container{
 display: flex;
