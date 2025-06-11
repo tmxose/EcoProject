@@ -61,7 +61,7 @@
 </head>
 <body>
 	<div class="container">
-	    <a href="/"><img src="/resources/img/icon.png" class="icon"></a>
+	    <a href="/"><img src="/resources/img/icon2.png" class="icon"></a>
 	    <h2>회원 정보 수정</h2>
 	    <div class="inner-container">
 	        <form action="mypageUpdate" method="post" class="signup-form" onsubmit="return validateForm()">
