@@ -23,7 +23,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 .box1{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #c5ee8f; color: #82cd2b}
-.box2{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #82cd2b; font-weight: bold; color: white;}
+.box2{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #008000; font-weight: bold; color: white;}
 </style>
 	<script>
 		function validateDates(form) {
