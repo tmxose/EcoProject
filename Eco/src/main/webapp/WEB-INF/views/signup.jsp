@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="container">
-		<a href="/"><img src="/resources/img/icon2.png" class="icon"></a>
+		<a href="/"><img src="/resources/img/icon2.png" class="icon-2"></a>
 		<h2>회원 가입</h2>
 		<div class="inner-container">
 			<form id="signupForm" action="signup" method="post"
