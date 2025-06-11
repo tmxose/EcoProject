@@ -35,7 +35,7 @@
 </head>
 <body>
 	<div class="container">
-		<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
+		<a href="/"><img src="/resources/img/icon2.png" class="icon"></a>
     	<h2>로그인</h2>
     	<div class="inner-container">
 		<form action="login" method="post" class="signup-form" onsubmit="return validateForm()">

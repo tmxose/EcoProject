@@ -24,7 +24,7 @@
 		<div class="inner-container">
 			<div class="head-box">
 				<!-- 아이콘 -->
-				<a href="/"><img src="/resources/img/icon.png" class="icon"></a>
+				<a href="/"><img src="/resources/img/icon2.png" class="icon"></a>
 				<!-- 메인화면 글씨 -->
 				<div class="title-container">
 					<h2>관리자 페이지</h2>
