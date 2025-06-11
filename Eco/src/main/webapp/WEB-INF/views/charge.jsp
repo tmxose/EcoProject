@@ -24,7 +24,7 @@
 <style>
 .box1{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #c5ee8f; color: #000000}
 .box2{width: 40%; line-height: 50px; display: inline-block; margin: 0; background-color: #008000; font-weight: bold; color: white;}
-input[type="date"]{font-size: 20px}
+
 </style>
 	<script>
 		function validateDates(form) {
