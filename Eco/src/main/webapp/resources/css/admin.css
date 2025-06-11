@@ -14,7 +14,11 @@ th, td {
 .selected {
 	background-color: #f0f8ff;
 }
-
+.green-btn-admin{
+    font-weight: bold;
+    box-sizing: border-box;	
+    width: fit-content;
+}
 .search-container {
 	width: 80%;
 	display: flex;
@@ -39,22 +43,31 @@ th, td {
 .search-area input[type="text"] {
 	height: 36px;
 	padding: 0 10px;
-	font-size: 14px;
+	font-size: 20px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }
 
-.search-area button.green-btn {
+.search-area button.green-btn-admin {
 	height: 36px;
-	padding: 0 16px;
-	font-size: 14px;
+	font-size: 20px;
 	border: none;
 	border-radius: 4px;
-	background-color: #82cd2b;
+	background-color: #008000;
 	color: white;
 	cursor: pointer;
+	padding: 0 5px;
 }
-
+.search-area button.green-btn{
+	height: 36px;
+	font-size: 20px;
+	border: none;
+	border-radius: 4px;
+	background-color: #008000;
+	color: white;
+	cursor: pointer;
+	padding: 0;
+}
 .search-area button.green-btn:hover {
 	background-color: #218838;
 }
@@ -90,11 +103,13 @@ th, td {
 	background-color: #c5ee8f;
 	color: white;
 	cursor: pointer;
+	font-size: 25px;
+	font-weight: bolder;
 	border: none;
 }
 
 .type-tab-btn.active {
-	background-color: #82cd2b; /* 활성화 색상 */
+	background-color: #008000; /* 활성화 색상 */
 	color: white;
 }
 
@@ -179,5 +194,6 @@ th, td {
     z-index: 999;
 }
 #usageTable tbody tr.selected, #userTable tbody tr.selected {
-    background-color: #f0f8ff !important; 
+    background-color: #008000 !important; 
+    color: white;
 }
