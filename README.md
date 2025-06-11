@@ -18,13 +18,15 @@
 
 프로젝트는 MVC 패턴을 기반으로 효율적인 관리를 위해 다음과 같이 패키지를 구성했습니다.
 
+```
 src/main/java  
-└── com.ecoproject  
+└── com.eco  
     ├── controller  
     ├── service  
     ├── domain  
     ├── exception  
     └── mapper
+```
 
 * **controller**: 사용자 요청을 처리하고 응답을 반환하는 컨트롤러 클래스들을 포함합니다.  
 * **service**: 비즈니스 로직을 담당하며, 데이터베이스와의 상호작용을 mapper 계층에 위임합니다.  
