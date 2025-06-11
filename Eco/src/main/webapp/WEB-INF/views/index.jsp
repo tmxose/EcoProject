@@ -54,14 +54,13 @@
 				<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
 				<c:choose>
 				    <c:when test="${empty sessionScope.currentUserInfo}">
-				        <button class="green-btn" onclick='location.href="/simplelookup"'>간편 요금 조회 (비회원)</button> 
+				        <a class="page-tab-a" href="/simplelookup">▶ 간편 요금 조회 (비회원)</a> 
 				    </c:when>
 				    <c:otherwise>
-				    	<button class="green-btn" onclick='location.href="/simplelookup"'>간편 요금 조회</button>
+				    	<a class="page-tab-a" href="/simplelookup">▶ 간편 요금 조회</a>
 				    </c:otherwise>
 				</c:choose>
-				<button class="green-btn" onclick="goToMyUsagePage()">내 사용량 조회</button> 
-				<!-- <button class="green-btn" onclick="goToUsageInsertPage()">내 사용량 등록</button> -->
+				<a href="javascript:void(0);" class="page-tab-a" onclick="goToMyUsagePage()">▶ 내 사용량 조회</a>
 			</div>
 		</div>
 		<!-- <div class="green-line"></div> -->

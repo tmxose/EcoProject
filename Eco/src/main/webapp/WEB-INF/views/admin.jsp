@@ -46,9 +46,9 @@
 			<div class="green-line"></div>
 			<div class="main-container">
 				<!-- 페이지 이동 버튼 -->
-				<button class="green-btn" onclick='location.href="/"'>메인페이지</button>
-				<button class="green-btn" onclick="goToMyUsagePage()">내 사용량
-					조회</button>
+				<a class="page-tab-a" href="/">▶ 메인페이지</a>
+				<a href="javascript:void(0);" class="page-tab-a" onclick="goToMyUsagePage()">▶ 내 사용량 조회</a>
+			
 			</div>
 		</div>
 
