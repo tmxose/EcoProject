@@ -44,7 +44,7 @@ src/main/java
 
 2. **데이터베이스 설정**:  
    * MySQL 데이터베이스를 생성하고, 필요한 테이블을 생성합니다. (스키마는 src/main/resources/sql/schema.sql 또는 관련 문서 추가예정)  
-   * src/main/resources/database.properties 파일에 데이터베이스 연결 정보를 설정합니다.  
+   * src/main/webapp/WEB-INF/spring/root-context.xml 파일에 데이터베이스 연결 정보를 설정합니다.  
 3. **STS3에서 프로젝트 임포트**:  
    * STS3를 실행하고, File \-\> Import \-\> Maven \-\> Existing Maven Projects를 선택하여 프로젝트를 임포트합니다.  
 4. **Maven 의존성 설치**:  
