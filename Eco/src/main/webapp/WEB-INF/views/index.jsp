@@ -62,6 +62,7 @@
 				</c:choose>
 				<a href="javascript:void(0);" class="page-tab-a" onclick="goToMyUsagePage()">▶ 내 사용량 조회</a>
 			</div>
+			<div class="green-line"></div>
 		</div>
 		<!-- <div class="green-line"></div> -->
 		<div class="chart-container">

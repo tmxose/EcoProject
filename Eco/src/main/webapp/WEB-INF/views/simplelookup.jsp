@@ -104,6 +104,7 @@
 				<a href="javascript:void(0);" class="page-tab-a" onclick="goToMyUsagePage()">▶ 내 사용량 조회</a>
 				<a class="page-tab-a" href="/">▶ 메인페이지</a> 
 			</div>
+			<div class="green-line"></div>
 		</div>
 	    <div class="inner-container">
 	    	<div class="data-box">
