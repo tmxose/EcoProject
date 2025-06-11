@@ -82,8 +82,8 @@
 				<a class="page-tab-a" href="/simplelookup">▶ 간편 요금 조회</a> 
 				<a class="page-tab-a" href="/">▶ 메인페이지</a> 
 			</div>
+			<div class="green-line"></div>
 		</div>
-		<!-- <div class="green-line"></div> -->
 		<div class="inner-container">
 			<div class="select-box">
 				<a href="/usage" class="box1">사용량</a>
