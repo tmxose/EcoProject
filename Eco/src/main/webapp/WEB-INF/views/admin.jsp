@@ -152,8 +152,8 @@
 				</div>
 
 				<div class="modal-buttons">
-					<button class="green-btn" onclick="saveUsageData()">저장</button>
-					<button class="green-btn" onclick="hideUsageModal()">취소</button>
+					<button class="green-btn-2" onclick="saveUsageData()">저장</button>
+					<button class="green-btn-2" onclick="hideUsageModal()">취소</button>
 				</div>
 			</div>
 
