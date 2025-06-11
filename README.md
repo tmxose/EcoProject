@@ -6,7 +6,7 @@
 
 ## **🛠️ 개발 환경 및 기술 스택**
 
-* **개발 기간**: 2024년 5월 29일 \~ 2024년 6월 12일  
+* **개발 기간**: 2025년 5월 29일 \~ 2025년 6월 12일  
 * **개발자**: 신혁주(팀장), 팀원 2명  
 * **프레임워크**: Spring Framework  
 * **IDE**: STS3 (Spring Tool Suite 3\)  
@@ -35,7 +35,7 @@ src/main/java
 ## **✨ 주요 기능**
 
 * **냉난방 사용량 및 요금 조회**: 사용자들이 월별 냉난방 에너지 사용량과 이에 따른 요금을 직관적으로 확인할 수 있도록 합니다.  
-* **SNS 로그인 연동**: 카카오, 네이버, 구글 등 소셜 계정을 통해 간편하게 로그인할 수 있는 기능을 제공하여 사용자 편의성을 높였습니다.
+* **SNS 로그인 연동**: 네이버, 구글 소셜 계정을 통해 간편하게 로그인할 수 있는 기능을 제공하여 사용자 편의성을 높였습니다.
 
 ## **🚀 프로젝트 실행 방법**
 
@@ -43,7 +43,7 @@ src/main/java
    git clone https://github.com/tmxose/EcoProject.git
 
 2. **데이터베이스 설정**:  
-   * MySQL 데이터베이스를 생성하고, 필요한 테이블을 생성합니다. (스키마는 src/main/resources/sql/schema.sql 또는 관련 문서 참조)  
+   * MySQL 데이터베이스를 생성하고, 필요한 테이블을 생성합니다. (스키마는 src/main/resources/sql/schema.sql 또는 관련 문서 추가예정)  
    * src/main/resources/database.properties 파일에 데이터베이스 연결 정보를 설정합니다.  
 3. **STS3에서 프로젝트 임포트**:  
    * STS3를 실행하고, File \-\> Import \-\> Maven \-\> Existing Maven Projects를 선택하여 프로젝트를 임포트합니다.  
