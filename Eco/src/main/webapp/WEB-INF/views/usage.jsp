@@ -21,7 +21,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 .box1{background-color: #008000; font-weight: bold; color: white;}
-.box2{background-color: #c5ee8f; color: #82cd2b;}
+.box2{background-color: #c5ee8f; color: #000000;}
 </style>
 	<script>
 		function validateDates(form) {
