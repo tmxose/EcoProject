@@ -20,7 +20,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/usage.css?after">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-.box1{background-color: #82cd2b; font-weight: bold; color: white;}
+.box1{background-color: #008000; font-weight: bold; color: white;}
 .box2{background-color: #c5ee8f; color: #82cd2b;}
 </style>
 	<script>
@@ -78,12 +78,11 @@
 			<div class="green-line"></div>
 			<div class="main-container">
 				<!-- 내 정보 보기 버튼 (로그인 안 되어 있으면 로그인 페이지로 이동) -->
-				<button class="green-btn" onclick='location.href="/simplelookup"'>간편 요금 조회</button> 
-				<button class="green-btn" onclick='location.href="/"'>메인페이지</button> 
-				<!-- <button class="green-btn" onclick='location.href="/usage/insert-form"'>내 사용량 등록</button> -->
+				<a class="page-tab-a" href="/simplelookup">▶ 간편 요금 조회</a> 
+				<a class="page-tab-a" href="/">▶ 메인페이지</a> 
 			</div>
+			<div class="green-line"></div>
 		</div>
-		<!-- <div class="green-line"></div> -->
 		<div class="inner-container">
 			<div class="select-box">
 				<a href="/usage" class="box1">사용량</a>
