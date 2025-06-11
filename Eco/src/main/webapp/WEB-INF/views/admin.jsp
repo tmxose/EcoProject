@@ -95,9 +95,9 @@
 			<div id="usageSection" class="result-container">
 				<div class="search-area">
 					<h3 id="usageTitle">가스 사용내역</h3>
-					<button class="green-btn" onclick="showUsageModal('add')">등록</button>
-					<button class="green-btn" onclick="showUsageModal('edit')">수정</button>
-					<button class="green-btn" onclick="deleteUsage()">삭제</button>
+					<button class="green-btn-admin" onclick="showUsageModal('add')">등록</button>
+					<button class="green-btn-admin" onclick="showUsageModal('edit')">수정</button>
+					<button class="green-btn-admin" onclick="deleteUsage()">삭제</button>
 				</div>
 				<div class="result-inner-container">
 					<table id="usageTable" border="1">
