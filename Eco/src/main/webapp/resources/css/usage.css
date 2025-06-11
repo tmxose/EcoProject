@@ -85,6 +85,7 @@ tr:nth-child(even){background-color: #edffd8;}
 
 /* 조회 기간 설정 */
 .form-title{width: 100%; font-weight: bold; font-size: 20px;}
+
 .form-box{
 	display: flex;
 	justify-content: flex-start;
