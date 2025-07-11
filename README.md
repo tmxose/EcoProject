@@ -56,3 +56,17 @@ src/main/java
    * Apache Tomcat 9 서버를 STS3에 연동하고, 프로젝트를 서버에 추가합니다.  
 6. **프로젝트 실행**:  
    * Tomcat 서버를 시작하여 웹 애플리케이션을 실행합니다.
+  
+
+## **🚀 프로젝트 시연 자료**
+
+![메인 화면](./Eco/src/main/resources/mainpage.png)
+
+![냉난방 사용량/요금 조회 화면](./Eco/src/main/resources/nomalSelect.png)
+
+![관리자 화면](./Eco/src/main/resources/admin.png)
+![관리자 화면 조회 결과](./Eco/src/main/resources/adminSelect.png)
+
+![비회원 조회 화면](./Eco/src/main/resources/nologin.png)
+
+[데모 영상 다운로드](./showFile/showDemo.mp4)
