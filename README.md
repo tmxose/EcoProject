@@ -43,7 +43,9 @@ src/main/java
 ## **🚀 프로젝트 실행 방법**
 
 1. **프로젝트 클론**:  
-   git clone https://github.com/tmxose/EcoProject.git
+   ```
+    git clone https://github.com/tmxose/EcoProject.git 
+    ```
 
 2. **데이터베이스 설정**:  
    * MySQL 데이터베이스를 생성하고, 필요한 테이블을 생성합니다. (스키마는 src/main/resources/sql/schema.sql 또는 관련 문서 추가예정)  
