@@ -60,13 +60,13 @@ src/main/java
 
 ## **🚀 프로젝트 시연 자료**
 
-![메인 화면](./Eco/src/main/resources/mainpage.png)
+![메인 화면](https://raw.githubusercontent.com/tmxose/EcoProject/master/Eco/src/main/resources/showFile/mainpage.png)
 
-![냉난방 사용량/요금 조회 화면](./Eco/src/main/resources/nomalSelect.png)
+![냉난방 사용량/요금 조회 화면](https://raw.githubusercontent.com/tmxose/EcoProject/master/Eco/src/main/resources/showFile/nomalSelect.png)
 
-![관리자 화면](./Eco/src/main/resources/admin.png)
-![관리자 화면 조회 결과](./Eco/src/main/resources/adminSelect.png)
+![관리자 화면](https://raw.githubusercontent.com/tmxose/EcoProject/master/Eco/src/main/resources/showFile/admin.png)
+![관리자 화면 조회 결과](https://raw.githubusercontent.com/tmxose/EcoProject/master/Eco/src/main/resources/showFile/adminSelect.png)
 
-![비회원 조회 화면](./Eco/src/main/resources/nologin.png)
+![비회원 조회 화면](https://raw.githubusercontent.com/tmxose/EcoProject/master/Eco/src/main/resources/showFile/nologin.png)
 
-[데모 영상 다운로드](./showFile/showDemo.mp4)
+[데모 영상 다운로드](https://raw.githubusercontent.com/tmxose/EcoProject/master/showFile/showDemo.mp4)
