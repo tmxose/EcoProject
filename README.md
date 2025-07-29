@@ -71,4 +71,7 @@ src/main/java
 
 ![비회원 조회 화면](https://raw.githubusercontent.com/tmxose/EcoProject/master/Eco/src/main/resources/showFile/nologin.png)
 
+# 시연영상
+https://github.com/user-attachments/assets/8a638f1d-e674-4cd5-88cc-ac18267d2630
+
 [데모 영상 다운로드](https://raw.githubusercontent.com/tmxose/EcoProject/master/Eco/src/main/resources/showFile/showDemo.mp4)
